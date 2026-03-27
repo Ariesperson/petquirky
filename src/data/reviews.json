@@ -1,0 +1,83 @@
+[
+  {
+    "productId": "prod_ceramic_slow_feeder",
+    "authorName": "Sophie M.",
+    "rating": 5,
+    "title": "Beautiful and practical",
+    "content": "Our corgi eats slower and the bowl looks sculptural on the counter.",
+    "date": "2026-02-25",
+    "verified": true
+  },
+  {
+    "productId": "prod_ceramic_slow_feeder",
+    "authorName": "Lea K.",
+    "rating": 4,
+    "title": "Heavy in a good way",
+    "content": "Feels premium and does not slide around.",
+    "date": "2026-02-19",
+    "verified": true
+  },
+  {
+    "productId": "prod_pebble_weave_basket",
+    "authorName": "Julie R.",
+    "rating": 5,
+    "title": "Cat approved instantly",
+    "content": "The basket blends into our living room and our cat moved in on day one.",
+    "date": "2026-01-28",
+    "verified": true
+  },
+  {
+    "productId": "prod_pebble_weave_basket",
+    "authorName": "Mina P.",
+    "rating": 5,
+    "title": "Looks editorial",
+    "content": "Exactly the calm aesthetic I wanted for our home.",
+    "date": "2026-02-01",
+    "verified": true
+  },
+  {
+    "productId": "prod_flowsmart_fountain",
+    "authorName": "Daniel F.",
+    "rating": 4,
+    "title": "Quiet operation",
+    "content": "Much quieter than our old fountain and simple to clean.",
+    "date": "2026-01-10",
+    "verified": true
+  },
+  {
+    "productId": "prod_flowsmart_fountain",
+    "authorName": "Lucia B.",
+    "rating": 5,
+    "title": "Worth it",
+    "content": "Both pets drink more water now.",
+    "date": "2026-01-22",
+    "verified": true
+  },
+  {
+    "productId": "prod_eco_knot_tug_toy",
+    "authorName": "Tom S.",
+    "rating": 4,
+    "title": "Sturdy rope",
+    "content": "Holding up well after a week of tug sessions.",
+    "date": "2025-11-09",
+    "verified": true
+  },
+  {
+    "productId": "prod_bamboo_shine_brush",
+    "authorName": "Claire V.",
+    "rating": 5,
+    "title": "Gentle on fur",
+    "content": "Soft enough for our rabbit and easy to grip.",
+    "date": "2025-10-24",
+    "verified": true
+  },
+  {
+    "productId": "prod_mossy_cave_hideaway",
+    "authorName": "Ari N.",
+    "rating": 4,
+    "title": "Natural texture",
+    "content": "Looks far better than plastic hides in our terrarium.",
+    "date": "2025-09-15",
+    "verified": true
+  }
+]

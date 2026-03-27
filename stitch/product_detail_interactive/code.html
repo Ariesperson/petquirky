@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Interactive Snake Toy | PetQuirky</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#8c7169",
+              "on-primary": "#ffffff",
+              "primary-container": "#c74d24",
+              "error": "#ba1a1a",
+              "on-primary-fixed-variant": "#852400",
+              "surface-variant": "#e4e2e1",
+              "surface": "#fcf9f8",
+              "on-tertiary-container": "#f5fff7",
+              "on-background": "#1b1c1c",
+              "on-secondary-fixed-variant": "#7f2a0d",
+              "error-container": "#ffdad6",
+              "surface-tint": "#a8380f",
+              "outline-variant": "#e0c0b6",
+              "inverse-primary": "#ffb59e",
+              "surface-container": "#f0eded",
+              "tertiary": "#00694c",
+              "on-tertiary-fixed-variant": "#00513a",
+              "on-secondary-container": "#722104",
+              "on-primary-container": "#fffbff",
+              "inverse-on-surface": "#f3f0f0",
+              "inverse-surface": "#303030",
+              "primary": "#D85A30",
+              "on-tertiary": "#ffffff",
+              "on-surface": "#1b1c1c",
+              "surface-dim": "#dcd9d9",
+              "on-secondary-fixed": "#3a0b00",
+              "surface-container-high": "#eae7e7",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-fixed": "#ffdbd0",
+              "primary-fixed-dim": "#ffb59e",
+              "tertiary-fixed-dim": "#68dbae",
+              "on-tertiary-fixed": "#002115",
+              "tertiary-container": "#008560",
+              "tertiary-fixed": "#86f8c9",
+              "on-error": "#ffffff",
+              "background": "#fcf9f8",
+              "surface-bright": "#fcf9f8",
+              "on-primary-fixed": "#3a0b00",
+              "secondary-container": "#fd8863",
+              "surface-container-low": "#f6f3f2",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#e4e2e1",
+              "secondary": "#D85A30",
+              "on-secondary": "#ffffff",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#ffdbd0",
+              "on-surface-variant": "#58423b"
+            },
+            fontFamily: {
+              "headline": ["Baloo 2", "cursive"],
+              "body": ["Quicksand", "sans-serif"],
+              "label": ["Quicksand", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .font-brand-logo { font-family: 'Baloo 2', cursive; }
+      .font-editorial { font-family: 'Quicksand', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f8]/80 dark:bg-[#1b1c1c]/80 backdrop-blur-xl shadow-sm transition-colors duration-300">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-[1440px] mx-auto">
+<div class="font-brand-logo text-3xl font-extrabold text-primary tracking-tighter hover:scale-105 transition-transform duration-200 cursor-pointer">PetQuirky</div>
+<div class="hidden md:flex items-center gap-8 font-semibold text-sm">
+<a class="text-on-surface hover:text-primary transition-colors" href="{{DATA:SCREEN:SCREEN_22}}">Home</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="{{DATA:SCREEN:SCREEN_30}}">Products</a>
+<a class="text-on-surface hover:text-primary transition-colors" href="{{DATA:SCREEN:SCREEN_7}}">Blog</a>
+<a class="text-on-surface hover:text-primary transition-colors" href="#">About</a>
+<a class="text-on-surface hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface hover:text-primary transition-all">search</button>
+<div class="flex items-center text-on-surface-variant font-medium cursor-pointer hover:text-primary transition-colors text-sm">
+<span>EN</span>
+<span class="material-symbols-outlined text-sm ml-0.5">expand_more</span>
+</div>
+<button class="material-symbols-outlined text-on-surface hover:text-primary transition-all" onclick="window.location.href='{{DATA:SCREEN:SCREEN_2}}'">person</button>
+<button class="material-symbols-outlined text-on-surface hover:text-primary transition-all relative" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+                shopping_cart
+                <span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-28 pb-20 px-6 max-w-[1440px] mx-auto">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 mb-8 text-sm font-medium opacity-60 overflow-x-auto whitespace-nowrap">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Products</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-on-surface font-bold">Smart Interactive Snake Toy</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 xl:gap-20">
+<!-- Left Column: Media -->
+<div class="space-y-6">
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-tech robotic snake toy with realistic segments moving on a hardwood floor, bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqPem-P9405XI6wxs2aLQdkbAA3cNAmSTsspwrKs-uoBgdT_wYGPlW5MU6EiM8OUiPXuwJJsjPA89_noBBJSIp3NYvzyqqozGSknX6SlSITPsNdLX_XrT7e3J9eTBw6L3MBnRRn2IfJIOc4_ecHC6W2t-8dFPwWVot_UCfSXwJAXaZunLylI7_CzsTsQLUHVfZeZGNbNOk1SgIZhlfaro79gJt-Maph_Q53aK1AK-4oLmGttmhFsgducI3MYix-E9b5EOIQiRtzW0"/>
+<div class="absolute top-6 left-6 bg-primary text-on-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase">Save 24%</div>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<button class="aspect-square rounded-md overflow-hidden ring-2 ring-primary bg-surface-container-lowest">
+<img class="w-full h-full object-cover opacity-80" data-alt="Miniature view of robotic snake segments" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuVUrPo-hYmUOsrP6k9czMprhF25oQOAlvS_kc13Jt2pMWnKdIwDxmPsKTlVIM_BrNqgiDpl0UwC7Dxnj--uBOu45QVUEpDMpAmXKnYtxSUyAHMK6zQKajdUNGvBUQpVNCWr9jbio1iv4UrORC0w19b_aR3bdjNmSgIcoVMTQo1GePbopbnhV0OFQ1-qnNr1K2TZu5plmbPvBBA5Ow-mfmC3LxINX_-OMAAhUp0-QXt7VOxBPlPXOJZ3ii-CvTX6IbrMI7PBSnVwA"/>
+</button>
+<button class="aspect-square rounded-md overflow-hidden bg-surface-container-lowest hover:opacity-100 transition-opacity opacity-60">
+<img class="w-full h-full object-cover" data-alt="Cat playing with a moving toy on a white rug" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1rnS5rS-lW3ewyNhNjpUIf9O24OlRjsfq-91rrze5_A1wXpQnLKE-oPqaSj7M7e8eBNzdQ9w4Tf0AHwL8qNsQJIZ0M5YwxzVyNd8sVWbdiLaU9vNCCjwFAwcS_uiHvWko-gUTclqOdKhfuH3Ubdd0x3QOSxHXS91b29cf6-nMuEH7ypU6HMrntZw4-7e9o3DtnwI6VcDWHVt2Ik-sR_gpCauWEkqJpqAxnUDKAon9Fyz72oMY6JjkzoTzji0jiHGp2NaYyNf9GuU"/>
+</button>
+<button class="aspect-square rounded-md overflow-hidden bg-surface-container-lowest hover:opacity-100 transition-opacity opacity-60">
+<img class="w-full h-full object-cover" data-alt="Close up of a smart cat toy charging port and texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDypQuIYIKyYCnTqAO9K28yaPRN4K55tvSyFUtI3eKmM_g-ilXYho8MTFmWUlI6yV6KigNq-Dn0rgoOKirlbxWO-Wg8nLb2XerVgRM89p8p4K5DAJetxrgscDCi1XNB1ujDTWZsPj5wK-BqEmOKQehbgSPvVxfjvM6b0V6l4dpYzcCdYMAX2XriEMNQejid_A4l0sfB-aG0D0Rq_gpvurUHqKuR2r42lWTFHeX-0PslforyD9up2fa9ETCAJDYDzKUpSWnwuMsnJBI"/>
+</button>
+<button class="aspect-square rounded-md overflow-hidden bg-surface-container-lowest hover:opacity-100 transition-opacity opacity-60">
+<img class="w-full h-full object-cover" data-alt="Abstract dynamic movement of a pet toy in a modern home" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2wV9rYhOHjXyzn_GbnfMEXYgkCBTli63RyJDOC2mq4y1lwey_TdNbWtBZIEJD7WqRGS5rbXZI9QdUiiVZ7wu8zJ0rNnSn-R8OdjMYRrFEdP99iMNaG5_dYr6rP1uvpS-66AATaaxmfZX0wfddXFdrM0taSMALzEyMEpe6eBRFQSZvicG3-ddghVkNEm7iR73kpgwQMJS-ewmY4ZiAsrpiZBkiDBRgEP9HdjwxIg5jvxLYrCT_HFnXX5XyRPz53TuuwIvJsu3Ut-s"/>
+</button>
+</div>
+</div>
+<!-- Right Column: Info -->
+<div class="flex flex-col">
+<div class="mb-2 flex items-center gap-3">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">Bestseller</span>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase flex items-center gap-1">
+                    🐱 Cats
+                </span>
+</div>
+<h1 class="font-headline text-4xl lg:text-5xl font-bold text-on-surface mb-4 leading-[1.1]">Smart Interactive Snake Toy</h1>
+<div class="flex items-center gap-4 mb-8">
+<div class="flex items-center text-primary">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+<span class="ml-2 text-sm font-semibold text-on-surface">4.8 (12 reviews)</span>
+</div>
+</div>
+<div class="flex items-baseline gap-4 mb-10">
+<span class="text-4xl font-extrabold text-primary">45,00 €</span>
+<span class="text-xl text-on-surface-variant line-through opacity-50">59,00 €</span>
+</div>
+<!-- Purchase Section -->
+<div class="flex flex-col gap-4 mb-8">
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-low rounded-lg px-2 h-14 border border-outline-variant/20">
+<button class="w-10 h-10 flex items-center justify-center text-primary hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="w-12 text-center font-bold text-lg">1</span>
+<button class="w-10 h-10 flex items-center justify-center text-primary hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<button class="flex-1 h-14 bg-primary text-on-primary font-bold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+<span class="material-symbols-outlined">shopping_cart</span>
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Trust Line -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-8 mb-8 border-b border-outline-variant/10 text-[11px] font-bold tracking-wider uppercase text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="text-tertiary">🚚</span> Free shipping over €50
+                </div>
+<div class="flex items-center gap-2">
+<span class="text-tertiary">🔄</span> 14-day returns
+                </div>
+<div class="flex items-center gap-2">
+<span class="text-tertiary">✅</span> CE certified
+                </div>
+</div>
+<!-- Shipping Estimate -->
+<div class="bg-surface-container-low p-6 rounded-lg mb-10">
+<div class="flex justify-between items-center mb-4">
+<span class="text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+                        Shipping to:
+                    </span>
+<select class="bg-transparent border-none text-sm font-bold text-primary focus:ring-0 cursor-pointer pr-8">
+<option>Germany</option>
+<option>France</option>
+<option>Italy</option>
+<option>Spain</option>
+<option>Netherlands</option>
+</select>
+</div>
+<p class="text-sm text-on-surface-variant">Estimated delivery: <span class="text-on-surface font-bold">Oct 24 - Oct 27</span></p>
+</div>
+<!-- Description -->
+<div class="prose prose-stone">
+<h3 class="font-headline text-2xl font-bold mb-4">Product Overview</h3>
+<p class="text-on-surface-variant leading-relaxed font-medium mb-6">
+                    Ignite your cat's natural hunting instincts with the PetQuirky Smart Snake. This lifelike robotic companion features intelligent obstacle avoidance, high-speed slithering, and reactive sensors that respond to every tap and pounce. Designed for tactile, high-energy play in modern European homes.
+                </p>
+</div>
+</div>
+</div>
+<!-- Specifications -->
+<section class="mt-20 pt-20 border-t border-outline-variant/10">
+<h2 class="font-headline text-3xl font-bold mb-12">The Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-6">
+<div class="flex justify-between py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant font-semibold">Material</span>
+<span class="font-bold">ABS Eco-Friendly Plastic</span>
+</div>
+<div class="flex justify-between py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant font-semibold">Battery</span>
+<span class="font-bold">150mAh Rechargeable</span>
+</div>
+<div class="flex justify-between py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant font-semibold">Play Time</span>
+<span class="font-bold">40 Minutes active use</span>
+</div>
+<div class="flex justify-between py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant font-semibold">Charging Time</span>
+<span class="font-bold">30 Minutes (USB-C)</span>
+</div>
+<div class="flex justify-between py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant font-semibold">Certification</span>
+<span class="font-bold">CE, FCC, RoHS</span>
+</div>
+<div class="flex justify-between py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant font-semibold">Weight</span>
+<span class="font-bold">120g</span>
+</div>
+</div>
+</section>
+<!-- Reviews -->
+<section class="mt-32">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<div class="w-full md:w-80 flex-shrink-0">
+<h2 class="font-headline text-3xl font-bold mb-6">Reviews</h2>
+<div class="bg-surface-container-low p-8 rounded-lg">
+<div class="text-center mb-6">
+<div class="text-6xl font-extrabold text-primary mb-2">4.8</div>
+<div class="flex justify-center text-primary mb-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Based on 12 reviews</p>
+</div>
+<!-- Rating Distribution -->
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-xs font-bold">
+<span class="w-12 opacity-60">5 stars</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%"></div>
+</div>
+<span class="w-8 text-right opacity-60">75%</span>
+</div>
+<div class="flex items-center gap-3 text-xs font-bold">
+<span class="w-12 opacity-60">4 stars</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 20%"></div>
+</div>
+<span class="w-8 text-right opacity-60">20%</span>
+</div>
+<div class="flex items-center gap-3 text-xs font-bold">
+<span class="w-12 opacity-60">3 stars</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 5%"></div>
+</div>
+<span class="w-8 text-right opacity-60">5%</span>
+</div>
+<div class="flex items-center gap-3 text-xs font-bold">
+<span class="w-12 opacity-60">2 stars</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 0%"></div>
+</div>
+<span class="w-8 text-right opacity-60">0%</span>
+</div>
+<div class="flex items-center gap-3 text-xs font-bold">
+<span class="w-12 opacity-60">1 star</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 0%"></div>
+</div>
+<span class="w-8 text-right opacity-60">0%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-8 w-full">
+<!-- Review 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-sm border border-outline-variant/5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-bold text-lg">Emma K.</h4>
+<span class="text-[#1D9E75] text-[10px] font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm">check</span>
+                                    Verified Purchase
+                                </span>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<span class="text-xs font-bold text-on-surface-variant opacity-60">2 DAYS AGO</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">My cat went absolutely wild for this! Usually, she gets bored of toys in 5 minutes, but the movement on this snake is so unpredictable she can't stop watching it.</p>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-sm border border-outline-variant/5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-bold text-lg">Lukas M.</h4>
+<span class="text-[#1D9E75] text-[10px] font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm">check</span>
+                                    Verified Purchase
+                                </span>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+</div>
+<span class="text-xs font-bold text-on-surface-variant opacity-60">1 WEEK AGO</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">Solid build quality. The sensor is actually quite smart, it doesn't get stuck under the couch as much as I expected. Fast charging is a plus.</p>
+</div>
+<!-- Review 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-sm border border-outline-variant/5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-bold text-lg">Sophie D.</h4>
+<span class="text-[#1D9E75] text-[10px] font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm">check</span>
+                                    Verified Purchase
+                                </span>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<span class="text-xs font-bold text-on-surface-variant opacity-60">3 WEEKS AGO</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">Excellent customer service and the packaging was beautiful. Definitely a premium feel compared to generic pet shop toys.</p>
+</div>
+<!-- Load More Reviews Button -->
+<div class="flex justify-center pt-4">
+<button class="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300">
+                        Load More Reviews
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Products -->
+<section class="mt-32">
+<h2 class="font-headline text-3xl font-bold mb-10 text-center">You might also like</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="group bg-surface-container-lowest rounded-lg p-4 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Modern organic cat bed made of natural felt, minimalist interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp0R9JNwGbpnFncRSFQ-ke2kW2wed2fU43kkNjfznhs2qnUFv09bRpEEoC6WiGb0DGTRmsGKVMrH4vlvdU0Z05XEPEWOkxFfqwgsgHoii7o0dQZyKnB5JLnE2PTXbp7vCV-P9vQBetTQjEnAjJsJntlkWpnpAd0z9lIRcCpKzPx3kkhWzy9ZAFj0Wto8LSGfZZJiT2LDWY3Dd9NReaXz-4KUoPX67UnPJ3R-sUWs1PvRfE8MNcnOKhWY3nArEgAbUpJNUcgUI9mcw"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.8</span>
+<span class="text-[10px] text-outline ml-1">(124 reviews)</span>
+</div>
+<h3 class="text-xl text-on-surface mb-1 group-hover:text-primary transition-colors font-headline">Nordic Felt Cat Nest</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-[10px] font-bold text-on-surface-variant flex items-center gap-1">🐈 Cats</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-xl font-bold text-on-surface">62,00 €</span>
+</div>
+<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group bg-surface-container-lowest rounded-lg p-4 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Artisanal leather dog leash with brass hardware on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo_3v3Idb5pm6k7z_BAV6CA1BND2UJEJc5DKQQCJborbvgwcTcsI5WD3Aukq9i5QAm-iYvZFRs3hL38NNVvg4d4FAv82nka2i8gETeJ7YG8U8YuMvfT--js07xhwrhvJR3WhBhvBhSXh8Du5Nl8isFFmx4jztrKPgjboo0iEAKYeutkqzzh7r9-BcxpgiYKn7Z3xTRRRdmDHGa1gwJrE6KFH0nLSiYV-1jf6z2f1y7veU9AdOKQGvqgR5UbtJd0KPxdnulN6g_bPM"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.9</span>
+<span class="text-[10px] text-outline ml-1">(256 reviews)</span>
+</div>
+<h3 class="text-xl text-on-surface mb-1 group-hover:text-primary transition-colors font-headline">Cognac Leather Leash</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-[10px] font-bold text-on-surface-variant flex items-center gap-1">🐕 Dogs</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-xl font-bold text-on-surface">38,00 €</span>
+</div>
+<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group bg-surface-container-lowest rounded-lg p-4 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Interactive wooden cat puzzle toy with treats hidden inside" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsts9h3IX-RyZQjIAQD_EX9qGKEyFm8jJDSIM-KkwOtsLE2KPOhJhm2OzD2BnZHo3yyrFupAQNz8xapNDOjOT6kQkBZypuyGl9W2SfeTYCjdHPEHUpQDm4BcHRTqQ84aqfsTQFmW2pRR8rh0Kg9riiU0oIwq-oGFdpieqvv9Qfu2wwRr5v_lJ_DhZrgnGWnwFR0x5A3mZubDSqyRgnXhrKlonU8SSbttesIoWX49U0qNfPgiPf9JwmIOiT1npuIWuQJYY3UnLdth8"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.7</span>
+<span class="text-[10px] text-outline ml-1">(89 reviews)</span>
+</div>
+<h3 class="text-xl text-on-surface mb-1 group-hover:text-primary transition-colors font-headline">Oak Treat Maze</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-[10px] font-bold text-on-surface-variant flex items-center gap-1">🐈 Cats</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-xl font-bold text-on-surface">29,00 €</span>
+</div>
+<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group bg-surface-container-lowest rounded-lg p-4 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Soft plush toy in a curious animal shape for dogs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkHpj6QA1AAZwqAaoTd440cu3HlJFsH1vzR3CH8UOwVvqxM5hCXzvTagDe-_uov6zhu1uj8dIb1eexorFfTdwFyRIukEdXt8tdUtDIoWAMgmxmh3RFEreXNRUIaWJUNk6IMtZ21i2sfWSsfrOzQ5lA0PblF8nLuNRaWZAVqRWdG2YXfJXsBuHIlVas1rxqpmthGeWpQpnWyVMgPdGmesCF2karIgv9VxdvvDZySizmccuaVlVBBxhfRPsGYY2LHf3stJ8ZT3IANmA"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.5</span>
+<span class="text-[10px] text-outline ml-1">(42 reviews)</span>
+</div>
+<h3 class="text-xl text-on-surface mb-1 group-hover:text-primary transition-colors font-headline">Woolen Hippo Plush</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-[10px] font-bold text-on-surface-variant flex items-center gap-1">🐕 Dogs</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-xl font-bold text-on-surface">22,00 €</span>
+</div>
+<button class="w-full py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#e4e2e1] dark:bg-[#1b1c1c] w-full px-12 py-16 flex flex-col md:flex-row justify-between items-start gap-8 full-width rounded-t-[2rem] mt-12">
+<div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-4 gap-12">
+<!-- Brand Column -->
+<div class="md:col-span-1">
+<h2 class="text-xl font-bold text-[#1b1c1c] dark:text-[#fcf9f8] mb-4 font-headline">PetQuirky</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 opacity-80">Curating the most delightful and sophisticated essentials for the pets that make your house a home. Every item is hand-picked with care.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary hover:scale-110 transition-transform shadow-sm" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12.31 1.5c-3.14 0-4.04 0-5.27.06-1.23.05-2.07.25-2.8.53-.76.3-1.4.69-2.04 1.33-.64.64-1.03 1.28-1.33 2.04-.28.73-.48 1.57-.53 2.8-.06 1.23-.06 2.13-.06 5.27s0 4.04.06 5.27c.05 1.23.25 2.07.53 2.8.3.76.69 1.4 1.33 2.04.64.64 1.28 1.03 2.04 1.33.73.28 1.57.48 2.8.53 1.23.06 2.13.06 5.27.06s4.04 0 5.27-.06c1.23-.05 2.07-.25 2.8-.53.76-.3 1.4-.69 2.04-1.33.64-.64 1.03-1.28 1.33-2.04.28-.73.48-1.57.53-2.8.06-1.23.06-2.13.06-5.27s0-4.04-.06-5.27c-.05-1.23-.25-2.07-.53-2.8-.3-.76-.69-1.4-1.33-2.04-.64-.64-1.28-1.03-2.04-1.33-.73-.28-1.57-.48-2.8-.53-1.23-.06-2.13-.06-5.27-.06zm0 2.22c3.09 0 3.45.01 4.67.07 1.13.05 1.74.24 2.15.4.54.21.93.46 1.33.86.4.4.65.79.86 1.33.16.41.35 1.02.4 2.15.06 1.22.07 1.58.07 4.67s-.01 3.45-.07 4.67c-.05 1.13-.24 1.74-.4 2.15-.21.54-.46.93-.86 1.33-.4.4-.79.65-1.33.86-.41.16-1.02.35-2.15.4-1.22.06-1.58.07-4.67.07s-3.45-.01-4.67-.07c-1.13-.05-1.74-.24-2.15-.4-.54-.21-.93-.46-1.33-.86-.4-.4-.65-.79-.86-1.33-.16-.41-.35-1.02-.4-2.15-.06-1.22-.07-1.58-.07-4.67s.01-3.45.07-4.67c.05-1.13.24-1.74.4-2.15.21-.54.46-.93.86-1.33.4-.4.79-.65 1.33-.86.41-.16 1.02-.35 2.15-.4 1.22-.06 1.58-.07 4.67-.07zm0 3.65a5.63 5.63 0 100 11.26 5.63 5.63 0 000-11.26zm0 9.04a3.41 3.41 0 110-6.82 3.41 3.41 0 010 6.82zm5.85-9.58a1.32 1.32 0 11-2.64 0 1.32 1.32 0 012.64 0z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary hover:scale-110 transition-transform shadow-sm" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2s-1.03 0-1.57.01v12.51a3.16 3.16 0 01-6.32 0c0-1.75 1.42-3.17 3.16-3.17.45 0 .87.1 1.25.28V9.39a6.19 6.19 0 00-4.41-1.04 6.17 6.17 0 00-5.02 5.06 6.17 6.17 0 005.04 7.19 6.19 6.19 0 007.2-5.04V7a4.8 4.8 0 003.44 3.06V7.4a4.85 4.85 0 01-4.07-.71z"></path></svg>
+</a>
+</div>
+</div>
+<!-- Shop Column -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold tracking-widest text-primary uppercase">Shop</h3>
+<nav class="flex flex-col gap-2">
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Products</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Gift Cards</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Sale</a>
+</nav>
+</div>
+<!-- Support Column -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold tracking-widest text-primary uppercase">Support</h3>
+<nav class="flex flex-col gap-2">
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Shipping Info</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Returns</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Contact</a>
+</nav>
+</div>
+<!-- Bottom Note / Legal -->
+<div class="flex flex-col gap-4 md:items-end text-right">
+<h3 class="text-sm font-bold tracking-widest text-primary uppercase">Legal</h3>
+<nav class="flex flex-col gap-2 md:items-end">
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Privacy Policy</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] opacity-60 hover:text-primary transition-colors text-sm" href="#">Terms of Service</a>
+</nav>
+<p class="text-on-surface text-xs opacity-70 mt-4 font-medium tracking-tight">© 2026 PetQuirky. Individual seller, not a corporate entity.</p>
+</div>
+</div>
+</footer>
+</body></html>

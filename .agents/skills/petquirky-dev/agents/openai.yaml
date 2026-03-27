@@ -1,0 +1,7 @@
+interface:
+  display_name: "PetQuirky Dev"
+  short_description: "Implement PetQuirky features by phase, route, and acceptance criteria"
+  default_prompt: "Use $petquirky-dev to implement a PetQuirky feature with the correct phase mapping, file targets, and verification steps."
+
+policy:
+  allow_implicit_invocation: true

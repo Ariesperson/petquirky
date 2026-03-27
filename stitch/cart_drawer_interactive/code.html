@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PetQuirky | Your Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#1b1c1c",
+                        "on-secondary-fixed": "#3a0b00",
+                        "secondary": "#9f4122",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary-container": "#722104",
+                        "surface-variant": "#e4e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "tertiary": "#00694c",
+                        "primary-container": "#c74d24",
+                        "on-secondary-fixed-variant": "#7f2a0d",
+                        "background": "#fcf9f8",
+                        "tertiary-container": "#008560",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface-variant": "#58423b",
+                        "inverse-surface": "#303030",
+                        "on-primary-fixed-variant": "#852400",
+                        "primary-fixed-dim": "#ffb59e",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#002115",
+                        "on-tertiary-container": "#f5fff7",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ffdbd0",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#e0c0b6",
+                        "surface-container-high": "#eae7e7",
+                        "on-background": "#1b1c1c",
+                        "inverse-primary": "#ffb59e",
+                        "primary-fixed": "#ffdbd0",
+                        "on-tertiary-fixed-variant": "#00513a",
+                        "on-primary-fixed": "#3a0b00",
+                        "secondary-fixed-dim": "#ffb59e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#86f8c9",
+                        "primary": "#a5360d",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#a8380f",
+                        "surface-container": "#f0eded",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#fd8863",
+                        "outline": "#8c7169",
+                        "on-primary-container": "#fffbff",
+                        "surface-container-highest": "#e4e2e1",
+                        "inverse-on-surface": "#f3f0f0",
+                        "tertiary-fixed-dim": "#68dbae"
+                    },
+                    fontFamily: {
+                        "baloo-2": ["Baloo 2"],
+                        "plus-jakarta-sans": ["Plus Jakarta Sans"],
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-baloo-2 { font-family: 'Baloo 2', cursive; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container/30 overflow-hidden">
+<!-- Backdrop Overlay for Drawer -->
+<div class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-40" onclick="window.history.back()"></div>
+<!-- Navigation Shell (TopAppBar) -->
+<nav class="fixed top-0 w-full z-30 bg-surface/80 backdrop-blur-xl flex justify-between items-center px-8 py-4 w-full max-w-none shadow-sm transition-transform duration-200">
+<div class="flex items-center gap-8">
+<span class="font-baloo-2 text-3xl font-extrabold text-[#a5360d]">PetQuirky</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-stone-600 hover:text-[#a5360d] font-plus-jakarta-sans text-body-lg hover:scale-105 transition-transform" href="#">Home</a>
+<a class="text-stone-600 hover:text-[#a5360d] font-plus-jakarta-sans text-body-lg hover:scale-105 transition-transform" href="#">Products</a>
+<a class="text-stone-600 hover:text-[#a5360d] font-plus-jakarta-sans text-body-lg hover:scale-105 transition-transform" href="#">Blog</a>
+<a class="text-stone-600 hover:text-[#a5360d] font-plus-jakarta-sans text-body-lg hover:scale-105 transition-transform" href="#">About</a>
+<a class="text-stone-600 hover:text-[#a5360d] font-plus-jakarta-sans text-body-lg hover:scale-105 transition-transform" href="#">Contact</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-medium text-sm">
+<span>EN</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<span class="material-symbols-outlined text-stone-600 cursor-pointer hover:scale-105 transition-transform">search</span>
+<span class="material-symbols-outlined text-stone-600 cursor-pointer hover:scale-105 transition-transform">person</span>
+<div class="relative group cursor-pointer hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[#a5360d]">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">2</span>
+</div>
+</div>
+</nav>
+<!-- Background Content (Simulated Homepage) -->
+<main class="pt-24 px-8 opacity-50 select-none pointer-events-none">
+<section class="max-w-7xl mx-auto grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-7 bg-surface-container-low rounded-xl p-12 flex flex-col justify-center min-h-[500px]">
+<h1 class="font-baloo-2 text-6xl text-primary leading-tight mb-6">Elevate Your Pet's Daily Ritual</h1>
+<p class="text-lg text-on-surface-variant max-w-md mb-8">Curated essentials for the modern companion, blending European craftsmanship with playful design.</p>
+<div class="w-48 h-12 bg-primary rounded-lg"></div>
+</div>
+<div class="col-span-12 lg:col-span-5 relative overflow-hidden rounded-xl h-[500px]">
+<img class="w-full h-full object-cover" data-alt="minimalist pet interior with a stylish ceramic dog bowl on a terracotta tiled floor with soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO-kwHwDNlFZjRRGySESJHabmkAMhi-aUiPjbqtlzJjfP4SAu-OjkjtmJ-gLQAwDVIf4yhTWlC9xYndKl2zxDeFiS0GXc_m4oCZnbHdMZ9TRatQffBaoX-49AyVlFsZKkro6WxWN-PDBlhOiGSnCHDuomi3oCWw_30Ug8ZzwpLpBrzfz4gI6K8GavrRt6rgOyDYyyix4n1mo4kTMI9lYi2Q2ZQm336yU6XTOBjriK_F2Bs7eAxltBwSkX5OGzSTOh6vTtEf2aJ5LM"/>
+</div>
+</section>
+<section class="mt-16 max-w-7xl mx-auto">
+<h2 class="font-baloo-2 text-3xl mb-8">New Arrivals</h2>
+<div class="grid grid-cols-4 gap-6">
+<div class="h-64 bg-surface-container-highest rounded-lg"></div>
+<div class="h-64 bg-surface-container-highest rounded-lg"></div>
+<div class="h-64 bg-surface-container-highest rounded-lg"></div>
+<div class="h-64 bg-surface-container-highest rounded-lg"></div>
+</div>
+</section>
+</main>
+<!-- Navigation Drawer (Slide-in Cart) -->
+<aside class="fixed inset-y-0 right-0 w-full max-w-md bg-surface flex flex-col shadow-2xl z-50 rounded-l-3xl overflow-hidden border-l border-white/10">
+<!-- Header -->
+<header class="px-8 pt-8 pb-6 flex items-center justify-between">
+<div>
+<h2 class="font-baloo-2 text-2xl font-bold text-[#a5360d]">Your Cart (2)</h2>
+<p class="font-plus-jakarta-sans text-body-md text-tertiary font-semibold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                    €5,00 away from free shipping!
+                </p>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-highest transition-colors group" onclick="window.history.back()">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:rotate-90 transition-transform duration-300">close</span>
+</button>
+</header>
+<!-- Progress Bar -->
+<div class="px-8 mb-6">
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-primary-container w-[92%] rounded-full shadow-sm"></div>
+</div>
+</div>
+<!-- Scrollable Middle Section -->
+<section class="flex-1 overflow-y-auto px-8 pb-8 space-y-8">
+<!-- Cart Item 1 -->
+<div class="flex gap-4 group">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-low shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close up of a handcrafted dark leather pet collar with brass hardware on a clean stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATTR9VRTTmjDMdUeJ76gwoFvxwqITP4jrUWxyfidz2YubnTfub7s-NPApapPCGvqPqqVJl1UQUquyB-xUdJjmgpHr6LhTgiwsH3JHAvKGYRGcFz_os57_z7NGtZ8-518zCMxWutaYWNbFfzCD3zLvAUBy0IEJ-79N1s96fp_tco26a0eGJngr9Ppw37JlTFCKSGHXtmZZEK2GQxKRswZToYgcwVZFz_9DG4teE7lkz54eztmynhJ4OxjLF8Np7HsuLvSgEWeehU1I"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-plus-jakarta-sans font-bold text-on-surface group-hover:text-primary transition-colors cursor-pointer">Heritage Leather Collar</h3>
+<span class="font-semibold text-on-surface">45,00 €</span>
+</div>
+<p class="text-sm text-on-surface-variant">Cognac / Medium</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center bg-surface-container-highest rounded-full px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+<button class="text-xs font-bold text-on-surface-variant hover:text-error transition-colors uppercase tracking-wider">Remove</button>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex gap-4 group">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-low shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="minimalist ceramic pet bowl in eucalyptus green with matte finish on a warm wood surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBspNNgNax1N45nQrdwNVjtNP02g38aKYq7hfBWgfhGB9W0TyLMk3rADDPN75x5daE6GuU7PCr3qr0HvUL5OCpgQlW0_qMOKlbh9cXsy1Dl0dVTE8NVyS1OmMauwNJ1yyNTdyzaypZyApEo-KvtjKGd-mRS5WVjufe4PvB9B8yE7RZcWquih9v-dUYyILTgS62Vc-8MX1sw6dby6H9qCyow4saO2AqNdDKiUXXImc2vIum33VZ5H6IjIpshyPNUv9exZurv32POVQ"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-plus-jakarta-sans font-bold text-on-surface group-hover:text-primary transition-colors cursor-pointer">Artisan Ceramic Bowl</h3>
+<span class="font-semibold text-on-surface">29,00 €</span>
+</div>
+<p class="text-sm text-on-surface-variant">Eucalyptus / Small</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center bg-surface-container-highest rounded-full px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+<button class="text-xs font-bold text-on-surface-variant hover:text-error transition-colors uppercase tracking-wider">Remove</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Fixed Footer -->
+<footer class="p-8 bg-surface-container-low border-t border-surface-variant/30 space-y-4">
+<div class="flex justify-between items-center mb-2">
+<span class="font-plus-jakarta-sans font-medium text-on-surface-variant">Subtotal</span>
+<span class="font-baloo-2 text-2xl font-bold text-on-surface">74,00 €</span>
+</div>
+<button class="w-full py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary-container/5 transition-colors scale-100 active:scale-[0.98] duration-200" onclick="window.location.href='{{DATA:SCREEN:SCREEN_71}}'">
+                View Cart
+            </button>
+<button class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-primary-container text-white font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2" onclick="window.location.href='{{DATA:SCREEN:SCREEN_46}}'">
+                Checkout
+                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<p class="text-[10px] text-center text-on-surface-variant/60 pt-2 font-medium uppercase tracking-widest">
+                © 2026 PetQuirky • Individual seller, not a corporate entity
+            </p>
+</footer>
+</aside>
+</body></html>

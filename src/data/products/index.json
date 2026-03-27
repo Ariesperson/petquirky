@@ -1,0 +1,302 @@
+[
+  {
+    "id": "prod_ceramic_slow_feeder",
+    "slug": "ceramic-sculpted-slow-feeder",
+    "category": "feeding",
+    "name": {
+      "en": "Ceramic Sculpted Slow Feeder",
+      "de": "Keramik Slow Feeder",
+      "fr": "Gamelle lente en céramique sculptée",
+      "es": "Comedero lento de cerámica esculpida"
+    },
+    "description": {
+      "en": "A tactile ceramic feeder designed to slow mealtime and elevate your kitchen corner.",
+      "de": "Ein taktiler Keramiknapf, der das Fressen verlangsamt und Ihre Küchenecke aufwertet.",
+      "fr": "Une gamelle tactile en céramique conçue pour ralentir les repas et sublimer la cuisine.",
+      "es": "Un comedero táctil de cerámica diseñado para ralentizar la comida y elevar tu cocina."
+    },
+    "price": {
+      "amount": 34,
+      "currency": "EUR"
+    },
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBOQGwijPKp-JAONcREEyYEE29fm7fozy_hchIsvyltpAp4zgDy-W8gCLQWaIo3ys2BOLFR88qW0hJqq-rGpREgE7WkbwWBj934HQOqwLZ5qtkIcXBKhkl8OpducpEhVCRpt4Bh2N_T9pf1u3Irs8l8py22mkAqvKGtTgH24hd_SSy0WJbUE3Dh2HTZ7Fa5AByabuDNF_ac07B0GuRsuK0jXO7HSABvLMjAE9-wzSPML-V6TRk8ptWi8pkEeeC5WsanCTQ9-tmz23E"
+    ],
+    "badge": "new",
+    "stock": "in_stock",
+    "weight": 0.85,
+    "specifications": {
+      "material": "Ceramic",
+      "finish": "Matte",
+      "dishwasherSafe": "Yes"
+    },
+    "seo": {
+      "title": {
+        "en": "Ceramic Sculpted Slow Feeder | PetQuirky",
+        "de": "Keramik Slow Feeder | PetQuirky",
+        "fr": "Gamelle lente en céramique sculptée | PetQuirky",
+        "es": "Comedero lento de cerámica esculpida | PetQuirky"
+      },
+      "description": {
+        "en": "A sculptural ceramic feeder for cats and dogs.",
+        "de": "Ein skulpturaler Keramiknapf für Katzen und Hunde.",
+        "fr": "Une gamelle en céramique sculpturale pour chats et chiens.",
+        "es": "Un comedero de cerámica escultórico para gatos y perros."
+      }
+    },
+    "tags": ["ceramic", "slow feeder", "kitchen"],
+    "petType": ["cat", "dog"],
+    "createdAt": "2026-02-18",
+    "featured": true
+  },
+  {
+    "id": "prod_pebble_weave_basket",
+    "slug": "pebble-weave-basket",
+    "category": "habitat",
+    "name": {
+      "en": "The Pebble Weave Basket",
+      "de": "Pebble Weave Basket",
+      "fr": "Panier Pebble Weave",
+      "es": "Cesta Pebble Weave"
+    },
+    "description": {
+      "en": "A softly structured cat basket woven for calm corners and sunlit naps.",
+      "de": "Ein weich strukturiertes Katzenkörbchen für ruhige Ecken und sonnige Nickerchen.",
+      "fr": "Un panier pour chat à la structure douce, conçu pour les coins calmes et les siestes au soleil.",
+      "es": "Una cesta para gatos de estructura suave creada para rincones tranquilos y siestas al sol."
+    },
+    "price": {
+      "amount": 45,
+      "currency": "EUR"
+    },
+    "compareAtPrice": {
+      "amount": 58,
+      "currency": "EUR"
+    },
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuD24K1dxN5s2rStYq29kDJwlACwfG8QPsgHgfL7Fl7LzcWbv4dFDCzKxPUGPaVZwDAp7KylnxlE9ZdnG3stdS49Kuq2B39hGE7uvPqtm0g86a8aTq7O83Q4hWbDryoQT6EDxCyBFIJKssBQCUgZLceH7Z_ErHqXeOEeRGyQMdaVao29ZaobgMBkhYpy5i11TzhmpQmHRlO9GFikDFbaKC6u2CjB8Gce7aHK1msnO2iq7qO6SselD5zsQ1SrQNYov3QQ4sa53eUNjYc"
+    ],
+    "badge": "sale",
+    "stock": "in_stock",
+    "weight": 1.4,
+    "specifications": {
+      "material": "Woven cotton",
+      "washable": "Cover only",
+      "shape": "Pebble oval"
+    },
+    "seo": {
+      "title": {
+        "en": "The Pebble Weave Basket | PetQuirky",
+        "de": "Pebble Weave Basket | PetQuirky",
+        "fr": "Panier Pebble Weave | PetQuirky",
+        "es": "Cesta Pebble Weave | PetQuirky"
+      },
+      "description": {
+        "en": "A woven cat basket with calm editorial styling.",
+        "de": "Ein gewebtes Katzenkörbchen mit ruhigem Editorial-Look.",
+        "fr": "Un panier tissé pour chat au style éditorial apaisé.",
+        "es": "Una cesta tejida para gatos con estilo editorial sereno."
+      }
+    },
+    "tags": ["cat bed", "woven", "nest"],
+    "petType": ["cat"],
+    "createdAt": "2026-01-21",
+    "featured": true
+  },
+  {
+    "id": "prod_flowsmart_fountain",
+    "slug": "flowsmart-zen-fountain",
+    "category": "feeding",
+    "name": {
+      "en": "FlowSmart Zen Fountain",
+      "de": "FlowSmart Zen Fountain",
+      "fr": "FlowSmart Zen Fountain",
+      "es": "FlowSmart Zen Fountain"
+    },
+    "description": {
+      "en": "A quiet hydration fountain with gentle circulation and easy-clean surfaces.",
+      "de": "Ein leiser Trinkbrunnen mit sanfter Zirkulation und pflegeleichten Flächen.",
+      "fr": "Une fontaine d’hydratation silencieuse avec circulation douce et surfaces faciles à nettoyer.",
+      "es": "Una fuente de hidratación silenciosa con circulación suave y superficies fáciles de limpiar."
+    },
+    "price": {
+      "amount": 89,
+      "currency": "EUR"
+    },
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBsAEA61GuwRyDF91W5YDPNVb76H7Xp5YiJBkaDMmemExpuhtThqtYIDku1ciHZRpyS0K185dJDbX0j4PMSzduNH_uSy9k1ENPHolhOTpYr4MD3vuXYFRXXykSDRSvz93acnlRgaaLD8dx3wikpwHd0Uwx5cvMK4OpKFDbj_kJsbqlzpz0_2NKnKcFsZnOuJTTcZNEbd0L2cJkYxZMmxl6PIKQ18Fr4gpBOG-DwK7poknaWu8BgpOlZTeE6lzn-pxeKCkdVnAk-HJQ"
+    ],
+    "stock": "in_stock",
+    "weight": 1.1,
+    "specifications": {
+      "capacity": "2.5L",
+      "noiseLevel": "< 20 dB",
+      "filter": "Replaceable"
+    },
+    "seo": {
+      "title": {
+        "en": "FlowSmart Zen Fountain | PetQuirky",
+        "de": "FlowSmart Zen Fountain | PetQuirky",
+        "fr": "FlowSmart Zen Fountain | PetQuirky",
+        "es": "FlowSmart Zen Fountain | PetQuirky"
+      },
+      "description": {
+        "en": "Smart hydration for cats and dogs.",
+        "de": "Smarte Trinklösung für Katzen und Hunde.",
+        "fr": "Hydratation intelligente pour chats et chiens.",
+        "es": "Hidratación inteligente para gatos y perros."
+      }
+    },
+    "tags": ["fountain", "hydration", "smart"],
+    "petType": ["cat", "dog"],
+    "createdAt": "2025-12-12",
+    "featured": true
+  },
+  {
+    "id": "prod_eco_knot_tug_toy",
+    "slug": "eco-knot-durable-tug-toy",
+    "category": "smart-toys",
+    "name": {
+      "en": "Eco-Knot Durable Tug Toy",
+      "de": "Eco-Knot Zerrspielzeug",
+      "fr": "Jouet de traction Eco-Knot",
+      "es": "Juguete de tiro Eco-Knot"
+    },
+    "description": {
+      "en": "A playful rope toy with durable knots and a tactile editorial color palette.",
+      "de": "Ein verspieltes Seilspielzeug mit robusten Knoten und taktiler Farbpalette.",
+      "fr": "Un jouet en corde ludique avec nœuds résistants et palette tactile.",
+      "es": "Un juguete de cuerda con nudos resistentes y una paleta táctil."
+    },
+    "price": {
+      "amount": 18.5,
+      "currency": "EUR"
+    },
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBHPjIGf2-fKaNuRYumk-zbQLZ7bjCxXwLTlGotLxi-lxW48ZNr7fv3c7id82DaCgOLqfX602bvEnMZgPvLxmNx5Pi-dW7edeKvPwlfTMYNg6rYEwhZrmKclnZl8U2Xsk6iYrbIt8lTsj6vVt4jzJE74JTcJXx1xQF1-yoD8ZrzsjKjfM6ZqA2igK12pPEmO5MPRfdkkhFqDDUaLuioajt-NrcFYpB5KORtIP7QI0zeHpuK_lG0njswIIqKMqmE5t5nJaMdBX_m82E"
+    ],
+    "stock": "low_stock",
+    "weight": 0.2,
+    "specifications": {
+      "material": "Natural rope",
+      "washable": "Hand wash",
+      "size": "Medium"
+    },
+    "seo": {
+      "title": {
+        "en": "Eco-Knot Durable Tug Toy | PetQuirky",
+        "de": "Eco-Knot Zerrspielzeug | PetQuirky",
+        "fr": "Jouet de traction Eco-Knot | PetQuirky",
+        "es": "Juguete de tiro Eco-Knot | PetQuirky"
+      },
+      "description": {
+        "en": "A durable rope toy for dogs.",
+        "de": "Ein robustes Seilspielzeug für Hunde.",
+        "fr": "Un jouet en corde durable pour chiens.",
+        "es": "Un juguete de cuerda duradero para perros."
+      }
+    },
+    "tags": ["rope", "dog toy", "eco"],
+    "petType": ["dog"],
+    "createdAt": "2025-11-03",
+    "featured": false
+  },
+  {
+    "id": "prod_bamboo_shine_brush",
+    "slug": "bamboo-shine-brush",
+    "category": "grooming",
+    "name": {
+      "en": "Bamboo Shine Brush",
+      "de": "Bamboo Shine Brush",
+      "fr": "Bamboo Shine Brush",
+      "es": "Bamboo Shine Brush"
+    },
+    "description": {
+      "en": "A lightweight bamboo grooming brush sized for rabbits and small companions.",
+      "de": "Eine leichte Bambusbürste für Kaninchen und kleine Begleiter.",
+      "fr": "Une brosse légère en bambou pour lapins et petits compagnons.",
+      "es": "Un cepillo ligero de bambú para conejos y pequeñas mascotas."
+    },
+    "price": {
+      "amount": 12,
+      "currency": "EUR"
+    },
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAxfwkFPYQC-sPRjyHYJhwMa6qox6GnzjJBu_iU85gGgYjjWdDePbWOLjADbyvMTXiGxetpswbptcUr1H93Tif2_5EM3xWE15ToSl7DhKDv5EOwkbNbSG2Y1YtvcOPWhKKdp6wWS6NZQ7rKEzZ2LUQBseQX2pEcTHtcGMLeR92jgkTWk1H2uILASYkhulPEwThLAqV3b-gto4TpFvTn8l-D0OUaRuGIbeHJqN37yNPL0dTvMLqVmWdOB5tlM8xGxIKImRvnxTsJXKw"
+    ],
+    "stock": "in_stock",
+    "weight": 0.18,
+    "specifications": {
+      "material": "Bamboo and natural bristles",
+      "size": "Small",
+      "finish": "Satin"
+    },
+    "seo": {
+      "title": {
+        "en": "Bamboo Shine Brush | PetQuirky",
+        "de": "Bamboo Shine Brush | PetQuirky",
+        "fr": "Bamboo Shine Brush | PetQuirky",
+        "es": "Bamboo Shine Brush | PetQuirky"
+      },
+      "description": {
+        "en": "A grooming brush for rabbits and small pets.",
+        "de": "Eine Fellbürste für Kaninchen und Kleintiere.",
+        "fr": "Une brosse de soin pour lapins et petits animaux.",
+        "es": "Un cepillo de cuidado para conejos y pequeñas mascotas."
+      }
+    },
+    "tags": ["bamboo", "grooming", "rabbit"],
+    "petType": ["rabbit", "hamster"],
+    "createdAt": "2025-10-17",
+    "featured": false
+  },
+  {
+    "id": "prod_mossy_cave_hideaway",
+    "slug": "mossy-cave-hideaway",
+    "category": "habitat",
+    "name": {
+      "en": "Mossy Cave Hideaway",
+      "de": "Mossy Cave Hideaway",
+      "fr": "Mossy Cave Hideaway",
+      "es": "Mossy Cave Hideaway"
+    },
+    "description": {
+      "en": "A cork and moss reptile hide with natural texture and easy placement.",
+      "de": "Ein Reptilienversteck aus Kork und Moos mit natürlicher Textur.",
+      "fr": "Une cachette en liège et mousse pour reptiles au toucher naturel.",
+      "es": "Un escondite para reptiles de corcho y musgo con textura natural."
+    },
+    "price": {
+      "amount": 26,
+      "currency": "EUR"
+    },
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAfM4vN2qXzHz5FCYT0esDMU8z_EANkFKxnone3myObDyMs__4dBRdcFvlbL3zKMrZnqNoShMBKSN_7eypKXFWi54vmttoxOg4QbxOG66WwDorkYlENgITzhorMfmxWZV-2Hf5Jmz1V9Zl9Hwyq0zPXXIbRBrOGNL2sC5e84xGjkQN82scgoxik2NCfAzze1u9-rQT3DJADtVGKlFzLqc0LlJTKUJbIPjFhKnCL2xQqnDPO-fQyWshqAGFrcWC3Lf0PXoS4EbrY0y0"
+    ],
+    "stock": "in_stock",
+    "weight": 0.5,
+    "specifications": {
+      "material": "Cork bark",
+      "finish": "Natural moss",
+      "placement": "Terrarium floor"
+    },
+    "seo": {
+      "title": {
+        "en": "Mossy Cave Hideaway | PetQuirky",
+        "de": "Mossy Cave Hideaway | PetQuirky",
+        "fr": "Mossy Cave Hideaway | PetQuirky",
+        "es": "Mossy Cave Hideaway | PetQuirky"
+      },
+      "description": {
+        "en": "A textured reptile hideaway.",
+        "de": "Ein texturiertes Reptilienversteck.",
+        "fr": "Une cachette texturée pour reptiles.",
+        "es": "Un refugio texturizado para reptiles."
+      }
+    },
+    "tags": ["reptile", "terrarium", "cork"],
+    "petType": ["reptile"],
+    "createdAt": "2025-09-08",
+    "featured": false
+  }
+]

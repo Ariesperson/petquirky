@@ -1,0 +1,18 @@
+{
+  "currency": "EUR",
+  "freeShippingThreshold": 50,
+  "zones": [
+    {
+      "id": "eu-standard",
+      "label": "EU Standard",
+      "rate": 6.9,
+      "minSubtotal": 0
+    },
+    {
+      "id": "eu-free",
+      "label": "EU Free Shipping",
+      "rate": 0,
+      "minSubtotal": 50
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "PetQuirky Design"
+  short_description: "Map PetQuirky pages to stitch references and enforce editorial UI rules"
+  default_prompt: "Use $petquirky-design to implement a PetQuirky screen against the local stitch references and design system."
+
+policy:
+  allow_implicit_invocation: true

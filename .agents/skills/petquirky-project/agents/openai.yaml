@@ -1,0 +1,7 @@
+interface:
+  display_name: "PetQuirky Project"
+  short_description: "Load PetQuirky guardrails, source-of-truth order, and stack constraints"
+  default_prompt: "Use $petquirky-project to establish PetQuirky requirements, real local source documents, and stack guardrails before implementation."
+
+policy:
+  allow_implicit_invocation: true

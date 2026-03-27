@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmed | PetQuirky</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1b1c1c",
+              "outline": "#8c7169",
+              "tertiary-container": "#008560",
+              "on-primary-container": "#fffbff",
+              "primary-container": "#c74d24",
+              "secondary-container": "#fd8863",
+              "surface-container-highest": "#e4e2e1",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed-variant": "#7f2a0d",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#002115",
+              "on-error": "#ffffff",
+              "tertiary-fixed": "#86f8c9",
+              "surface-container": "#f0eded",
+              "on-background": "#1b1c1c",
+              "surface-dim": "#dcd9d9",
+              "on-primary-fixed-variant": "#852400",
+              "on-primary-fixed": "#3a0b00",
+              "surface-container-high": "#eae7e7",
+              "on-tertiary-container": "#f5fff7",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#722104",
+              "on-tertiary-fixed-variant": "#00513a",
+              "surface-tint": "#a8380f",
+              "inverse-on-surface": "#f3f0f0",
+              "on-error-container": "#93000a",
+              "surface": "#fcf9f8",
+              "secondary-fixed-dim": "#ffb59e",
+              "outline-variant": "#e0c0b6",
+              "primary-fixed": "#ffdbd0",
+              "inverse-surface": "#303030",
+              "error-container": "#ffdad6",
+              "error": "#ba1a1a",
+              "surface-bright": "#fcf9f8",
+              "surface-container-low": "#f6f3f2",
+              "primary": "#a5360d",
+              "tertiary": "#00694c",
+              "inverse-primary": "#ffb59e",
+              "surface-variant": "#e4e2e1",
+              "tertiary-fixed-dim": "#68dbae",
+              "surface-container-lowest": "#ffffff",
+              "secondary": "#9f4122",
+              "primary-fixed-dim": "#ffb59e",
+              "background": "#fcf9f8",
+              "on-surface-variant": "#58423b",
+              "on-secondary-fixed": "#3a0b00",
+              "secondary-fixed": "#ffdbd0"
+            },
+            fontFamily: {
+              "headline": ["Baloo 2"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Baloo 2', cursive; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-[#fcf9f8] dark:bg-stone-900 backdrop-blur-md opacity-95 shadow-sm dark:shadow-none fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-8xl mx-auto">
+<div class="text-3xl font-extrabold font-['Baloo_2'] text-[#a5360d] dark:text-[#d85a30] tracking-tight hover:scale-105 transition-transform duration-200 ease-out cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_17}}'">
+                PetQuirky
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200 ease-out" href="{{DATA:SCREEN:SCREEN_17}}">Home</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200 ease-out" href="{{DATA:SCREEN:SCREEN_30}}">Products</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200 ease-out" href="{{DATA:SCREEN:SCREEN_7}}">Blog</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200 ease-out" href="#">About</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#a5360d] cursor-pointer hover:scale-105 transition-transform" data-icon="language">language</span>
+<a class="material-symbols-outlined text-[#a5360d] cursor-pointer hover:scale-105 transition-transform" data-icon="person" href="{{DATA:SCREEN:SCREEN_8}}">person</a>
+<a class="material-symbols-outlined text-[#a5360d] cursor-pointer hover:scale-105 transition-transform" data-icon="shopping_cart" href="{{DATA:SCREEN:SCREEN_8}}">shopping_cart</a>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-20 px-6 max-w-[600px] mx-auto text-center">
+<!-- Success Icon -->
+<div class="mb-8 flex justify-center">
+<div class="w-24 h-24 rounded-full bg-tertiary/10 flex items-center justify-center relative">
+<div class="absolute inset-0 rounded-full border-4 border-tertiary animate-ping opacity-20"></div>
+<span class="material-symbols-outlined text-[64px] text-[#1D9E75]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Heading -->
+<h1 class="text-[28px] leading-tight text-primary mb-2">Thank you for your order!</h1>
+<p class="text-on-surface-variant mb-10">We've received your request and our quirky team is on it.</p>
+<!-- Order Details Card -->
+<div class="bg-[#FFF0EB] rounded-[16px] p-8 text-left mb-8 shadow-sm">
+<div class="flex justify-between items-start border-b border-primary/10 pb-4 mb-6">
+<div>
+<p class="text-[10px] font-bold tracking-widest text-primary uppercase mb-1">Order Number</p>
+<p class="font-bold text-lg text-on-surface">#PQ-20260323-001</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold tracking-widest text-primary uppercase mb-1">Status</p>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold">Processing</span>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="text-sm font-bold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_bag">shopping_bag</span>
+                        Items Ordered
+                    </h3>
+<ul class="space-y-3">
+<li class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Smart Interactive Snake Toy</span>
+<span class="font-medium">1x</span>
+</li>
+<li class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">AeroBounce Smart Launcher</span>
+<span class="font-medium">1x</span>
+</li>
+</ul>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h3 class="text-sm font-bold text-on-surface mb-2">Shipping to</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Oliver Bennett<br/>
+                            123 Rue de la Paix<br/>
+                            Paris, 75002, France
+                        </p>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-surface mb-2 text-right">Order Date</h3>
+<p class="text-sm text-on-surface-variant text-right">March 23, 2026</p>
+</div>
+</div>
+<div class="pt-4 border-t border-primary/10 flex justify-between items-center">
+<span class="font-bold text-on-surface">Total paid</span>
+<span class="text-2xl font-bold text-primary">74,00 €</span>
+</div>
+</div>
+</div>
+<!-- Next Steps -->
+<div class="space-y-4 mb-10">
+<div class="flex items-center gap-3 justify-center p-3 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+<span class="text-sm text-on-surface-variant">We've sent a confirmation to your email</span>
+</div>
+<div class="flex items-center gap-3 justify-center p-3 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+<span class="text-sm text-on-surface-variant">Estimated delivery: 5-10 business days</span>
+</div>
+<div class="flex items-center gap-3 justify-center p-3 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary" data-icon="help_center">help_center</span>
+<span class="text-sm text-on-surface-variant">Questions? Contact us at <a class="text-primary font-semibold hover:underline" href="mailto:hello@petquirky.com">hello@petquirky.com</a></span>
+</div>
+</div>
+<!-- Account Prompt -->
+<div class="bg-surface-container-low rounded-lg p-6 mb-8 flex flex-col items-center gap-4">
+<p class="text-sm font-medium text-on-surface">Create an account to track your order in real-time</p>
+<a class="px-8 py-3 border-2 border-[#a5360d] text-[#a5360d] font-bold rounded-lg hover:bg-primary hover:text-white transition-all duration-200 active:scale-95 text-center inline-block" href="{{DATA:SCREEN:SCREEN_8}}">
+                Create Account
+            </a>
+</div>
+<!-- Continue Shopping -->
+<a class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform active:scale-95 text-center block" href="{{DATA:SCREEN:SCREEN_17}}">
+            Continue Shopping
+        </a>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-stone-200 dark:bg-stone-950 rounded-t-[2rem] mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-8xl mx-auto text-left">
+<div class="space-y-4">
+<div class="text-xl font-bold font-['Baloo_2'] text-[#a5360d]">PetQuirky</div>
+<p class="text-stone-600 dark:text-stone-400 text-sm leading-relaxed">
+                    2026 PetQuirky. Individual seller, not a corporate entity.
+                </p>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-xs tracking-widest text-[#a5360d] uppercase">Shop</p>
+<ul class="space-y-2">
+<li><a class="text-stone-600 dark:text-stone-400 opacity-80 hover:opacity-100 transition-colors" href="#">Best Sellers</a></li>
+<li><a class="text-stone-600 dark:text-stone-400 opacity-80 hover:opacity-100 transition-colors" href="#">New Arrivals</a></li>
+<li><a class="text-stone-600 dark:text-stone-400 opacity-80 hover:opacity-100 transition-colors" href="#">Gifts</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-xs tracking-widest text-[#a5360d] uppercase">Support</p>
+<ul class="space-y-2">
+<li><a class="text-stone-600 dark:text-stone-400 opacity-80 hover:opacity-100 transition-colors" href="#">Shipping</a></li>
+<li><a class="text-stone-600 dark:text-stone-400 opacity-80 hover:opacity-100 transition-colors" href="#">Returns</a></li>
+<li><a class="text-stone-600 dark:text-stone-400 opacity-80 hover:opacity-100 transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-xs tracking-widest text-[#a5360d] uppercase">Connect</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#a5360d] cursor-pointer hover:scale-110 transition-transform" data-icon="tiktok">youtube_trending</span>
+<span class="material-symbols-outlined text-[#a5360d] cursor-pointer hover:scale-110 transition-transform" data-icon="instagram">retweet</span>
+</div>
+<p class="text-xs text-stone-500 mt-4">Handpicked quirky gear for your furry companions.</p>
+</div>
+</div>
+</footer>
+</body></html>

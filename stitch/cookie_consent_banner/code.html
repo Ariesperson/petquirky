@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Baloo 2', cursive;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#fffbff",
+              "secondary-container": "#fd8863",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "surface-bright": "#fcf9f8",
+              "on-tertiary-fixed": "#002115",
+              "surface-container-highest": "#e4e2e1",
+              "tertiary-fixed": "#86f8c9",
+              "on-tertiary-fixed-variant": "#00513a",
+              "on-surface": "#1b1c1c",
+              "surface-dim": "#dcd9d9",
+              "on-primary-fixed": "#3a0b00",
+              "surface": "#fcf9f8",
+              "surface-container-high": "#eae7e7",
+              "primary-fixed-dim": "#ffb59e",
+              "outline": "#8c7169",
+              "error-container": "#ffdad6",
+              "surface-variant": "#e4e2e1",
+              "on-background": "#1b1c1c",
+              "outline-variant": "#e0c0b6",
+              "inverse-primary": "#ffb59e",
+              "tertiary-container": "#008560",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f6f3f2",
+              "secondary-fixed": "#ffdbd0",
+              "tertiary": "#00694c",
+              "on-secondary-container": "#722104",
+              "on-error-container": "#93000a",
+              "on-tertiary-container": "#f5fff7",
+              "tertiary-fixed-dim": "#68dbae",
+              "surface-container-lowest": "#ffffff",
+              "surface-tint": "#a8380f",
+              "on-secondary-fixed-variant": "#7f2a0d",
+              "surface-container": "#f0eded",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-container": "#c74d24",
+              "on-primary-fixed-variant": "#852400",
+              "inverse-surface": "#303030",
+              "on-secondary-fixed": "#3a0b00",
+              "on-primary": "#ffffff",
+              "background": "#fcf9f8",
+              "primary": "#a5360d",
+              "on-surface-variant": "#58423b",
+              "secondary": "#9f4122",
+              "primary-fixed": "#ffdbd0",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#f3f0f0"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f8]/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="text-3xl font-bold tracking-tighter text-[#a5360d] dark:text-[#d85a30] font-[Baloo 2] hover:scale-105 transition-transform duration-200 cursor-pointer">PetQuirky</div>
+<div class="hidden md:flex items-center space-gap-8 gap-x-8">
+<a class="text-[#a5360d] dark:text-[#d85a30] font-bold border-b-2 border-[#a5360d] pb-1 hover:scale-105 transition-transform duration-200" href="#">Home</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] transition-colors hover:scale-105 transition-transform duration-200" href="#">Products</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] transition-colors hover:scale-105 transition-transform duration-200" href="#">Blog</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] transition-colors hover:scale-105 transition-transform duration-200" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] transition-colors hover:scale-105 transition-transform duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container-highest rounded-full px-4 py-2 gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-medium" placeholder="Search for treats..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#a5360d] hover:scale-105 transition-transform" data-icon="shopping_cart">shopping_cart</button>
+<button class="material-symbols-outlined text-[#a5360d] hover:scale-105 transition-transform" data-icon="person">person</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-32">
+<!-- Hero Section -->
+<section class="px-8 max-w-screen-2xl mx-auto mb-20">
+<div class="relative rounded-lg overflow-hidden bg-surface-container-low min-h-[600px] flex items-center p-12 lg:p-24">
+<div class="z-10 max-w-2xl">
+<span class="inline-block px-4 py-1 bg-primary-container text-on-primary-container rounded-full text-sm font-bold tracking-widest mb-6">NEW ARRIVAL</span>
+<h1 class="text-6xl md:text-8xl mb-8 leading-[0.9] tracking-tight">Curated Comfort for <span class="text-primary italic">Quirky</span> Companions.</h1>
+<p class="text-xl text-on-surface-variant mb-10 max-w-lg leading-relaxed">Artisan-crafted pet essentials designed for the modern European home. Because your pet's nest should be as beautiful as yours.</p>
+<div class="flex gap-4">
+<button class="px-8 py-4 bg-primary text-on-primary rounded-lg font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-primary/20">Shop the Collection</button>
+<button class="px-8 py-4 border-2 border-outline-variant text-primary rounded-lg font-bold text-lg hover:scale-105 transition-transform">Our Story</button>
+</div>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/2 hidden lg:block">
+<img alt="Elegant dog on mid-century sofa" class="w-full h-full object-cover" data-alt="a sophisticated golden retriever lounging on a minimal mid-century modern sofa in a sunlit Parisian apartment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHKpGRZwa5RxNRLIDGZ_d_PkMu5__JOHNd9zZs988ajHukt3llFQLznT_VGZc1OTgo37qQrYwTT5G8LkPk0_Gcbhd1RLBdewDwDtd_gXh2g6d_iGj6za6OtbnWECaeWpIU-Px_dNpsagzNQFTfC-qgHV0Ch4GpyORIfnKVeP2bQ2gWHhVngzYkKG0fQIJKU68vSzt0URS_RlQjrzlzf5ISWvsnCEDumJNNi04dD_xyj54HkB3RtdeQZzfmJHKzAuzooZWuoxzb9S0"/>
+</div>
+</div>
+</section>
+<!-- Bento Grid Products -->
+<section class="px-8 max-w-screen-2xl mx-auto mb-20">
+<h2 class="text-4xl mb-12">The Weekly Curated</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Large Feature -->
+<div class="md:col-span-2 md:row-span-2 bg-surface-container rounded-lg p-8 flex flex-col justify-between group cursor-pointer overflow-hidden">
+<div>
+<h3 class="text-3xl mb-2">The Woolen Nest</h3>
+<p class="text-on-surface-variant">Hand-spun merino wool cat beds.</p>
+</div>
+<div class="relative h-64 mt-8">
+<img alt="Woolen cat bed" class="absolute inset-0 w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" data-alt="a close-up of a high-end hand-knitted chunky wool cat bed in a soft cream color" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpRsafc_pQNV6rldyQ9J6UojoF1Hhw01WNQWQ5C9bGbSKWyv_YrZVlzF3ZJyzY8sSxQbYgJzKB5GRDEaboUx9QVQOiCNbcYbvew8hYcSMmnN-DnWh5lR3XGzp66UUvBizhBXcBet_1mrJ-Ev5IInFs1Vnfk94TEv81DThndJbo_kGDcH_FztWXKRNQ9-sKvFNRwH9ziGrcwbPAp1gc9TWid6VwkM4SCZonX4bV0-Ez1xyN4ijwNkcun1Gw_5HeL9B1UH18YVu6K3M"/>
+</div>
+<div class="flex justify-between items-center mt-4">
+<span class="text-2xl font-bold">129,00 €</span>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center"><span class="material-symbols-outlined" data-icon="add">add</span></button>
+</div>
+</div>
+<!-- Small Card 1 -->
+<div class="bg-surface-container-low rounded-lg p-6 group cursor-pointer">
+<div class="aspect-square mb-4 overflow-hidden rounded-lg">
+<img alt="Leather collar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="minimalist Italian leather dog collar with solid brass hardware on a marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMw3zUeu7RSOBxq44Z78i03L69S4NE9sGwcBgi1Oaa9Rfs16uRV6EsQevZJotSfqa3uHzB_XfMnYXW0gmmKGvSgFPt9WhZHHRlcwtrOE3t0mM8-9cBeiZSAPFw92UkAG6CbCPYzlKNF4ngKSG6QnudKypZZKo0071edZYgsUuMrWFsi1mN5OZY-eBrpBWTiMYdqgPHX2LOHOuydzcX_OsjXx07M3WBPpP0UJGPdsQ0VMjmjdX5X8teKHIcZYShNhEA_jvbMfM1RlU"/>
+</div>
+<h4 class="font-bold">Cognac Leather Collar</h4>
+<p class="text-sm text-on-surface-variant">45,00 €</p>
+</div>
+<!-- Small Card 2 -->
+<div class="bg-surface-container-low rounded-lg p-6 group cursor-pointer">
+<div class="aspect-square mb-4 overflow-hidden rounded-lg">
+<img alt="Ceramic bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="set of two handmade speckled ceramic pet bowls with a soft matte glaze" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQYu4YldUNz8jpLCwEkabbpe1CcGmou30-95V29u424qrBIzwgMc2HDtv0sIrP3yZOuXPp-4hewsU3-nGTXUJdCg_czwrzpmbq2TOSW4WgSFNSq6sLb3UhcBg6uHfl4nW9eXn1zpc0ZYwt6_Pohdju3vI-4YsjIezzPOyZMvreoHqsUuHqk4e0DspCti93FrhqBwGbStU2P6fNsME6kj36ywb8aezf4IOTQP8-6vSVfLvJ6Xp2kS3xpPwfVHC9yOIKZp3jj0szlko"/>
+</div>
+<h4 class="font-bold">Speckled Ceramic Set</h4>
+<p class="text-sm text-on-surface-variant">38,00 €</p>
+</div>
+<!-- Small Card 3 -->
+<div class="bg-surface-container-low rounded-lg p-6 group cursor-pointer">
+<div class="aspect-square mb-4 overflow-hidden rounded-lg">
+<img alt="Herbal treats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="artisanal organic dog treats in a glass jar with a wooden lid, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_YSjgDXcNmn9S808wSVDqevqThT-xQ02ArzWGUp0j65JotqCtL05HjKLS_z8S5OAxjwiueIUsy7CipDfWkmjc1Ocr3aMZ3e5F_lPhNRB6r9l_2Qu4fFU9S7DfseyQJYGzLyB5Mp2fzDMUU20_YTpTqhwQYSzJb_mQYOavx8kz0UMmsbkxdUHgZpc_vhRUcivA05ZD_8HTOtLvMzHhpgsVWItlDD6e1YRuYvKvrD8ngM9ijzN9mZApgzW6XKoymr6Iwx2GDXjtltk"/>
+</div>
+<h4 class="font-bold">Organic Herbal Bites</h4>
+<p class="text-sm text-on-surface-variant">12,50 €</p>
+</div>
+<!-- Small Card 4 -->
+<div class="bg-surface-container-low rounded-lg p-6 group cursor-pointer">
+<div class="aspect-square mb-4 overflow-hidden rounded-lg">
+<img alt="Velvet cushion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="a deep emerald green velvet pet cushion with gold piping in a warm cozy corner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtyhBJJaauyNbrAWLhpomwbbosWqUfSws9Xl7x_QWRXGTMtxqCTrqKMGums71KsXQx0K55r1iw8xF7_vijSE7aD0YU9IxnxwIBE1fY_0JaBB3e1DpoyqfrCytGuDluCAiVi2RtFzCIXWMjtiyem7OmFaQkf5_iIJe0rzs-lQpqXFdF3yBcqgR9kDHz9l8-Hz0lPfnBexx3LNWo9cBnzh7q7qxxpMiwbESKribdECtkdGXpktPFkt6Fn_EhCbvFU2FdhQQCSNdj5Bg"/>
+</div>
+<h4 class="font-bold">Velvet Sleep Cushion</h4>
+<p class="text-sm text-on-surface-variant">89,00 €</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] bg-stone-200 dark:bg-stone-950 w-full px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col gap-2">
+<div class="text-xl font-bold text-stone-800 dark:text-stone-200 brand-font">PetQuirky</div>
+<p class="text-sm font-body opacity-70 text-stone-600 dark:text-stone-400">© 2026 PetQuirky. Individual seller, not a corporate entity.</p>
+</div>
+<div class="flex gap-8 text-sm font-medium">
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-800 transition-opacity" href="#">Privacy Policy</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-800 transition-opacity" href="#">Terms of Service</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-800 transition-opacity" href="#">Shipping Info</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-800 transition-opacity" href="#">Returns</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400" data-icon="share">share</span>
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400" data-icon="mail">mail</span>
+</div>
+</footer>
+<!-- GDPR Cookie Banner -->
+<div class="fixed bottom-0 left-0 w-full bg-white z-[100] border-t border-stone-100 shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
+<div class="max-w-screen-2xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
+<!-- Left Side -->
+<div class="flex items-center gap-4 text-stone-700">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="cookie">cookie</span>
+</div>
+<p class="text-sm md:text-base font-medium leading-relaxed">
+                    We use cookies to enhance your experience. 
+                    <a class="text-primary font-bold hover:underline" href="#">Read our Privacy Policy.</a>
+</p>
+</div>
+<!-- Right Side Buttons -->
+<div class="flex flex-wrap items-center gap-4">
+<button class="px-5 py-2 text-sm font-semibold text-primary hover:text-secondary-container transition-colors">
+                    Manage Preferences
+                </button>
+<button class="px-6 py-2.5 text-sm font-bold text-stone-600 border border-stone-300 rounded-lg hover:bg-stone-50 transition-colors">
+                    Necessary Only
+                </button>
+<button class="px-8 py-2.5 text-sm font-bold text-white bg-[#D85A30] rounded-lg hover:bg-[#a5360d] hover:scale-[1.02] active:scale-95 transition-all shadow-md shadow-[#D85A30]/20">
+                    Accept All
+                </button>
+</div>
+</div>
+</div>
+</body></html>

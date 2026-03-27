@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>404 - Page Not Found | PetQuirky</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#e0c0b6",
+                        "on-primary-fixed": "#3a0b00",
+                        "inverse-surface": "#303030",
+                        "outline": "#8c7169",
+                        "on-secondary-fixed": "#3a0b00",
+                        "surface": "#fcf9f8",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#00513a",
+                        "tertiary": "#00694c",
+                        "secondary-container": "#fd8863",
+                        "primary-fixed-dim": "#ffb59e",
+                        "primary-fixed": "#ffdbd0",
+                        "tertiary-fixed": "#86f8c9",
+                        "on-surface-variant": "#58423b",
+                        "background": "#fcf9f8",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed": "#002115",
+                        "on-surface": "#1b1c1c",
+                        "inverse-primary": "#ffb59e",
+                        "tertiary-fixed-dim": "#68dbae",
+                        "secondary-fixed-dim": "#ffb59e",
+                        "surface-container-highest": "#e4e2e1",
+                        "surface-dim": "#dcd9d9",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbd0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e4e2e1",
+                        "on-tertiary-container": "#f5fff7",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#852400",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-container-high": "#eae7e7",
+                        "secondary": "#9f4122",
+                        "on-secondary-fixed-variant": "#7f2a0d",
+                        "tertiary-container": "#008560",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#a8380f",
+                        "primary": "#a5360d",
+                        "on-secondary-container": "#722104",
+                        "surface-bright": "#fcf9f8",
+                        "primary-container": "#c74d24"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"],
+                        "brand": ["Baloo 2"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+        }
+        h1, h2, h3 {
+            font-family: 'Baloo 2', cursive;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<!-- Suppression Logic: Navigation is suppressed as this is an error/transactional-adjacent flow prioritizing the Canvas. Per instructions, however, the prompt requested a Sticky Header specifically for this design. -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f8]/80 dark:bg-[#1b1c1c]/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(165,54,13,0.06)]">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<!-- Brand Logo -->
+<a class="text-3xl font-bold tracking-tighter text-[#a5360d] dark:text-[#c74d24] font-['Baloo_2'] hover:scale-105 transition-transform duration-200" href="#">
+                PetQuirky
+            </a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] hover:text-[#a5360d] transition-colors font-medium" href="#">Home</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] hover:text-[#a5360d] transition-colors font-medium" href="#">Products</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] hover:text-[#a5360d] transition-colors font-medium" href="#">Blog</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] hover:text-[#a5360d] transition-colors font-medium" href="#">About</a>
+<a class="text-[#1b1c1c] dark:text-[#fcf9f8] hover:text-[#a5360d] transition-colors font-medium" href="#">Contact</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-6">
+<button class="hover:scale-105 transition-transform duration-200 text-[#1b1c1c]">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="flex items-center gap-1 cursor-pointer text-[#1b1c1c] font-bold text-sm">
+<span>EN</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<button class="hover:scale-105 transition-transform duration-200 text-[#1b1c1c]">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="relative hover:scale-105 transition-transform duration-200 text-[#1b1c1c]">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-[#a5360d] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (404 Focus) -->
+<main class="flex-grow flex items-center justify-center px-6 pt-32 pb-20">
+<div class="max-w-4xl w-full flex flex-col items-center text-center">
+<!-- Asymmetric/Playful Illustration Section -->
+<div class="relative mb-12 w-full max-w-lg aspect-square">
+<!-- Decorative organic shapes for "The Curated Tactile Nest" feel -->
+<div class="absolute inset-0 bg-primary-fixed opacity-20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary-container opacity-10 rounded-full blur-2xl"></div>
+<img alt="Confused pet" class="w-full h-full object-cover rounded-lg shadow-[0_20px_40px_rgba(165,54,13,0.12)] border-[12px] border-surface-container-low transform -rotate-3 hover:rotate-0 transition-transform duration-500" data-alt="Candid studio portrait of a fluffy golden retriever puppy with head tilted in confusion, soft warm lighting, minimalist warm background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKwJWB071noIaoIOo_Mg83tNDgxtxR6IMRPG5gE5k_D-oIyemfonVo4g6tPVG0KTwi7_gT1chgJOOL4dOt1nsOpuwr86pmT5FsXqk8BvyudY7xHX3s9_dTd2JO4cKoUSFHLtFffxVAJ70lTAvQ0QL2qNXHqxRcfUK-l8wAA39xopDkhZQr_1h2gh1rqKsGspBTRRodIJld5CCdAVS6GB8wgAXx6hNp2GmlL-a-fjhq7dFgCdTVjE-8Cxwdg6tBlZqTpvH-Kr4z1AY"/>
+<!-- Floating badge element -->
+<div class="absolute -bottom-6 -right-6 bg-surface-container-highest backdrop-blur-md p-6 rounded-lg shadow-xl border border-white/20">
+<span class="material-symbols-outlined text-4xl text-primary">search_off</span>
+</div>
+</div>
+<!-- Typography & Messaging -->
+<h1 class="text-5xl md:text-7xl font-brand font-extrabold text-[#a5360d] mb-6 tracking-tight leading-tight">
+                Oops! Page Not Found
+            </h1>
+<p class="text-xl md:text-2xl font-body text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed opacity-90">
+                Looks like this page wandered off... just like a curious cat exploring a neighbor's garden. 
+            </p>
+<!-- Action Cluster -->
+<div class="flex flex-col sm:flex-row gap-6 items-center justify-center">
+<a class="group px-10 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">home</span>
+                    Go Home
+                </a>
+<a class="group px-10 py-4 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary/5 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+                    Browse Products
+                </a>
+</div>
+<!-- Helpful Links (Bento-lite pattern) -->
+<div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl text-left">
+<div class="p-8 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors group cursor-pointer">
+<span class="material-symbols-outlined text-secondary mb-4 block text-3xl">help</span>
+<h3 class="text-xl font-bold mb-2">Need Help?</h3>
+<p class="text-sm opacity-80 mb-4">Our support team is always ready to wag their tails for you.</p>
+<span class="text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Visit Help Center <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</div>
+<div class="p-8 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors group cursor-pointer">
+<span class="material-symbols-outlined text-secondary mb-4 block text-3xl">pets</span>
+<h3 class="text-xl font-bold mb-2">New Arrivals</h3>
+<p class="text-sm opacity-80 mb-4">See the latest treats and toys for your furry best friend.</p>
+<span class="text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Shop New <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</div>
+<div class="p-8 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors group cursor-pointer">
+<span class="material-symbols-outlined text-secondary mb-4 block text-3xl">menu_book</span>
+<h3 class="text-xl font-bold mb-2">Our Blog</h3>
+<p class="text-sm opacity-80 mb-4">Tips, tricks, and heartwarming stories from the pet world.</p>
+<span class="text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">Read Stories <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] bg-[#f6f3f2] dark:bg-[#1b1c1c] text-[#a5360d] dark:text-[#c74d24]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 md:px-16 py-20 w-full max-w-[1440px] mx-auto">
+<!-- Brand & Tagline -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#a5360d] font-['Baloo_2']">PetQuirky</div>
+<p class="font-body text-sm text-[#1b1c1c] dark:text-[#fcf9f8] opacity-70 leading-relaxed">
+                    Crafting quirky experiences for pets and their favorite humans since 2024.
+                </p>
+</div>
+<!-- Links: Shop -->
+<div>
+<h4 class="font-bold uppercase text-xs tracking-widest mb-6 opacity-60">Shop</h4>
+<ul class="space-y-4 font-body text-[#1b1c1c] dark:text-[#fcf9f8] opacity-80">
+<li><a class="hover:opacity-100 hover:translate-x-1 transition-transform inline-block" href="#">All Products</a></li>
+<li><a class="hover:opacity-100 hover:translate-x-1 transition-transform inline-block" href="#">Dog Supplies</a></li>
+<li><a class="hover:opacity-100 hover:translate-x-1 transition-transform inline-block" href="#">Cat Favorites</a></li>
+</ul>
+</div>
+<!-- Links: Support/Legal -->
+<div>
+<h4 class="font-bold uppercase text-xs tracking-widest mb-6 opacity-60">Support</h4>
+<ul class="space-y-4 font-body text-[#1b1c1c] dark:text-[#fcf9f8] opacity-80">
+<li><a class="hover:opacity-100 hover:translate-x-1 transition-transform inline-block" href="#">Shipping Policy</a></li>
+<li><a class="hover:opacity-100 hover:translate-x-1 transition-transform inline-block" href="#">Privacy Policy</a></li>
+<li><a class="hover:opacity-100 hover:translate-x-1 transition-transform inline-block" href="#">Contact Us</a></li>
+</ul>
+</div>
+<!-- Links: Social -->
+<div class="space-y-6">
+<h4 class="font-bold uppercase text-xs tracking-widest mb-6 opacity-60">Social</h4>
+<div class="flex gap-4">
+<a class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:scale-110 transition-transform" href="#">
+<img alt="TikTok" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq9g6cMLKsbFv_n7_nP98TpIjLRNSQ_MZ03AzrqRKDoQlIcoalLzuu7L3IDoMLhfYpFbhfSCA3N0ArD8KJIJjd_0sSrjWrpuIKRaLPr8cptUBATpfQToUblga90HQp5MViZcvhwMzepcIYMemaLNtPwn5zOBRnS-1NUXjyvamz-0sIe4lSq4PX5Tl1YpJseGIcQE3JS2wbt2Bez1PSoUiPWLEUjK42QTVdCeDukbnJfcgVHRFjiow8Qu7p1NDIXiWuJQi1fPtqFLo"/>
+</a>
+<a class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:scale-110 transition-transform" href="#">
+<img alt="Instagram" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAApeV3NLUp-4YIkzoitZ1jE-e4o-r3m5KVXSHoa_yMA4dL3LIHSexmwRlpcVW7DbxMNkkgpsJwlKgSBY9wqltBlbngvrRcL65psIVNe5gjehfvmgqgvtRjehwyNRhximMKoCaRE9XbzWQHckhQYeQFqLy2ErWTOOAk0UP2LYBQLIIhd-eoS-VJF3yr4R3q_TwfonijBJBqe20UW2-GO6qTWv17SVzhmoGiqq4fA2dzn_TpDSVJoYgJYobGdckxnW7C7D-SBMHcouQ"/>
+</a>
+<a class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center hover:scale-110 transition-transform" href="#">
+<img alt="X" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGoI4HzEYVgNg3jAMNmu4isCOhruL9EQlSNea4O4NwUZkwrIKqkA65DnmO2RCealh_FyRV0dSH2Df8odPIh8G_1KbDCEhmoIl6QaMWV-Hlv1XZTWz3rtIG8HfUIIby0s_SEI_dzHvHnbLUAOTwlsKQYXVRZkAQWu-4MCT0DtX62Bwl6iQoPFwT303Z7QewETKX7aK0txpcu66MvODvwdpkSJkcD2ZwOUTRLV970G80PR6ypvqA7WqxzZyM0_DMtONhKvpv-z_UUyA"/>
+</a>
+</div>
+</div>
+</div>
+<!-- Copyright -->
+<div class="w-full max-w-[1440px] mx-auto px-16 pb-12 pt-8 border-t border-on-surface/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body text-sm opacity-70 text-[#1b1c1c] dark:text-[#fcf9f8]">
+                2026 PetQuirky. Individual seller, not a corporate entity.
+            </p>
+<div class="flex items-center gap-2 opacity-70 font-body text-xs text-[#1b1c1c] dark:text-[#fcf9f8]">
+<span>EUR (€)</span>
+<span class="w-1 h-1 bg-current rounded-full"></span>
+<span>English</span>
+</div>
+</div>
+</footer>
+</body></html>

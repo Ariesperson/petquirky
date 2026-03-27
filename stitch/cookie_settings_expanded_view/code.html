@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manage Preferences - PetQuirky</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#fffbff",
+              "secondary-container": "#fd8863",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "surface-bright": "#fcf9f8",
+              "on-tertiary-fixed": "#002115",
+              "surface-container-highest": "#e4e2e1",
+              "tertiary-fixed": "#86f8c9",
+              "on-tertiary-fixed-variant": "#00513a",
+              "on-surface": "#1b1c1c",
+              "surface-dim": "#dcd9d9",
+              "on-primary-fixed": "#3a0b00",
+              "surface": "#fcf9f8",
+              "surface-container-high": "#eae7e7",
+              "primary-fixed-dim": "#ffb59e",
+              "outline": "#8c7169",
+              "error-container": "#ffdad6",
+              "surface-variant": "#e4e2e1",
+              "on-background": "#1b1c1c",
+              "outline-variant": "#e0c0b6",
+              "inverse-primary": "#ffb59e",
+              "tertiary-container": "#008560",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f6f3f2",
+              "secondary-fixed": "#ffdbd0",
+              "tertiary": "#00694c",
+              "on-secondary-container": "#722104",
+              "on-error-container": "#93000a",
+              "on-tertiary-container": "#f5fff7",
+              "tertiary-fixed-dim": "#68dbae",
+              "surface-container-lowest": "#ffffff",
+              "surface-tint": "#a8380f",
+              "on-secondary-fixed-variant": "#7f2a0d",
+              "surface-container": "#f0eded",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-container": "#c74d24",
+              "on-primary-fixed-variant": "#852400",
+              "inverse-surface": "#303030",
+              "on-secondary-fixed": "#3a0b00",
+              "on-primary": "#ffffff",
+              "background": "#fcf9f8",
+              "primary": "#a5360d",
+              "on-surface-variant": "#58423b",
+              "secondary": "#9f4122",
+              "primary-fixed": "#ffdbd0",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#f3f0f0"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Baloo 2', cursive; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f8]/80 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="text-3xl font-bold tracking-tighter text-[#a5360d] font-[Baloo 2]">PetQuirky</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-stone-600 font-medium hover:text-[#a5360d] transition-colors" href="#">Home</a>
+<a class="text-stone-600 font-medium hover:text-[#a5360d] transition-colors" href="#">Products</a>
+<a class="text-stone-600 font-medium hover:text-[#a5360d] transition-colors" href="#">Blog</a>
+<a class="text-stone-600 font-medium hover:text-[#a5360d] transition-colors" href="#">About</a>
+<a class="text-stone-600 font-medium hover:text-[#a5360d] transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="hover:scale-105 transition-transform duration-200 text-stone-600">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="hover:scale-105 transition-transform duration-200 text-stone-600">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Background Content (Dimmed Simulation) -->
+<main class="pt-32 px-8 max-w-screen-2xl mx-auto opacity-40 select-none pointer-events-none">
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
+<div>
+<h1 class="text-6xl text-primary leading-none mb-6">Unconventional comfort for your best friend.</h1>
+<p class="text-xl text-on-surface-variant max-w-lg">Discover hand-picked artisan pet goods that prioritize sustainable materials and quirky European aesthetics.</p>
+</div>
+<div class="rounded-lg overflow-hidden h-[500px]">
+<img class="w-full h-full object-cover" data-alt="a cozy interior scene with a sophisticated velvet dog bed in terracotta color placed on a clean wooden floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_QbLD1JTnU4-S_4ZfKZbXKGcVThCrMU-UHQr_yRYht2MJ-6jyhPnWAFFi7fu8OhtHDBsEUm-o3QrryA4oSj4KtXA33qP7xX6sHrejmnS-Czix3KS9NbM-DIDYVKpAUQRi3Z4xJE0BTE4lsJlcNmxlUAgZLl5s760fZKcQc1zCQRvwbsNZ4VwWqs56cWDVQCPJmCOXlM0Ypr5DpeicTj1wqR3QP7n_D8_eaibKNEeBaSOjHViUF3irHl_k78o4c-pAhUvn-xegaWg"/>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-8 rounded-lg">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="eco">eco</span>
+</div>
+<h3 class="text-2xl mb-2">Sustainable Sourcing</h3>
+<p class="text-on-surface-variant">We partner with ethical workshops across Europe.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="brush">brush</span>
+</div>
+<h3 class="text-2xl mb-2">Artisan Designed</h3>
+<p class="text-on-surface-variant">Every item has a story and a unique quirk.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<h3 class="text-2xl mb-2">Giving Back</h3>
+<p class="text-on-surface-variant">10% of profits go to animal sanctuaries.</p>
+</div>
+</div>
+</main>
+<!-- Overlay / Modal Backdrop -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/40 backdrop-blur-md px-4">
+<!-- Cookie Settings Modal -->
+<div class="bg-surface-bright w-full max-w-3xl rounded-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="p-8 md:p-12">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h2 class="text-4xl text-primary mb-2">Cookie Settings</h2>
+<p class="text-on-surface-variant max-w-md">We use cookies to enhance your experience. Choose which ones you're comfortable with.</p>
+</div>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Preference Toggles -->
+<div class="space-y-4">
+<!-- Necessary Cookies -->
+<div class="flex items-start justify-between p-6 bg-surface-container-lowest rounded-lg">
+<div class="pr-8">
+<h4 class="text-lg font-bold text-on-surface mb-1">Necessary Cookies</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">These are essential for the website to function properly. They handle basic tasks like page navigation and access to secure areas. They cannot be turned off.</p>
+</div>
+<div class="flex-shrink-0 pt-1">
+<div class="relative inline-flex h-6 w-11 items-center rounded-full bg-stone-300 cursor-not-allowed">
+<span class="translate-x-6 inline-block h-4 w-4 transform rounded-full bg-white transition shadow-sm"></span>
+</div>
+</div>
+</div>
+<!-- Analytics Cookies -->
+<div class="flex items-start justify-between p-6 bg-surface-container-lowest rounded-lg group hover:bg-surface-container-low transition-colors">
+<div class="pr-8">
+<h4 class="text-lg font-bold text-on-surface mb-1">Analytics Cookies</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">We use these to understand how visitors interact with our boutique. It helps us improve our product selection and website flow based on anonymous data.</p>
+</div>
+<div class="flex-shrink-0 pt-1">
+<button class="relative inline-flex h-6 w-11 items-center rounded-full bg-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button">
+<span class="translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</div>
+</div>
+<!-- Marketing Cookies -->
+<div class="flex items-start justify-between p-6 bg-surface-container-lowest rounded-lg group hover:bg-surface-container-low transition-colors">
+<div class="pr-8">
+<h4 class="text-lg font-bold text-on-surface mb-1">Marketing Cookies</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">These allow us to show you pet goods that actually match your interests. Without these, you'll still see ads, but they won't be tailored to your furry friend's needs.</p>
+</div>
+<div class="flex-shrink-0 pt-1">
+<button class="relative inline-flex h-6 w-11 items-center rounded-full bg-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button">
+<span class="translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between gap-6">
+<button class="text-stone-600 font-semibold hover:text-primary transition-colors text-sm underline decoration-primary/30 underline-offset-4">Read our Privacy Policy</button>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-8 py-3 rounded-full border border-outline-variant text-stone-700 font-semibold hover:bg-surface-container-high transition-all active:scale-95">Accept Essential</button>
+<button class="flex-1 md:flex-none px-10 py-3 rounded-full bg-gradient-to-r from-[#a5360d] to-[#c74d24] text-white font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all active:scale-95">Save Preferences</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full rounded-t-[2rem] bg-stone-200 dark:bg-stone-950 mt-24">
+<div class="w-full px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-xl font-bold text-stone-800 dark:text-stone-200 brand-font">PetQuirky</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-stone-500 hover:text-stone-800 transition-opacity text-sm font-medium" href="#">Privacy Policy</a>
+<a class="text-stone-500 hover:text-stone-800 transition-opacity text-sm font-medium" href="#">Terms of Service</a>
+<a class="text-stone-500 hover:text-stone-800 transition-opacity text-sm font-medium" href="#">Shipping Info</a>
+<a class="text-stone-500 hover:text-stone-800 transition-opacity text-sm font-medium" href="#">Returns</a>
+</div>
+<p class="text-stone-500 dark:text-stone-400 opacity-70 text-xs text-center md:text-right max-w-[200px]">
+                © 2026 PetQuirky. Individual seller, not a corporate entity.
+            </p>
+</div>
+</footer>
+</body></html>

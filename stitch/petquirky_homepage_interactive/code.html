@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PetQuirky | Smart Gear for Unique Pets</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#c74d24",
+              "on-tertiary-container": "#f5fff7",
+              "on-surface-variant": "#58423b",
+              "surface-tint": "#a8380f",
+              "surface-bright": "#fcf9f8",
+              "on-secondary-container": "#722104",
+              "tertiary-fixed-dim": "#68dbae",
+              "inverse-primary": "#ffb59e",
+              "error-container": "#ffdad6",
+              "secondary-fixed": "#ffdbd0",
+              "primary": "#a5360d",
+              "outline": "#8c7169",
+              "on-surface": "#1b1c1c",
+              "surface-container-high": "#eae7e7",
+              "outline-variant": "#e0c0b6",
+              "on-secondary-fixed-variant": "#7f2a0d",
+              "on-background": "#1b1c1c",
+              "on-secondary": "#ffffff",
+              "surface-container-highest": "#e4e2e1",
+              "on-error": "#ffffff",
+              "on-primary-container": "#fffbff",
+              "on-tertiary-fixed-variant": "#00513a",
+              "on-tertiary-fixed": "#002115",
+              "background": "#fcf9f8",
+              "secondary-container": "#fd8863",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#ffb59e",
+              "tertiary-fixed": "#86f8c9",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#ffdbd0",
+              "tertiary-container": "#008560",
+              "surface-dim": "#dcd9d9",
+              "on-primary-fixed-variant": "#852400",
+              "surface-variant": "#e4e2e1",
+              "surface": "#fcf9f8",
+              "secondary-fixed-dim": "#ffb59e",
+              "error": "#ba1a1a",
+              "tertiary": "#00694c",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#3a0b00",
+              "inverse-surface": "#303030",
+              "on-secondary-fixed": "#3a0b00",
+              "on-primary": "#ffffff",
+              "surface-container": "#f0eded",
+              "inverse-on-surface": "#f3f0f0",
+              "surface-container-low": "#f6f3f2",
+              "secondary": "#9f4122"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcf9f8; color: #1b1c1c; }
+        .font-baloo { font-family: 'Baloo 2', cursive; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="selection:bg-primary-container/30">
+<!-- Top Navigation Shell -->
+<header class="bg-white/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm dark:shadow-none docked full-width top-0 z-50 sticky">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-bold text-stone-800 dark:text-stone-100 font-['Baloo_2'] selection:text-orange-600">PetQuirky</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-orange-700 dark:text-orange-400 font-bold border-b-2 border-orange-700 pb-1" href="#">Home</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-orange-600 transition-colors" href="{{DATA:SCREEN:SCREEN_39}}">Products</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-orange-600 transition-colors" href="{{DATA:SCREEN:SCREEN_84}}">Blog</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-orange-600 transition-colors" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-orange-600 transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-5">
+<button class="hover:scale-105 transition-transform duration-200 text-stone-600"><span class="text-xl">🔍</span></button>
+<div class="relative group"><button class="flex items-center gap-1 text-sm font-bold text-stone-600 hover:text-[#D85A30] transition-colors">
+  EN <span class="material-symbols-outlined text-sm leading-none">expand_more</span>
+</button>
+<div class="absolute hidden group-hover:block top-full right-0 mt-2 w-24 bg-white shadow-xl rounded-lg py-2 border border-stone-100 z-[60]">
+<a class="block px-4 py-2 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#D85A30]" href="#">EN</a>
+<a class="block px-4 py-2 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#D85A30]" href="#">DE</a>
+<a class="block px-4 py-2 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#D85A30]" href="#">FR</a>
+<a class="block px-4 py-2 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#D85A30]" href="#">ES</a>
+</div></div>
+<button class="hover:scale-105 transition-transform duration-200 text-stone-600" onclick="window.location.href='{{DATA:SCREEN:SCREEN_42}}'"><span class="text-xl">👤</span></button>
+<button class="hover:scale-105 transition-transform duration-200 text-stone-600 relative" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">
+<span class="text-xl">🛒</span>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- 1. HERO BANNER -->
+<section class="relative overflow-hidden bg-gradient-to-br from-[#FFF0EB] to-white pt-12 pb-24 md:py-32">
+<div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-12 items-center">
+<div class="z-10">
+<h1 class="font-baloo text-5xl md:text-7xl font-extrabold text-on-surface leading-[1.1] mb-6 tracking-tight">
+                    Smart Gear for <span class="text-primary text-[#D85A30]">Unique</span> Pets
+                </h1>
+<p class="text-lg md:text-xl text-on-surface-variant mb-10 max-w-lg leading-relaxed">
+                    Discover quirky accessories for every companion — from playful cats to curious reptiles. Curated for the modern home.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-10 py-4 rounded-lg font-bold text-lg hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20" onclick="window.location.href='{{DATA:SCREEN:SCREEN_39}}'">
+                        Shop Now
+                    </button>
+<button class="px-10 py-4 rounded-lg font-bold text-lg border-2 border-outline-variant/30 text-primary hover:bg-surface-container-low transition-colors">
+                        View Lookbook
+                    </button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -top-20 -right-20 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="grid grid-cols-2 gap-4 rounded-lg overflow-hidden transform md:rotate-2 hover:rotate-0 transition-transform duration-700 shadow-2xl bg-white p-2">
+<div class="aspect-square overflow-hidden rounded">
+<img alt="Playful Cat" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5MV1XIGzG-krOXMRMHB8w8oDucjT0WeKLPV27rwkgarA8rpDS6sxF9HQSK1Q3VIulX7QMffwnrTT02CJysC6-HjhK9Xg_whHC470PESV5EQnqO57mG_tld48RVJkHi0ufrUGhJKmn3wdppY53tJg6mv1u3OV4aMsrH4KGUQRxYXS4yq137Zwx4x8iRnRHomU_YcW02oP9DWavky0YjRLHndPA38iKOFQELvjHmbm7A7wGTokPQSTztBKCsDipCGzzOsKmEkpBY_c"/>
+</div>
+<div class="aspect-square overflow-hidden rounded">
+<img alt="Happy Dog" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-RJunmu8R2ZJ296gPwVru4jOfSMbXWHwgKs16-ezfK11Y9wvYc0ETPyshUyrgJwB1nvWNvBWBqLeKyPQCBpL8xSUZIQOzxL3Q9T72QNwwj8ZhpYvqw9xN4rHCVKklCzv8EoeXD9aGwM7vglwyZ9s7b4xU5JHQ8ifKGSJaPSL4y9POSRNPvyELIY1N_M-dKIyoWhJJjpTDq-vOMu-WFEzK5cmKv0HDVYeXZ1YwSdmBi1AxpzE1ULDIRdNxWzPsrXqVpvt90t0Km0k"/>
+</div>
+<div class="aspect-square overflow-hidden rounded">
+<img alt="Leopard Gecko" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh6tOzQx8AI_wbEgcfsL7u3YOADimxA8V9vL7noPBKeZ263caE9Qu55KXpnZ0dXaL_OBtHb0dz5heiFp2Wsseoe8lo14pqP1AKPMKmAU5cZlrLytguAlHFd4W98qIIWMd71iEQNV2x7G23bl9L0jkskR72JzkobE13G5JlO8pnbozbfC3UHFTtrDFg4cpxXDS-f7NPa1jWAuHx1YmzCc2AG3ckhuTCBW1ql2E4nZT2jWXHOgqC2bXAzsAG3n9ulul3B-Zn4MtGNW4"/>
+</div>
+<div class="aspect-square overflow-hidden rounded">
+<img alt="Cute Hamster" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx11Ci3luvG6nTtkF-bT79InIYrTOHkdKXHTUE9-Bd_GiQ38_XPqVhNjmhpwXlAeffi2j_lWIdru6OGDn53YZU39ry_KmqRUc6sb2bOZ-L4PerBdeO6Okd7jvcqpiU9IYrJxuenUfwhH6Ju7cPfjb3LM7WmWSXlSNGP-gaNHgS-JPwkrgUO7dheaNOEcH783EftigtXssJHfJ7ujv4t-WQh5CvV3RcRirnyNsfdTyGpRHfdteebSyNCjjXTO8InJxj6Nyq50-Wp0Y"/>
+</div>
+</div>
+<!-- Asymmetric Floating Card -->
+<div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-xl hidden lg:block max-w-[200px]">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-bold text-sm">Premium Quality</span>
+</div>
+<p class="text-xs text-on-surface-variant">Expertly sourced materials for lasting durability.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. CATEGORY SHOWCASE -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-baloo text-3xl md:text-4xl text-on-surface">Shop by Category</h2>
+<a class="text-primary font-bold hover:underline decoration-2 underline-offset-4" href="{{DATA:SCREEN:SCREEN_28}}">Browse All</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<!-- Category Card 1 -->
+<a class="group bg-surface-container-low p-8 rounded-lg text-center hover:bg-surface-container-highest transition-all duration-300 transform hover:-translate-y-2" href="{{DATA:SCREEN:SCREEN_39}}">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+<span class="text-3xl">✨</span>
+</div>
+<h3 class="font-bold text-lg">Smart Toys</h3>
+</a>
+<!-- Category Card 2 -->
+<a class="group bg-surface-container-low p-8 rounded-lg text-center hover:bg-surface-container-highest transition-all duration-300 transform hover:-translate-y-2" href="{{DATA:SCREEN:SCREEN_39}}">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+<span class="text-3xl">🥣</span>
+</div>
+<h3 class="font-bold text-lg">Feeding &amp; Enrichment</h3>
+</a>
+<!-- Category Card 3 -->
+<a class="group bg-surface-container-low p-8 rounded-lg text-center hover:bg-surface-container-highest transition-all duration-300 transform hover:-translate-y-2" href="{{DATA:SCREEN:SCREEN_39}}">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+<span class="text-3xl">🏠</span>
+</div>
+<h3 class="font-bold text-lg">Habitat &amp; Equipment</h3>
+</a>
+<!-- Category Card 4 -->
+<a class="group bg-surface-container-low p-8 rounded-lg text-center hover:bg-surface-container-highest transition-all duration-300 transform hover:-translate-y-2" href="{{DATA:SCREEN:SCREEN_39}}">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+<span class="text-3xl">📦</span>
+</div>
+<h3 class="font-bold text-lg">All Products</h3>
+</a>
+</div>
+</div>
+</section>
+<!-- 3. FEATURED PRODUCTS -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="font-baloo text-4xl mb-4">Trending Essentials</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">The most loved items from our community of discerning pet parents.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_63}}'">
+<div class="relative h-[280px] overflow-hidden">
+<img alt="Smart Dog Toy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern geometric-shaped automatic dog ball launcher in white and coral colors on a minimalist wooden floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-RJunmu8R2ZJ296gPwVru4jOfSMbXWHwgKs16-ezfK11Y9wvYc0ETPyshUyrgJwB1nvWNvBWBqLeKyPQCBpL8xSUZIQOzxL3Q9T72QNwwj8ZhpYvqw9xN4rHCVKklCzv8EoeXD9aGwM7vglwyZ9s7b4xU5JHQ8ifKGSJaPSL4y9POSRNPvyELIY1N_M-dKIyoWhJJjpTDq-vOMu-WFEzK5cmKv0HDVYeXZ1YwSdmBi1AxpzE1ULDIRdNxWzPsrXqVpvt90t0Km0k"/>
+<span class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bestseller</span>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.8</span>
+<span class="text-sm text-on-surface-variant">(124)</span>
+</div>
+<h3 class="font-bold text-lg mb-1">AeroBounce Smart Launcher</h3>
+<div class="mb-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-high text-on-surface-variant">
+                                🐕 Dogs
+                            </span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<span class="text-xl font-bold text-primary">89,00 €</span>
+<span class="text-sm text-on-surface-variant line-through">115,00 €</span>
+</div>
+<button class="w-full py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">
+                            Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_63}}'">
+<div class="relative h-[280px] overflow-hidden">
+<img alt="Luxe Cat Bed" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Hand-woven circular felt cat nest in light grey with a terracotta cushion inside, isolated on warm beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5MV1XIGzG-krOXMRMHB8w8oDucjT0WeKLPV27rwkgarA8rpDS6sxF9HQSK1Q3VIulX7QMffwnrTT02CJysC6-HjhK9Xg_whHC470PESV5EQnqO57mG_tld48RVJkHi0ufrUGhJKmn3wdppY53tJg6mv1u3OV4aMsrH4KGUQRxYXS4yq137Zwx4x8iRnRHomU_YcW02oP9DWavky0YjRLHndPA38iKOFQELvjHmbm7A7wGTokPQSTztBKCsDipCGzzOsKmEkpBY_c"/>
+<span class="absolute top-4 left-4 bg-tertiary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">New</span>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.9</span>
+<span class="text-sm text-on-surface-variant">(42)</span>
+</div>
+<h3 class="font-bold text-lg mb-1">ZenFelt Cat Sanctuary</h3>
+<div class="mb-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-high text-on-surface-variant">
+                                🐱 Cats
+                            </span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<span class="text-xl font-bold text-primary">64,00 €</span>
+</div>
+<button class="w-full py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">
+                            Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_63}}'">
+<div class="relative h-[280px] overflow-hidden">
+<img alt="Reptile Habitat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Sophisticated black and glass terrarium with minimalist interior design and integrated smart lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh6tOzQx8AI_wbEgcfsL7u3YOADimxA8V9vL7noPBKeZ263caE9Qu55KXpnZ0dXaL_OBtHb0dz5heiFp2Wsseoe8lo14pqP1AKPMKmAU5cZlrLytguAlHFd4W98qIIWMd71iEQNV2x7G23bl9L0jkskR72JzkobE13G5JlO8pnbozbfC3UHFTtrDFg4cpxXDS-f7NPa1jWAuHx1YmzCc2AG3ckhuTCBW1ql2E4nZT2jWXHOgqC2bXAzsAG3n9ulul3B-Zn4MtGNW4"/>
+<span class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bestseller</span>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.7</span>
+<span class="text-sm text-on-surface-variant">(88)</span>
+</div>
+<h3 class="font-bold text-lg mb-1">TerraSmart Ecosystem V2</h3>
+<div class="mb-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-high text-on-surface-variant">
+                                🦎 Reptiles
+                            </span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<span class="text-xl font-bold text-primary">210,00 €</span>
+<span class="text-sm text-on-surface-variant line-through">245,00 €</span>
+</div>
+<button class="w-full py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">
+                            Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_63}}'">
+<div class="relative h-[280px] overflow-hidden">
+<img alt="Pet Grooming" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Eco-friendly ergonomic pet grooming brush set made of bamboo and recycled materials in a soft focus bathroom setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx11Ci3luvG6nTtkF-bT79InIYrTOHkdKXHTUE9-Bd_GiQ38_XPqVhNjmhpwXlAeffi2j_lWIdru6OGDn53YZU39ry_KmqRUc6sb2bOZ-L4PerBdeO6Okd7jvcqpiU9IYrJxuenUfwhH6Ju7cPfjb3LM7WmWSXlSNGP-gaNHgS-JPwkrgUO7dheaNOEcH783EftigtXssJHfJ7ujv4t-WQh5CvV3RcRirnyNsfdTyGpRHfdteebSyNCjjXTO8InJxj6Nyq50-Wp0Y"/>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.8</span>
+<span class="text-sm text-on-surface-variant">(15)</span>
+</div>
+<h3 class="font-bold text-lg mb-1">GroomPro Bamboo Set</h3>
+<div class="mb-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-high text-on-surface-variant">
+                                🐹 Small Pets
+                            </span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<span class="text-xl font-bold text-primary">35,00 €</span>
+</div>
+<button class="w-full py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">
+                            Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. TRUST BADGES -->
+<section class="py-12 bg-[#FFF0EB] border-y border-primary/20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="flex items-center gap-4 group">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="text-3xl">🚚</span>
+</div>
+<div>
+<p class="font-bold text-sm">Free Shipping</p>
+<p class="text-xs text-on-surface-variant">Orders over 50 €</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="text-3xl">🔄</span>
+</div>
+<div>
+<p class="font-bold text-sm">14-Day Returns</p>
+<p class="text-xs text-on-surface-variant">Worry-free shopping</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="text-3xl">🔒</span>
+</div>
+<div>
+<p class="font-bold text-sm">Secure Payment</p>
+<p class="text-xs text-on-surface-variant">100% encrypted</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="text-3xl">✅</span>
+</div>
+<div>
+<p class="font-bold text-sm">CE Certified</p>
+<p class="text-xs text-on-surface-variant">Safety guaranteed</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. NEWSLETTER -->
+<section class="py-24 bg-surface">
+<div class="max-w-5xl mx-auto px-8">
+<div class="relative bg-stone-900 rounded-lg p-12 md:p-20 overflow-hidden text-center">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
+<div class="relative z-10">
+<h2 class="font-baloo text-4xl text-white mb-4">Stay in the loop</h2>
+<p class="text-stone-300 mb-10 max-w-md mx-auto">Get early access to new arrivals, care guides, and pet-friendly tech insights</p>
+<form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+<input class="flex-grow bg-white/10 border-0 rounded-lg px-6 py-4 text-white placeholder:text-stone-400 focus:ring-2 focus:ring-primary focus:bg-white/20 transition-all outline-none" placeholder="Enter your email" type="email"/>
+<button class="bg-primary hover:bg-primary-container text-white px-8 py-4 rounded-lg font-bold transition-colors whitespace-nowrap">
+                            Subscribe
+                        </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-stone-800 dark:bg-stone-950 text-orange-50 dark:text-orange-200 full-width rounded-t-[2rem] mt-12">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-12 py-16 w-full max-w-7xl mx-auto">
+<div class="col-span-2 md:col-span-1">
+<div class="text-xl font-bold text-white mb-6">PetQuirky</div>
+<p class="text-stone-300 text-sm leading-relaxed mb-6">Elevating the lives of pets and their people through thoughtful design and smart technology.</p>
+<div class="flex gap-4">
+<a aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors" href="#">
+<i class="fa-brands fa-instagram text-lg text-white"></i>
+</a>
+<a aria-label="TikTok" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors" href="#">
+<i class="fa-brands fa-tiktok text-sm text-white"></i>
+</a>
+<a aria-label="Website" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg text-white" data-icon="public">public</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Shop</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="{{DATA:SCREEN:SCREEN_28}}">New Arrivals</a></li>
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="{{DATA:SCREEN:SCREEN_28}}">Best Sellers</a></li>
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="{{DATA:SCREEN:SCREEN_28}}">Sale</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="#">Shipping Policy</a></li>
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="#">Returns &amp; Refunds</a></li>
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="#">Terms of Service</a></li>
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="#">Privacy Policy</a></li>
+<li><a class="text-stone-300 hover:text-white transition-colors hover:translate-x-1 inline-block" href="#">Cookie Settings</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-12 pb-12 border-t border-white/5 pt-8 text-center md:text-left">
+<p class="body-sm opacity-70 text-stone-400">© 2026 PetQuirky. Individual seller, not a corporate entity.</p>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "smart-toys",
+    "icon": "✨"
+  },
+  {
+    "id": "feeding",
+    "icon": "🥣"
+  },
+  {
+    "id": "habitat",
+    "icon": "🏠"
+  },
+  {
+    "id": "tracking",
+    "icon": "🧭"
+  },
+  {
+    "id": "grooming",
+    "icon": "🪮"
+  }
+]

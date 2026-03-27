@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PetQuirky Blog | Tips, Guides, and Stories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#002115",
+              "surface-container-highest": "#e4e2e1",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#3a0b00",
+              "on-tertiary-fixed-variant": "#00513a",
+              "secondary-fixed-dim": "#ffb59e",
+              "on-secondary-fixed": "#3a0b00",
+              "surface-container-low": "#f6f3f2",
+              "on-primary-container": "#fffbff",
+              "surface-tint": "#a8380f",
+              "surface-container-high": "#eae7e7",
+              "primary-fixed": "#ffdbd0",
+              "secondary-container": "#fd8863",
+              "secondary": "#9f4122",
+              "on-secondary-fixed-variant": "#7f2a0d",
+              "secondary-fixed": "#ffdbd0",
+              "primary-container": "#c74d24",
+              "on-error-container": "#93000a",
+              "surface-container": "#f0eded",
+              "on-primary-fixed-variant": "#852400",
+              "inverse-on-surface": "#f3f0f0",
+              "tertiary": "#00694c",
+              "inverse-surface": "#303030",
+              "tertiary-fixed": "#86f8c9",
+              "on-secondary-container": "#722104",
+              "on-surface-variant": "#58423b",
+              "on-error": "#ffffff",
+              "on-tertiary-container": "#f5fff7",
+              "on-background": "#1b1c1c",
+              "surface-dim": "#dcd9d9",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-surface": "#1b1c1c",
+              "background": "#fcf9f8",
+              "surface-bright": "#fcf9f8",
+              "primary-fixed-dim": "#ffb59e",
+              "tertiary-fixed-dim": "#68dbae",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#fcf9f8",
+              "outline": "#8c7169",
+              "inverse-primary": "#ffb59e",
+              "error": "#ba1a1a",
+              "surface-variant": "#e4e2e1",
+              "outline-variant": "#e0c0b6",
+              "primary": "#a5360d",
+              "error-container": "#ffdad6",
+              "tertiary-container": "#008560"
+            },
+            fontFamily: {
+              "headline": ["Baloo 2", "cursive"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Baloo 2', cursive; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f8]/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-3xl font-bold font-['Baloo_2'] text-[#a5360d] dark:text-[#d85a30] tracking-tight hover:scale-105 transition-transform duration-200 cursor-pointer">
+                PetQuirky
+            </div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200" href="#">Home</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200" href="#">Products</a>
+<a class="text-[#a5360d] dark:text-[#d85a30] font-bold border-b-2 border-[#a5360d] pb-1 hover:scale-105 transition-transform duration-200" href="{{DATA:SCREEN:SCREEN_84}}">Blog</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-[#a5360d] hover:scale-105 transition-transform duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">language</button>
+<div class="relative group">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">shopping_cart</button>
+<span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+<!-- Page Header -->
+<header class="mb-12 text-left">
+<h1 class="text-[32px] leading-tight text-on-surface font-bold mb-2">PetQuirky Blog</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl">Tips, guides, and stories for every pet parent</p>
+</header>
+<!-- Category Filter -->
+<div class="flex flex-wrap gap-3 mb-16 overflow-x-auto pb-4 scrollbar-hide">
+<button class="px-6 py-2.5 rounded-full bg-primary text-white font-semibold transition-all hover:shadow-md">All</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium hover:bg-primary-fixed transition-all">Cat Care</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium hover:bg-primary-fixed transition-all">Dog Care</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium hover:bg-primary-fixed transition-all">Reptile Care</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium hover:bg-primary-fixed transition-all">Small Pets</button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium hover:bg-primary-fixed transition-all">Product Guides</button>
+</div>
+<!-- Featured Article Section -->
+<section class="mb-20">
+<div class="bg-surface-container-low rounded-lg overflow-hidden flex flex-col md:flex-row min-h-[450px] shadow-sm hover:shadow-md transition-shadow">
+<!-- Image Container (60%) -->
+<div class="md:w-3/5 relative overflow-hidden h-64 md:h-auto group">
+<img alt="Featured Reptile Article" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up portrait of a vibrant leopard gecko standing on a piece of cork bark in a naturalistic terrarium with warm sunset lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJhATGbawYXG2JIjtPYYuPM20yq2R-OEjTfcAEn8KCZZcqynWbuoCe4i9Uk8YK5-6FsdyAvcuvn0oxjHhpdbldw_GdhcsEgQ8rpIsCHcXbnLRdfN83tEZtH4WRR9b5JySTdHI0IGBXJoIy1bB251Qj5Vx7D0SP8yuawO2IGkxEc109tn0avpCGaxXtPNBCyUAvwDILpjAmfih9TaQ14lSBzyCTrqQ6kbvOQ0N_yosXq1Ih8-py6c77vj_RV8GQ6WbjQeXGapl1i0M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/20 to-transparent pointer-events-none"></div>
+</div>
+<!-- Content Container (40%) -->
+<div class="md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
+<span class="text-primary font-bold text-xs tracking-widest uppercase mb-4 inline-block">Reptile Care</span>
+<h2 class="text-3xl font-bold leading-tight mb-6 text-on-surface">Best UVB Lights for Leopard Geckos in 2026</h2>
+<p class="text-on-surface-variant mb-6 line-clamp-2 leading-relaxed">Ensure your scaly friend thrives with the latest in lighting technology. We review the top five UVB systems designed specifically for crepuscular reptiles.</p>
+<div class="flex items-center text-sm text-outline mb-8">
+<span class="material-symbols-outlined text-[18px] mr-2">schedule</span>
+<span>5 min read</span>
+<span class="mx-3">•</span>
+<span>March 15, 2026</span>
+</div>
+<a class="inline-flex items-center text-primary font-bold group hover:gap-2 transition-all" href="{{DATA:SCREEN:SCREEN_14}}">
+                        Read More 
+                        <span class="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Article Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+<!-- Article 1 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col group cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_14}}'">
+<div class="h-64 overflow-hidden relative">
+<img alt="Cat Enrichment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Playful ginger cat batting at a feathered teaser toy on a soft beige rug, sunlight streaming through a nearby window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkgGNnVhBMRhTtLwPEoPSTgOAjn4RgR4YHKhCrAy7OkLOWqAQMZs9HhacwgEDKKagdi_iGkDweA-e0bRKweLsVIXGZ3ZgrR-LFYxJMVhYU7QrWqWOmQ3mcbimGI8oBu-PCIKF_r2bvhZH9Nx6_viliEsn1QIZfuqzbeCInmByKCD9DlEmbiVbISr9tvN0YVEzgmwLPfw0VOYfivicDfUhysz9T2zWmluC1eeU-h8Wk7KLELSvsDZHF9EFdPSaPDHHwdEnXmExsfxg"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase shadow-sm">Cat Toys</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold mb-3 text-on-surface">Why your cat needs enrichment</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-3">Understanding the predatory drive of indoor cats and how modern interactive toys can prevent behavioral issues and keep them fit.</p>
+<div class="mt-auto flex justify-between items-center text-[12px] text-outline font-medium">
+<span>Feb 28, 2026</span>
+<span>4 min read</span>
+</div>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col group cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_14}}'">
+<div class="h-64 overflow-hidden relative">
+<img alt="Hamster Care" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Small Syrian hamster running on a modern silent acrylic exercise wheel inside a clean, aesthetic wooden enclosure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaMbGm8-MzskZgv9gyHR9CPwfupPbOGx6krQYKwHpENLpXDr50pCs0QnGflHRjv24uWtwyZm0K-Q4lerTU1TUrg-bP6-7zUUcXzy7loS5jydE7b3M9QQojftyNnE6MykuYMa21c5Z4c9rO69tB2SzX5zZ2FOpmPiQ4Zitk_JD32IbPiIytwoH85Kvgli75eeMG6C9r8UzWnmsLdeA3UQyC7cL1HA4Dp_twxARnEc_PQ4PnUfwAG982KxRgVvbkOlylZgKyF5kBFXI"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase shadow-sm">Hamster Care</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold mb-3 text-on-surface">Choosing the right wheel for your hamster</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-3">A guide to preventing 'wheel back' by selecting the appropriate size and material for different hamster breeds, from Dwarfs to Syrians.</p>
+<div class="mt-auto flex justify-between items-center text-[12px] text-outline font-medium">
+<span>Feb 20, 2026</span>
+<span>6 min read</span>
+</div>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col group cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_14}}'">
+<div class="h-64 overflow-hidden relative">
+<img alt="Dog Training" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Young golden retriever puppy sitting attentively while a hand offers a small healthy treat during a training session in a park" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8eWdq0EydEDwJXKTUymfBSHjxIu8MMWsJcEx4_3Qy4tuEGIlqdtOyDC5FnzKB0wXl883Xk23rgb9rVgRII5ddMrUfRj2K1Gl1UEI-M2z0zMCLIsOkGhVlR2nWx-kLN9xD2C6TBankZC1NOd9vjH4v1TaTX2GWoWfiQIdTH6ID6OprLI5TvHuHUF82x1u96N5MnKXSaepA9QtJnAbbYD8RGdZ6s9ffcm3j_QW1Cuk22Plf7h_TH9AcuAdangT9q8WSPerv9uY4GWc"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase shadow-sm">Dog Training</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold mb-3 text-on-surface">Smart feeding for puppy training</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-3">Ditch the bowl! How to use your puppy's daily meal allowance as the ultimate high-value reinforcement for better focus and learning.</p>
+<div class="mt-auto flex justify-between items-center text-[12px] text-outline font-medium">
+<span>Feb 12, 2026</span>
+<span>5 min read</span>
+</div>
+</div>
+</article>
+<!-- Article 4 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col group cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_14}}'">
+<div class="h-64 overflow-hidden relative">
+<img alt="Pet Health" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="High-tech smart dog collar with glowing LED indicator resting on a sleek wooden table with a smartphone showing health stats" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5KaGM3OWEChlFWrOlw9EfAEkfHWE0_b2NsFrfTewKCaPe9P8OH2RnFZqbXVSzW0i7WoxzVbGbk3FzTkQXTngabTgMNoCb-B8aKcdPTxYQhbxGyl3Pwg5lj4o01FoQY8Rhfhe6p3vTnfXt7NZfJdrTaaMn8SlRT3Z__Kg_xubwDTN2DOj1jS1a8GZkHfMYdQRjiKNigw6JR3Ok9Keq_5BS8BaJSYwBGGtK2FRJdbA_AsoMN5WE7Pz-O_vD7l-d8-ujtfZ4ddMQT5I"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase shadow-sm">Pet Health</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold mb-3 text-on-surface">Monitoring your pet's activity with smart collars</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-3">Early detection of health issues starts with data. See how tracking sleep cycles and steps can alert you to hidden discomfort.</p>
+<div class="mt-auto flex justify-between items-center text-[12px] text-outline font-medium">
+<span>Jan 30, 2026</span>
+<span>8 min read</span>
+</div>
+</div>
+</article>
+<!-- Article 5 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col group cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_14}}'">
+<div class="h-64 overflow-hidden relative">
+<img alt="Reptile Care" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Mist spraying inside a lush tropical vivarium with green ferns and bromeliads for a dart frog habitat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHIsAW7bxfQpC1unarW1DRvCdX4h2pODQzCTcYVCtaOKsAzatTcuyW9b2DMsNjWp2os0h5gPbj2J0vXx-oc2DE3X08sSPIxUF3ZuMD_p-aucGfRYmX3uDlw6WP1CEzUoOrQqm0ABhCOWtAmb3NAiJs4sYoHHELZqyuvTgPM-nZ3ZernZ5X-z7GIgYxpS748NNlxghACq3MGL5uXSSo5L3tejbevUQ_WZJBVnPSlDWNZnVqpfiy5ibjg3wnTxylYboZcfnQ5jth8so"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase shadow-sm">Reptile Care</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold mb-3 text-on-surface">Humidity guides for tropical species</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-3">From foggers to manual misting, we break down the most effective ways to maintain consistent 80%+ humidity levels for your rainforest pets.</p>
+<div class="mt-auto flex justify-between items-center text-[12px] text-outline font-medium">
+<span>Jan 18, 2026</span>
+<span>7 min read</span>
+</div>
+</div>
+</article>
+<!-- Article 6 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col group cursor-pointer" onclick="window.location.href='{{DATA:SCREEN:SCREEN_14}}'">
+<div class="h-64 overflow-hidden relative">
+<img alt="Product Guide" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="An unboxing setup showing a sleek, segmented robotic snake toy on a clean white surface with modern minimalist packaging" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD86d49IL7GvkVESCqnwTy7iw_LDLsQgR9fjfuyOdZFIIPDJCdcRqdpsMQara7OmmTnkk8gy4DjmBmQ_RoKZnYqjDQ5AIUHpzWu_RG7YxgOiPVsyCbNtjx2VmbLCkeS96I55jBENU59n3tP1eTtf1CRzcfY6opHRs2mz84cZyA8nWmOKVnJn2ceRC2YImlrzY05YaZgvIxogNflqOEKOgx4MLFgXB2fgikAI4p7hZtZX-AyeBtVvs3sUbdho-jsKu8gJq3JnY0yLMQ"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase shadow-sm">Product Guide</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold mb-3 text-on-surface">Unboxing the Smart Interactive Snake Toy</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-3">Does this realistic robotic snake actually engage cats? We test the durability, battery life, and feline reactions to 2026's hottest toy.</p>
+<div class="mt-auto flex justify-between items-center text-[12px] text-outline font-medium">
+<span>Jan 05, 2026</span>
+<span>4 min read</span>
+</div>
+</div>
+</article>
+</section>
+<!-- Newsletter Section -->
+<section class="mt-24 bg-primary-fixed rounded-lg p-12 text-center relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 w-60 h-60 bg-primary-container/10 rounded-full blur-3xl"></div>
+<h2 class="text-3xl font-bold mb-4 text-on-primary-fixed">Don't Miss a Paws!</h2>
+<p class="text-on-primary-fixed-variant mb-8 max-w-lg mx-auto">Get the best pet advice, product unboxings, and quirky stories delivered to your inbox every Sunday.</p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+<input class="flex-grow px-6 py-4 rounded-full border-none bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-sm text-on-surface" placeholder="Enter your email" type="email"/>
+<button class="bg-primary text-white font-bold px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg" type="submit">Subscribe</button>
+</form>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] mt-20 bg-stone-200 dark:bg-stone-950">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-7xl mx-auto text-left">
+<div class="col-span-1 md:col-span-1">
+<div class="text-xl font-bold font-['Baloo_2'] text-stone-800 dark:text-stone-200 mb-6">PetQuirky</div>
+<p class="text-stone-500 dark:text-stone-400 text-sm leading-relaxed">Curating the world's most unique and high-quality pet products for discerning owners.</p>
+</div>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest text-on-surface mb-6">Shop</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">New Arrivals</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Bestsellers</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Gift Cards</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest text-on-surface mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Shipping Info</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Returns</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest text-on-surface mb-6">Connect</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Instagram</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">TikTok</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-[#a5360d] transition-opacity" href="#">Pinterest</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-12 pb-12">
+<div class="pt-8 border-t border-stone-300 dark:border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-stone-500 dark:text-stone-400 text-sm opacity-70">© 2026 PetQuirky. Individual seller, not a corporate entity.</p>
+<div class="flex gap-8">
+<a class="text-stone-500 dark:text-stone-400 text-xs hover:text-[#a5360d]" href="#">Privacy Policy</a>
+<a class="text-stone-500 dark:text-stone-400 text-xs hover:text-[#a5360d]" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
