@@ -1,9 +1,10 @@
 import Link from "next/link";
 
+import { ProductRecommendation } from "@/components/blog/ProductRecommendation";
 import type { BlogPost } from "@/data/blog/posts";
 import type { Locale } from "@/lib/i18n";
 import { formatBlogDate } from "@/lib/blog";
-import { formatPrice } from "@/lib/products";
+import type { ProductListingItem } from "@/lib/products";
 
 type ArticleBodyProps = {
   locale: Locale;
@@ -17,6 +18,7 @@ type ArticleBodyProps = {
   };
   relatedPosts: BlogPost[];
   relatedCategoryLabels: Record<string, string>;
+  recommendedProduct?: ProductListingItem;
 };
 
 export function ArticleBody({
@@ -25,6 +27,7 @@ export function ArticleBody({
   labels,
   relatedPosts,
   relatedCategoryLabels,
+  recommendedProduct,
 }: ArticleBodyProps) {
   const body = post.body[locale];
 
@@ -76,28 +79,13 @@ export function ArticleBody({
             </section>
           ))}
 
-          {body.recommendedProduct ? (
-            <section className="rounded-[28px] bg-primary-tint p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                {labels.recommended}
-              </p>
-              <div className="mt-5 flex flex-col gap-6 rounded-[24px] bg-white p-6 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <h3 className="font-heading text-2xl font-extrabold text-dark">
-                    {body.recommendedProduct.title}
-                  </h3>
-                  <p className="mt-3 text-2xl font-extrabold text-primary">
-                    {formatPrice(body.recommendedProduct.price, locale)}
-                  </p>
-                </div>
-                <Link
-                  href={`/${locale}${body.recommendedProduct.href}`}
-                  className="inline-flex items-center justify-center rounded-[16px] bg-[linear-gradient(135deg,#d85a30,#ff8a65)] px-6 py-4 text-sm font-semibold text-white"
-                >
-                  {labels.viewProduct}
-                </Link>
-              </div>
-            </section>
+          {recommendedProduct ? (
+            <ProductRecommendation
+              locale={locale}
+              product={recommendedProduct}
+              eyebrow={labels.recommended}
+              ctaLabel={labels.viewProduct}
+            />
           ) : null}
         </div>
       </article>

@@ -13,6 +13,7 @@ type CheckoutSuccessPageProps = {
     total?: string;
     email?: string;
     shipping?: string;
+    warnings?: string;
   }>;
 };
 
@@ -39,6 +40,20 @@ export default async function CheckoutSuccessPage({
   const status = query.status ?? dict.account.status_processing;
   const total = Number(query.total ?? 0);
   const payerEmail = query.email ?? shippingAddress.email;
+  const warnings = (() => {
+    if (!query.warnings) {
+      return [] as string[];
+    }
+
+    try {
+      const parsed = JSON.parse(query.warnings) as string[];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [] as string[];
+    }
+  })();
+  const hasConfirmationEmailWarning = warnings.some((entry) => entry.startsWith("confirmation-email-failed:"));
+  const hasSellerNotificationWarning = warnings.some((entry) => entry.startsWith("seller-notification-failed:"));
 
   return (
     <main className="mx-auto flex w-full max-w-[640px] flex-1 flex-col items-center px-6 pb-20 pt-24 text-center">
@@ -70,7 +85,11 @@ export default async function CheckoutSuccessPage({
           </span>
         </div>
         <div className="mt-6 space-y-4 text-sm text-muted">
-          <p>{dict.checkout.success_email_notice}</p>
+          <p>
+            {hasConfirmationEmailWarning
+              ? dict.checkout.success_email_pending
+              : dict.checkout.success_email_notice}
+          </p>
           <p>{dict.checkout.success_delivery_notice}</p>
           <p>
             {dict.checkout.success_contact_notice}{" "}
@@ -78,16 +97,19 @@ export default async function CheckoutSuccessPage({
               hello@petquirky.com
             </a>
           </p>
+          {hasSellerNotificationWarning ? (
+            <p className="font-medium text-warning">{dict.checkout.success_internal_notice}</p>
+          ) : null}
         </div>
       </div>
 
       <div className="mt-8 w-full rounded-[24px] bg-[#f6f3f2] p-6">
         <p className="text-sm font-medium text-dark">{dict.checkout.success_account_prompt}</p>
         <Link
-          href={`/${locale}/auth/register`}
+          href={`/${locale}/account`}
           className="mt-4 inline-flex rounded-[14px] border-2 border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
         >
-          {dict.auth.register_submit}
+          {dict.account.orders}
         </Link>
       </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -8,11 +8,14 @@ import { OrderReview } from "@/components/checkout/OrderReview";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
 import { PayPalButton } from "@/components/checkout/PayPalButton";
 import { ShippingForm } from "@/components/checkout/ShippingForm";
+import { useAuth } from "@/hooks/useAuth";
 import {
   buildCheckoutOrderPayload,
   CHECKOUT_ADDRESS_STORAGE_KEY,
   emptyCheckoutAddress,
+  hasMeaningfulCheckoutAddressValue,
   isCheckoutAddressComplete,
+  readStoredCheckoutAddress,
 } from "@/lib/checkout";
 import type { Locale } from "@/lib/i18n";
 import { formatPrice } from "@/lib/products";
@@ -58,6 +61,8 @@ type CheckoutClientProps = {
     paypalUnavailable: string;
     paypalError: string;
     processing: string;
+    loginRequired: string;
+    loginRequiredCta: string;
   };
 };
 
@@ -106,9 +111,37 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { hydrated, lineItems, subtotal, shipping, total } = useCart();
+  const { hydrated: authHydrated, user } = useAuth();
   const [shippingAddress, setShippingAddress] = useState<CheckoutAddress>(() =>
     emptyCheckoutAddress()
   );
+
+  useEffect(() => {
+    if (!hydrated || !authHydrated) {
+      return;
+    }
+
+    const hasTypedValue = hasMeaningfulCheckoutAddressValue(shippingAddress);
+    if (hasTypedValue) {
+      return;
+    }
+
+    const storedAddress = readStoredCheckoutAddress();
+    if (!storedAddress && !user) {
+      return;
+    }
+
+    startTransition(() => {
+      setShippingAddress({
+        fullName: storedAddress?.fullName || user?.fullName || "",
+        email: storedAddress?.email || user?.email || "",
+        address: storedAddress?.address || "",
+        city: storedAddress?.city || "",
+        postalCode: storedAddress?.postalCode || "",
+        country: storedAddress?.country || "France",
+      });
+    });
+  }, [authHydrated, hydrated, shippingAddress, user]);
 
   const currentStep = searchParams.get("step") === "review" ? 2 : 1;
   const items = useMemo(
@@ -172,7 +205,7 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
     setShippingAddress(value);
   };
 
-  if (!hydrated) {
+  if (!hydrated || !authHydrated) {
     return (
       <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-8">
         <div className="h-14 w-48 animate-pulse rounded-full bg-[#f1e8e4]" />
@@ -246,6 +279,8 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
                   unavailable: labels.paypalUnavailable,
                   error: labels.paypalError,
                   processing: labels.processing,
+                  loginRequired: labels.loginRequired,
+                  login: labels.loginRequiredCta,
                 }}
               />
             </div>

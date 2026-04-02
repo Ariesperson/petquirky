@@ -34,6 +34,7 @@ export type CompletedCheckoutOrder = {
   createdAt: string;
   payerEmail?: string;
   shippingAddress: CheckoutAddress;
+  items?: CheckoutItemPayload[];
 };
 
 export type CompletedCheckoutOrderWithItems = CompletedCheckoutOrder & {

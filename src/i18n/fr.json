@@ -60,9 +60,14 @@
   "contact": {
     "title": "Contacter PetQuirky",
     "subtitle": "Une question sur une commande, la livraison, un retour ou un produit vu dans le journal ? Écrivez-nous directement.",
+    "form_title": "Envoyez-nous un message",
     "email_label": "E-mail",
+    "message_label": "Message",
     "reply_label": "Délai de réponse habituel",
-    "reply_value": "Sous 1 à 2 jours ouvrés"
+    "reply_value": "Sous 1 à 2 jours ouvrés",
+    "submit": "Envoyer le message",
+    "success": "Merci ! Votre message a bien été envoyé à PetQuirky.",
+    "error": "Nous n'avons pas pu envoyer votre message. Veuillez réessayer."
   },
   "cookie": {
     "title": "Nous utilisons des cookies pour assurer le bon fonctionnement de PetQuirky.",
@@ -137,7 +142,12 @@
     "newsletter_title": "Restez informé",
     "newsletter_description": "Recevez en avant-première nos nouveautés, guides pratiques et idées tech pour animaux.",
     "newsletter_placeholder": "Entrez votre e-mail",
-    "newsletter_cta": "S’abonner"
+    "newsletter_cta": "S’abonner",
+    "newsletter_success": "Merci pour votre inscription. Nous vous tiendrons au courant.",
+    "newsletter_error": "Nous n’avons pas pu enregistrer votre inscription pour le moment. Veuillez réessayer.",
+    "newsletter_invalid": "Veuillez saisir une adresse e-mail valide.",
+    "newsletter_already": "Cette adresse e-mail est deja inscrite.",
+    "newsletter_processing": "Inscription en cours..."
   },
   "product": {
     "add_to_cart": "Ajouter au panier",
@@ -223,9 +233,14 @@
     "agree_prefix": "J’accepte la",
     "invalid_credentials": "Veuillez saisir un e-mail et un mot de passe valides.",
     "invalid_registration": "Veuillez compléter tous les champs et accepter les conditions.",
+    "password_min_length": "Utilisez au moins 8 caractères.",
+    "password_too_short": "Le mot de passe doit contenir au moins 8 caractères.",
+    "passwords_do_not_match": "Les mots de passe ne correspondent pas.",
+    "accept_terms_required": "Veuillez accepter la politique de confidentialité et les conditions d’utilisation.",
+    "confirmation_sent": "Votre compte a ete cree. Veuillez confirmer votre adresse e-mail avant de vous connecter.",
     "reset_sent": "Si cet e-mail existe, un lien de réinitialisation a été envoyé.",
     "password_updated": "Mot de passe mis à jour. Redirection vers la connexion...",
-    "auth_unavailable": "L’authentification Supabase n’est pas encore configurée."
+    "auth_unavailable": "L’authentification est temporairement indisponible."
   },
   "account": {
     "orders": "Commandes",
@@ -237,17 +252,25 @@
     "view_details": "Voir les détails",
     "track_order": "Suivre la commande",
     "order_number": "Commande",
-    "order_detail_help": "Les détails de la commande et l’historique de livraison apparaîtront ici une fois la persistance réelle connectée.",
+    "order_detail_help": "Consultez ici vos details de livraison et les articles achetes.",
     "empty_title": "Aucune commande pour le moment",
     "empty_description": "L’historique de vos achats validés apparaîtra ici dès votre première commande.",
     "guest_name": "Client invité",
     "guest_email": "Connectez-vous pour synchroniser vos commandes sur tous vos appareils.",
     "order_missing_title": "Commande introuvable",
-    "order_missing_description": "Nous n’avons pas encore trouvé cette commande dans l’historique local.",
+    "order_missing_description": "Nous n’avons pas trouve cette commande dans votre compte.",
     "back_to_orders": "Retour aux commandes",
     "placed_on": "Passée le",
     "profile_help": "Ce profil est synchronisé depuis votre session Supabase actuelle.",
-    "sign_out": "Se déconnecter"
+    "account_id": "ID du compte",
+    "sign_out": "Se déconnecter",
+    "signing_out": "Deconnexion...",
+    "no_saved_address": "Aucune adresse de livraison enregistree pour le moment. Apres votre premiere commande, nous l’afficherons ici.",
+    "save_changes": "Enregistrer les modifications",
+    "saving_changes": "Enregistrement...",
+    "profile_saved": "Vos modifications de profil ont ete enregistrees.",
+    "incomplete_address": "Veuillez completer toute l'adresse de livraison ou la laisser vide.",
+    "email_locked": "Les modifications d'e-mail sont gerees par l'authentification Supabase et sont ici en lecture seule."
   },
   "checkout": {
     "back_to_cart": "Retour au panier",
@@ -275,14 +298,17 @@
     "paypal_unavailable": "PayPal est actuellement indisponible",
     "paypal_error": "Impossible de démarrer le paiement PayPal. Veuillez réessayer.",
     "processing": "Complétez d'abord les informations de livraison avant de payer.",
+    "login_required": "Veuillez vous connecter avant de commencer le paiement.",
     "summary_title": "Récapitulatif",
     "success_title": "Merci pour votre commande !",
     "success_subtitle": "Nous avons bien reçu votre demande et notre équipe s’en occupe.",
     "order_number": "Numéro de commande",
     "success_email_notice": "Nous avons envoyé une confirmation à votre adresse e-mail.",
+    "success_email_pending": "Votre commande est confirmee, mais l'e-mail de confirmation est encore en attente. Vous pouvez consulter la commande depuis votre compte.",
     "success_delivery_notice": "Livraison estimée : 5 à 10 jours ouvrés.",
     "success_contact_notice": "Des questions ? Contactez-nous à",
-    "success_account_prompt": "Créez un compte pour suivre votre commande en temps réel.",
+    "success_internal_notice": "La commande a bien ete enregistree, mais une notification interne demande encore une verification.",
+    "success_account_prompt": "Vous pouvez consulter les details de commande et votre adresse enregistree depuis votre compte a tout moment.",
     "continue_shopping": "Continuer vos achats"
   },
   "cart": {

@@ -6,26 +6,45 @@ import type { CompletedCheckoutOrder, CompletedCheckoutOrderWithItems } from "@/
 const ORDERS_TABLE = "orders";
 
 type PersistServerOrderInput = CompletedCheckoutOrderWithItems;
+type SupabaseOrderRow = {
+  id: string;
+  user_id: string;
+  status: string;
+  total: number;
+  currency: "EUR";
+  created_at: string;
+  payer_email: string | null;
+  shipping_address: CompletedCheckoutOrder["shippingAddress"];
+  items: CompletedCheckoutOrderWithItems["items"] | null;
+};
 
-export async function persistOrderFromServer(order: PersistServerOrderInput) {
+function mapSupabaseOrderRow(row: SupabaseOrderRow): CompletedCheckoutOrderWithItems {
+  return {
+    id: row.id,
+    status: row.status,
+    total: row.total,
+    currency: row.currency,
+    createdAt: row.created_at,
+    payerEmail: row.payer_email ?? undefined,
+    shippingAddress: row.shipping_address,
+    items: row.items ?? [],
+  };
+}
+
+export async function persistOrderFromServer(order: PersistServerOrderInput, userId: string) {
   const supabase = await getSupabaseServerClient();
   if (!supabase) {
     return { ok: false as const, reason: "supabase-not-configured" };
   }
 
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError || !user) {
-    return { ok: false as const, reason: "guest-or-missing-user" };
+  if (!userId) {
+    return { ok: false as const, reason: "missing-user-id" };
   }
 
   const { error } = await supabase.from(ORDERS_TABLE).upsert(
     {
       id: order.id,
-      user_id: user.id,
+      user_id: userId,
       status: order.status,
       total: order.total,
       currency: order.currency,
@@ -41,7 +60,31 @@ export async function persistOrderFromServer(order: PersistServerOrderInput) {
     return { ok: false as const, reason: error.message };
   }
 
-  return { ok: true as const, userId: user.id };
+  return { ok: true as const, userId };
+}
+
+export async function listOrdersForUserFromServer(userId: string) {
+  const supabase = await getSupabaseServerClient();
+  if (!supabase || !userId) {
+    return [] as CompletedCheckoutOrderWithItems[];
+  }
+
+  const { data, error } = await supabase
+    .from(ORDERS_TABLE)
+    .select("id,user_id,status,total,currency,created_at,payer_email,shipping_address,items")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (error || !data) {
+    return [] as CompletedCheckoutOrderWithItems[];
+  }
+
+  return (data as SupabaseOrderRow[]).map(mapSupabaseOrderRow);
+}
+
+export async function getOrderForUserFromServer(userId: string, orderId: string) {
+  const orders = await listOrdersForUserFromServer(userId);
+  return orders.find((order) => order.id === orderId) ?? null;
 }
 
 export function serializeCompletedOrder(input: {

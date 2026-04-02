@@ -4,6 +4,7 @@ import { HeroBanner } from "@/components/home/HeroBanner";
 import { Newsletter } from "@/components/home/Newsletter";
 import { TrustBadges } from "@/components/home/TrustBadges";
 import { getDictionary, type Locale } from "@/lib/i18n";
+import { filterProducts } from "@/lib/products";
 
 type LocalePageProps = {
   params: Promise<{ locale: Locale }>;
@@ -20,57 +21,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     { emoji: "📦", label: dict.home.category_all_products },
   ];
 
-  const featuredProducts = [
-    {
-      name: "AeroBounce Smart Launcher",
-      petType: `🐕 ${dict.home.pet_dogs}`,
-      price: "89,00 €",
-      compareAtPrice: "115,00 €",
-      badge: dict.home.badge_bestseller,
-      rating: "4.8",
-      reviews: "124",
-      emoji: "🎾",
-      tone: "bg-[#f2dfd3]",
-      addToCartLabel: dict.home.featured_add_to_cart,
-      ratingLabel: dict.home.featured_rating_count,
-    },
-    {
-      name: "ZenFelt Cat Sanctuary",
-      petType: `🐱 ${dict.home.pet_cats}`,
-      price: "64,00 €",
-      rating: "4.9",
-      reviews: "42",
-      badge: dict.home.badge_new,
-      emoji: "🛏️",
-      tone: "bg-[#efe5da]",
-      addToCartLabel: dict.home.featured_add_to_cart,
-      ratingLabel: dict.home.featured_rating_count,
-    },
-    {
-      name: "TerraSmart Ecosystem V2",
-      petType: `🦎 ${dict.home.pet_reptiles}`,
-      price: "210,00 €",
-      compareAtPrice: "245,00 €",
-      badge: dict.home.badge_bestseller,
-      rating: "4.7",
-      reviews: "88",
-      emoji: "🌿",
-      tone: "bg-[#dde8df]",
-      addToCartLabel: dict.home.featured_add_to_cart,
-      ratingLabel: dict.home.featured_rating_count,
-    },
-    {
-      name: "GroomPro Bamboo Set",
-      petType: `🐹 ${dict.home.pet_small_pets}`,
-      price: "35,00 €",
-      rating: "4.8",
-      reviews: "15",
-      emoji: "🪮",
-      tone: "bg-[#f0e5db]",
-      addToCartLabel: dict.home.featured_add_to_cart,
-      ratingLabel: dict.home.featured_rating_count,
-    },
-  ];
+  const featuredProducts = filterProducts(locale, { sort: "recommended" }).slice(0, 4);
+  const petTypeLabels: Record<string, string> = {
+    cat: `🐈 ${dict.products.pet_cats}`,
+    dog: `🐕 ${dict.products.pet_dogs}`,
+    reptile: `🦎 ${dict.products.pet_reptiles}`,
+    hamster: `🐹 ${dict.products.pet_hamsters}`,
+    rabbit: `🐇 ${dict.products.pet_rabbits}`,
+    bird: `🐦 ${dict.products.pet_birds}`,
+    fish: `🐠 ${dict.products.pet_fish}`,
+    other: dict.products.pet_other,
+  };
 
   const trustItems = [
     {
@@ -111,16 +72,33 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         categories={categories}
       />
       <FeaturedProducts
+        locale={locale}
         title={dict.home.featured_title}
         subtitle={dict.home.featured_subtitle}
         products={featuredProducts}
+        labels={{
+          addToCart: dict.home.featured_add_to_cart,
+          reviews: dict.products.reviews_label,
+          badges: {
+            new: dict.products.badge_new,
+            bestseller: dict.products.badge_bestseller,
+            sale: dict.products.badge_sale,
+          },
+          petTypes: petTypeLabels,
+        }}
       />
       <TrustBadges items={trustItems} />
       <Newsletter
+        locale={locale}
         title={dict.home.newsletter_title}
         description={dict.home.newsletter_description}
         placeholder={dict.home.newsletter_placeholder}
         ctaLabel={dict.home.newsletter_cta}
+        successLabel={dict.home.newsletter_success}
+        errorLabel={dict.home.newsletter_error}
+        invalidLabel={dict.home.newsletter_invalid}
+        alreadyLabel={dict.home.newsletter_already}
+        processingLabel={dict.home.newsletter_processing}
       />
     </main>
   );

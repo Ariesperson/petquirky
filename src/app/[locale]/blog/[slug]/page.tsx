@@ -8,6 +8,7 @@ import {
 } from "@/lib/blog";
 import { createPageMetadata } from "@/lib/seo";
 import { getDictionary, isLocale } from "@/lib/i18n";
+import { getProductBySlug } from "@/lib/products";
 
 type BlogArticlePageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -47,6 +48,9 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
   }
 
   const relatedPosts = getRelatedBlogPosts(post.slug, post.category);
+  const recommendedProduct = post.body[locale].recommendedProductSlug
+    ? getProductBySlug(post.body[locale].recommendedProductSlug)
+    : undefined;
   const categoryLabels = {
     "cat-care": dict.blog.cat_care,
     "dog-care": dict.blog.dog_care,
@@ -76,6 +80,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
         post={post}
         relatedPosts={relatedPosts}
         relatedCategoryLabels={categoryLabels}
+        recommendedProduct={recommendedProduct}
         labels={{
           byline: dict.blog.byline,
           recommended: dict.blog.recommended_product,

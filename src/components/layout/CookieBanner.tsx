@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 
 import { CookieSettings } from "@/components/layout/CookieSettings";
 
@@ -61,15 +62,17 @@ function readStoredPreferences(): CookiePreferences | null {
 }
 
 export function CookieBanner({ labels }: CookieBannerProps) {
-  const initialPreferences = readStoredPreferences();
-  const [visible, setVisible] = useState(initialPreferences === null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [preferences, setPreferences] =
-    useState<CookiePreferences>(initialPreferences ?? defaultPreferences);
+  const pathname = usePathname();
   const hydrated = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false
+  );
+  const isCheckoutPage = /^\/(en|de|fr|es)\/checkout$/.test(pathname);
+  const [visible, setVisible] = useState(() => readStoredPreferences() === null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [preferences, setPreferences] = useState<CookiePreferences>(
+    () => readStoredPreferences() ?? defaultPreferences
   );
 
   useEffect(() => {
@@ -108,6 +111,10 @@ export function CookieBanner({ labels }: CookieBannerProps) {
   };
 
   if (!hydrated) {
+    return null;
+  }
+
+  if (isCheckoutPage) {
     return null;
   }
 

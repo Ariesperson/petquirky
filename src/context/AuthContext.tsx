@@ -17,6 +17,7 @@ import {
   type AuthUser,
 } from "@/lib/auth";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import type { CheckoutAddress } from "@/types/checkout";
 
 type AuthContextValue = {
   hydrated: boolean;
@@ -28,7 +29,13 @@ type AuthContextValue = {
     email: string;
     password: string;
     fullName: string;
+    emailRedirectTo?: string;
   }) => Promise<AuthActionResult>;
+  updateProfile: (input: {
+    fullName: string;
+    shippingAddress: CheckoutAddress | null;
+  }) => Promise<AuthActionResult>;
+  saveShippingAddress: (address: CheckoutAddress) => Promise<AuthActionResult>;
   requestPasswordReset: (input: {
     email: string;
     redirectTo: string;
@@ -91,23 +98,79 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         return error ? { error: error.message } : {};
       },
-      register: async ({ email, password, fullName }) => {
+      register: async ({ email, password, fullName, emailRedirectTo }) => {
         const supabase = getSupabaseBrowserClient();
         if (!supabase) {
           return { error: "Supabase is not configured." };
         }
 
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             data: {
               full_name: fullName,
             },
+            emailRedirectTo,
           },
         });
 
-        return error ? { error: error.message } : {};
+        if (error) {
+          return { error: error.message };
+        }
+
+        return { requiresEmailConfirmation: !data.session };
+      },
+      updateProfile: async ({ fullName, shippingAddress }) => {
+        const supabase = getSupabaseBrowserClient();
+        if (!supabase) {
+          return { error: "Supabase is not configured." };
+        }
+
+        const nextFullName = fullName.trim();
+        if (!nextFullName) {
+          return { error: "Full name is required." };
+        }
+
+        const { data, error } = await supabase.auth.updateUser({
+          data: {
+            full_name: nextFullName,
+            shipping_address: shippingAddress
+              ? {
+                  ...shippingAddress,
+                  fullName: nextFullName,
+                  email: user?.email ?? shippingAddress.email,
+                }
+              : null,
+          },
+        });
+
+        if (error) {
+          return { error: error.message };
+        }
+
+        setUser(mapSupabaseUser(data.user));
+        return {};
+      },
+      saveShippingAddress: async (address) => {
+        const supabase = getSupabaseBrowserClient();
+        if (!supabase) {
+          return { error: "Supabase is not configured." };
+        }
+
+        const { data, error } = await supabase.auth.updateUser({
+          data: {
+            full_name: user?.fullName ?? address.fullName,
+            shipping_address: address,
+          },
+        });
+
+        if (error) {
+          return { error: error.message };
+        }
+
+        setUser(mapSupabaseUser(data.user));
+        return {};
       },
       logout: async () => {
         const supabase = getSupabaseBrowserClient();

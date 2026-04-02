@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
+import { validateCheckoutOrderPayload } from "@/lib/checkout";
 import { createPayPalOrder } from "@/lib/paypal";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 import type { CheckoutOrderPayload } from "@/types/checkout";
 
 function isValidOrderPayload(value: unknown): value is CheckoutOrderPayload {
@@ -35,12 +37,49 @@ export async function POST(request: Request) {
     );
   }
 
+  const supabase = await getSupabaseServerClient();
+  if (!supabase) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Supabase is not configured.",
+      },
+      { status: 501 }
+    );
+  }
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Please sign in before paying.",
+      },
+      { status: 401 }
+    );
+  }
+
   const payload = await request.json();
   if (!isValidOrderPayload(payload)) {
     return NextResponse.json(
       {
         ok: false,
         error: "Invalid checkout payload.",
+      },
+      { status: 400 }
+    );
+  }
+
+  const validation = validateCheckoutOrderPayload(payload);
+  if (!validation.ok) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: validation.reason,
       },
       { status: 400 }
     );

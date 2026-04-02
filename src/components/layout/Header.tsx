@@ -54,6 +54,11 @@ export function Header({ locale, cartCount = 0, dictionary }: HeaderProps) {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const { itemCount, openCart, hydrated } = useCart();
+  const isCheckoutPage = pathname === `/${locale}/checkout`;
+
+  if (isCheckoutPage) {
+    return null;
+  }
 
   const navItems = [
     { href: `/${locale}`, label: dictionary.nav.home },

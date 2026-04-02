@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 
 import { CartItem } from "@/components/cart/CartItem";
@@ -25,6 +26,7 @@ type CartDrawerProps = {
 };
 
 export function CartDrawer({ locale, labels }: CartDrawerProps) {
+  const pathname = usePathname();
   const {
     hydrated,
     lineItems,
@@ -35,6 +37,10 @@ export function CartDrawer({ locale, labels }: CartDrawerProps) {
     updateQuantity,
     removeItem,
   } = useCart();
+
+  if (pathname === `/${locale}/checkout`) {
+    return null;
+  }
 
   if (!isDrawerOpen) {
     return null;
@@ -107,13 +113,14 @@ export function CartDrawer({ locale, labels }: CartDrawerProps) {
           >
             {labels.viewCart}
           </Link>
-          <button
-            type="button"
+          <Link
+            href={`/${locale}/checkout`}
+            onClick={closeCart}
             className="inline-flex w-full items-center justify-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#d85a30,#ff8a65)] px-6 py-4 text-sm font-semibold text-white shadow-[0_18px_34px_rgba(216,90,48,0.25)] transition hover:scale-[1.02]"
           >
             {labels.checkout}
             <ArrowRight className="size-4" />
-          </button>
+          </Link>
         </footer>
       </aside>
     </>

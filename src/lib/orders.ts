@@ -3,7 +3,7 @@
 import { isSupabaseConfigured } from "@/lib/auth";
 import { ORDER_HISTORY_STORAGE_KEY } from "@/lib/checkout";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import type { CompletedCheckoutOrder } from "@/types/checkout";
+import type { CheckoutItemPayload, CompletedCheckoutOrder } from "@/types/checkout";
 
 const ORDERS_TABLE = "orders";
 
@@ -31,13 +31,14 @@ type PersistOrderInput = CompletedCheckoutOrder & {
 
 type SupabaseOrderRow = {
   id: string;
-  user_id: string;
+  user_id: string | null;
   status: string;
   total: number;
   currency: "EUR";
   created_at: string;
   payer_email: string | null;
   shipping_address: CompletedCheckoutOrder["shippingAddress"];
+  items: CheckoutItemPayload[] | null;
 };
 
 export function writeStoredOrders(nextOrders: CompletedCheckoutOrder[]) {
@@ -68,6 +69,7 @@ export async function persistOrderToSupabase(order: PersistOrderInput) {
       created_at: order.createdAt,
       payer_email: order.payerEmail ?? null,
       shipping_address: order.shippingAddress,
+      items: order.items ?? [],
     },
     { onConflict: "id" }
   );
@@ -91,7 +93,7 @@ export async function listOrdersFromSupabase(userId: string) {
 
   const { data, error } = await supabase
     .from(ORDERS_TABLE)
-    .select("id,user_id,status,total,currency,created_at,payer_email,shipping_address")
+    .select("id,user_id,status,total,currency,created_at,payer_email,shipping_address,items")
     .eq("user_id", userId)
     .order("created_at", { ascending: false });
 
@@ -107,5 +109,6 @@ export async function listOrdersFromSupabase(userId: string) {
     createdAt: row.created_at,
     payerEmail: row.payer_email ?? undefined,
     shippingAddress: row.shipping_address,
+    items: row.items ?? [],
   }));
 }

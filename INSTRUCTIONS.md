@@ -94,16 +94,18 @@ export default config;
 # PayPal
 PAYPAL_CLIENT_ID=
 PAYPAL_CLIENT_SECRET=
-PAYPAL_MODE=sandbox
+PAYPAL_ENV=sandbox
 NEXT_PUBLIC_PAYPAL_CLIENT_ID=
 
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
+# 当前前台与订单流程未直接使用，保留给后续需要服务端高权限任务时再配置
 SUPABASE_SERVICE_ROLE_KEY=
 
 # Site
 NEXT_PUBLIC_SITE_URL=https://petquirky.com
+# 当前代码未读取，保留给后续联系方式配置扩展
 NEXT_PUBLIC_CONTACT_EMAIL=hello@petquirky.com
 
 # Email (Resend)

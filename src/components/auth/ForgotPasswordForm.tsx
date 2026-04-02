@@ -44,7 +44,7 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
     }
 
     setSubmitting(true);
-    const redirectTo = `${window.location.origin}/${locale}/auth/reset-password`;
+    const redirectTo = `${window.location.origin}/${locale}/auth/confirm?next=/${locale}/auth/reset-password`;
     const result = await requestPasswordReset({ email, redirectTo });
     setSubmitting(false);
 
@@ -62,10 +62,14 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
       <p className="mt-3 text-sm leading-7 text-muted">{labels.help}</p>
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-2">
-          <label className="ml-1 block text-xs font-bold uppercase tracking-[0.16em] text-muted">
+          <label
+            htmlFor="forgot-password-email"
+            className="ml-1 block text-xs font-bold uppercase tracking-[0.16em] text-muted"
+          >
             {labels.email}
           </label>
           <input
+            id="forgot-password-email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}

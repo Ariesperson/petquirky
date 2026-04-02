@@ -60,9 +60,14 @@
   "contact": {
     "title": "Contactar con PetQuirky",
     "subtitle": "¿Preguntas sobre pedidos, envíos, devoluciones o un producto visto en el journal? Escríbenos directamente.",
+    "form_title": "Envíanos un mensaje",
     "email_label": "Correo",
+    "message_label": "Mensaje",
     "reply_label": "Tiempo habitual de respuesta",
-    "reply_value": "En 1 o 2 días laborables"
+    "reply_value": "En 1 o 2 días laborables",
+    "submit": "Enviar mensaje",
+    "success": "Gracias. Tu mensaje ya va camino de PetQuirky.",
+    "error": "No pudimos enviar tu mensaje. Inténtalo de nuevo."
   },
   "cookie": {
     "title": "Usamos cookies para que PetQuirky funcione sin problemas.",
@@ -137,7 +142,12 @@
     "newsletter_title": "Mantente al día",
     "newsletter_description": "Recibe acceso anticipado a novedades, guías de cuidado e ideas de tecnología para mascotas.",
     "newsletter_placeholder": "Introduce tu correo",
-    "newsletter_cta": "Suscribirse"
+    "newsletter_cta": "Suscribirse",
+    "newsletter_success": "Gracias por suscribirte. Te mantendremos al dia.",
+    "newsletter_error": "No pudimos guardar tu suscripcion ahora mismo. Intentalo de nuevo.",
+    "newsletter_invalid": "Introduce una direccion de correo valida.",
+    "newsletter_already": "Este correo ya esta suscrito.",
+    "newsletter_processing": "Guardando tu suscripcion..."
   },
   "product": {
     "add_to_cart": "Añadir al carrito",
@@ -223,9 +233,14 @@
     "agree_prefix": "Acepto la",
     "invalid_credentials": "Introduce un correo y una contraseña válidos.",
     "invalid_registration": "Completa todos los campos y confirma las condiciones.",
+    "password_min_length": "Usa al menos 8 caracteres.",
+    "password_too_short": "La contraseña debe tener al menos 8 caracteres.",
+    "passwords_do_not_match": "Las contraseñas no coinciden.",
+    "accept_terms_required": "Acepta la Política de Privacidad y los Términos del servicio.",
+    "confirmation_sent": "Tu cuenta se ha creado. Revisa tu correo y confirma la direccion antes de iniciar sesion.",
     "reset_sent": "Si este correo existe, se ha enviado un enlace de restablecimiento.",
     "password_updated": "Contraseña actualizada. Redirigiendo al acceso...",
-    "auth_unavailable": "La autenticación de Supabase aún no está configurada."
+    "auth_unavailable": "La autenticacion no esta disponible temporalmente."
   },
   "account": {
     "orders": "Pedidos",
@@ -237,17 +252,25 @@
     "view_details": "Ver detalles",
     "track_order": "Seguir pedido",
     "order_number": "Pedido",
-    "order_detail_help": "El detalle del pedido y el historial de entrega aparecerán aquí cuando la persistencia real esté conectada.",
+    "order_detail_help": "Consulta aqui los detalles de envio y los articulos comprados.",
     "empty_title": "Aún no hay pedidos",
     "empty_description": "Tu historial de compras completadas aparecerá aquí en cuanto hagas tu primer pedido.",
     "guest_name": "Cliente invitado",
     "guest_email": "Inicia sesión para sincronizar tus pedidos entre dispositivos.",
     "order_missing_title": "Pedido no encontrado",
-    "order_missing_description": "Todavía no encontramos este pedido en el historial local.",
+    "order_missing_description": "No pudimos encontrar este pedido en tu cuenta.",
     "back_to_orders": "Volver a pedidos",
     "placed_on": "Realizado el",
-    "profile_help": "Este perfil se sincroniza desde tu sesión actual de Supabase.",
-    "sign_out": "Cerrar sesión"
+    "profile_help": "Este perfil se sincroniza desde tu sesion actual de Supabase.",
+    "account_id": "ID de la cuenta",
+    "sign_out": "Cerrar sesión",
+    "signing_out": "Cerrando sesion...",
+    "no_saved_address": "Todavia no hay una direccion guardada. Despues de tu primer pedido la mostraremos aqui.",
+    "save_changes": "Guardar cambios",
+    "saving_changes": "Guardando...",
+    "profile_saved": "Tus cambios de perfil se han guardado.",
+    "incomplete_address": "Completa toda la direccion de envio o dejala vacia.",
+    "email_locked": "Los cambios de correo se gestionan desde la autenticacion de Supabase y aqui son solo de lectura."
   },
   "checkout": {
     "back_to_cart": "Volver al carrito",
@@ -275,14 +298,17 @@
     "paypal_unavailable": "PayPal no está disponible en este momento",
     "paypal_error": "No se pudo iniciar el pago con PayPal. Inténtalo de nuevo.",
     "processing": "Completa primero los datos de envío antes de pagar.",
+    "login_required": "Inicia sesion antes de comenzar el pago.",
     "summary_title": "Resumen del pedido",
     "success_title": "¡Gracias por tu pedido!",
     "success_subtitle": "Hemos recibido tu solicitud y nuestro equipo ya está en ello.",
     "order_number": "Número de pedido",
     "success_email_notice": "Hemos enviado una confirmación a tu correo.",
+    "success_email_pending": "Tu pedido esta confirmado, pero el correo de confirmacion sigue pendiente. Puedes revisar el pedido desde tu cuenta.",
     "success_delivery_notice": "Entrega estimada: 5-10 días laborables.",
     "success_contact_notice": "¿Preguntas? Contáctanos en",
-    "success_account_prompt": "Crea una cuenta para seguir tu pedido en tiempo real.",
+    "success_internal_notice": "El pedido se guardo correctamente, pero una notificacion interna todavia requiere atencion.",
+    "success_account_prompt": "Puedes revisar los detalles del pedido y tu direccion guardada desde tu cuenta en cualquier momento.",
     "continue_shopping": "Seguir comprando"
   },
   "cart": {

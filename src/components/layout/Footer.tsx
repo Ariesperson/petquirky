@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import type { Locale } from "@/lib/i18n";
 
@@ -31,6 +32,11 @@ type FooterProps = {
 };
 
 export function Footer({ locale, dictionary }: FooterProps) {
+  const pathname = usePathname();
+  if (pathname === `/${locale}/checkout`) {
+    return null;
+  }
+
   const footerGroups = [
     {
       title: dictionary.footer.shopTitle,

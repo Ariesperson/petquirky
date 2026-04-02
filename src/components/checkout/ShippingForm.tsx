@@ -25,7 +25,7 @@ type ShippingFormProps = {
 
 export function ShippingForm({ locale, value, onChange, onSubmit, labels }: ShippingFormProps) {
   return (
-    <section className="lg:col-span-7">
+    <section className="space-y-10 lg:col-span-7">
       <div>
         <h1 className="font-heading text-4xl font-extrabold text-dark">{labels.title}</h1>
         <p className="mt-2 text-sm text-muted">
@@ -48,12 +48,14 @@ export function ShippingForm({ locale, value, onChange, onSubmit, labels }: Ship
             label={labels.fullName}
             type="text"
             value={value.fullName}
+            placeholder="Ada Lovelace"
             onChange={(nextValue) => onAddressFieldChange("fullName", nextValue, value, onChange)}
           />
           <Field
             label={labels.email}
             type="email"
             value={value.email}
+            placeholder="ada@example.com"
             onChange={(nextValue) => onAddressFieldChange("email", nextValue, value, onChange)}
           />
         </div>
@@ -61,6 +63,7 @@ export function ShippingForm({ locale, value, onChange, onSubmit, labels }: Ship
           label={labels.address}
           type="text"
           value={value.address}
+          placeholder="1 Rue de Test"
           onChange={(nextValue) => onAddressFieldChange("address", nextValue, value, onChange)}
         />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -69,6 +72,7 @@ export function ShippingForm({ locale, value, onChange, onSubmit, labels }: Ship
               label={labels.city}
               type="text"
               value={value.city}
+              placeholder="Paris"
               onChange={(nextValue) => onAddressFieldChange("city", nextValue, value, onChange)}
             />
           </div>
@@ -76,6 +80,7 @@ export function ShippingForm({ locale, value, onChange, onSubmit, labels }: Ship
             label={labels.postalCode}
             type="text"
             value={value.postalCode}
+            placeholder="75001"
             onChange={(nextValue) =>
               onAddressFieldChange("postalCode", nextValue, value, onChange)
             }
@@ -90,7 +95,7 @@ export function ShippingForm({ locale, value, onChange, onSubmit, labels }: Ship
             onChange={(event) =>
               onAddressFieldChange("country", event.target.value, value, onChange)
             }
-            className="w-full rounded-[14px] bg-[#f6f3f2] p-4 outline-none focus:ring-2 focus:ring-primary/20"
+            className="w-full appearance-none rounded-[18px] bg-[#f6f3f2] px-4 py-4 text-base font-medium text-dark outline-none ring-1 ring-transparent transition focus:bg-white focus:ring-primary/20"
           >
             <option>France</option>
             <option>Germany</option>
@@ -101,7 +106,7 @@ export function ShippingForm({ locale, value, onChange, onSubmit, labels }: Ship
         </label>
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-[16px] bg-[linear-gradient(135deg,#d85a30,#ff8a65)] px-10 py-4 text-base font-semibold text-white shadow-[0_18px_34px_rgba(216,90,48,0.22)] transition hover:scale-[1.02]"
+          className="inline-flex min-w-[240px] items-center justify-center rounded-[18px] bg-[linear-gradient(135deg,#d85a30,#ff8a65)] px-10 py-4 text-base font-semibold text-white shadow-[0_18px_34px_rgba(216,90,48,0.22)] transition hover:scale-[1.02]"
         >
           {labels.continueToReview}
         </button>
@@ -115,11 +120,13 @@ function Field({
   value,
   onChange,
   type,
+  placeholder,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   type: string;
+  placeholder?: string;
 }) {
   return (
     <label className="block space-y-2">
@@ -130,8 +137,9 @@ function Field({
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
         autoComplete={type === "email" ? "email" : "on"}
-        className="w-full rounded-[14px] bg-[#f6f3f2] p-4 outline-none focus:ring-2 focus:ring-primary/20"
+        className="w-full rounded-[18px] bg-[#f6f3f2] px-4 py-4 text-base font-medium text-dark outline-none placeholder:text-muted/55 focus:bg-white focus:ring-2 focus:ring-primary/20"
       />
     </label>
   );

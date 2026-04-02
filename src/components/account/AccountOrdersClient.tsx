@@ -1,17 +1,16 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 
+import { AccountSignOutButton } from "@/components/account/AccountSignOutButton";
 import { OrderCard } from "@/components/account/OrderCard";
-import { useAuth } from "@/hooks/useAuth";
 import type { Locale } from "@/lib/i18n";
 import { formatPrice } from "@/lib/products";
-import { listOrdersFromSupabase, readStoredOrders } from "@/lib/orders";
 import type { CompletedCheckoutOrder } from "@/types/checkout";
 
 type AccountOrdersClientProps = {
   locale: Locale;
+  customerName: string;
+  customerEmail: string;
+  orders: CompletedCheckoutOrder[];
   labels: {
     orders: string;
     profile: string;
@@ -23,63 +22,38 @@ type AccountOrdersClientProps = {
     emptyTitle: string;
     emptyDescription: string;
     startShopping: string;
-    guestName: string;
-    guestEmail: string;
+    signOut: string;
+    signingOut: string;
   };
 };
 
-export function AccountOrdersClient({ locale, labels }: AccountOrdersClientProps) {
-  const { configured, hydrated: authHydrated, user } = useAuth();
-  const [orders, setOrders] = useState<CompletedCheckoutOrder[]>(() => readStoredOrders());
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  );
+export function AccountOrdersClient({
+  locale,
+  customerName,
+  customerEmail,
+  orders,
+  labels,
+}: AccountOrdersClientProps) {
+  const initials = customerName
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 
-  const initials = useMemo(() => {
-    const source = user?.fullName ?? labels.guestName;
-    return source
-      .split(" ")
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? "")
-      .join("");
-  }, [labels.guestName, user?.fullName]);
-
-  useEffect(() => {
-    if (!hydrated || !authHydrated || !configured || !user?.id) {
-      return;
+  const describeOrderItems = (order: CompletedCheckoutOrder) => {
+    if (!order.items || order.items.length === 0) {
+      return order.shippingAddress.address;
     }
 
-    let active = true;
+    const preview = order.items
+      .slice(0, 2)
+      .map((item) => `${item.name} x${item.quantity}`)
+      .join(" · ");
+    const remaining = order.items.length - 2;
 
-    void listOrdersFromSupabase(user.id).then((remoteOrders) => {
-      if (!active) {
-        return;
-      }
-
-      if (remoteOrders.length > 0) {
-        setOrders(remoteOrders);
-      }
-    });
-
-    return () => {
-      active = false;
-    };
-  }, [authHydrated, configured, hydrated, user?.id]);
-
-  if (!hydrated || !authHydrated) {
-    return (
-      <main className="mx-auto w-full max-w-7xl flex-1 gap-8 px-4 pb-12 pt-10 md:flex md:px-8">
-        <div className="h-44 w-full animate-pulse rounded-[28px] bg-[#f6f3f2] md:w-72" />
-        <div className="flex-1 space-y-6">
-          <div className="h-28 animate-pulse rounded-[28px] bg-[#f6f3f2]" />
-          <div className="h-44 animate-pulse rounded-[28px] bg-[#f6f3f2]" />
-        </div>
-      </main>
-    );
-  }
+    return remaining > 0 ? `${preview} +${remaining}` : preview;
+  };
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 gap-8 px-4 pb-12 pt-10 md:flex md:px-8">
@@ -89,8 +63,8 @@ export function AccountOrdersClient({ locale, labels }: AccountOrdersClientProps
             {initials}
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-dark">{user?.fullName ?? labels.guestName}</h2>
-            <p className="text-sm text-muted">{user?.email ?? labels.guestEmail}</p>
+            <h2 className="text-lg font-semibold text-dark">{customerName}</h2>
+            <p className="text-sm text-muted">{customerEmail}</p>
           </div>
         </div>
         <nav className="space-y-2">
@@ -104,6 +78,13 @@ export function AccountOrdersClient({ locale, labels }: AccountOrdersClientProps
             {labels.profile}
           </Link>
         </nav>
+        <AccountSignOutButton
+          locale={locale}
+          labels={{
+            signOut: labels.signOut,
+            signingOut: labels.signingOut,
+          }}
+        />
       </aside>
 
       <section className="flex-1 space-y-6">
@@ -125,7 +106,7 @@ export function AccountOrdersClient({ locale, labels }: AccountOrdersClientProps
                   month: "long",
                   day: "numeric",
                 }).format(new Date(order.createdAt)),
-                items: order.shippingAddress.address,
+                items: describeOrderItems(order),
                 total: formatPrice(order.total, locale),
                 cta: labels.viewDetails,
                 totalLabel: labels.total,

@@ -52,6 +52,8 @@ export default async function CheckoutPage({ params }: CheckoutPageProps) {
         paypalUnavailable: dict.checkout.paypal_unavailable,
         paypalError: dict.checkout.paypal_error,
         processing: dict.checkout.processing,
+        loginRequired: dict.checkout.login_required,
+        loginRequiredCta: dict.auth.login_submit,
       }}
     />
   );

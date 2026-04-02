@@ -1,8 +1,98 @@
-import { blogPosts, type BlogCategory, type BlogPost } from "@/data/blog/posts";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+import {
+  blogPosts,
+  type BlogBody,
+  type BlogCategory,
+  type BlogPost,
+} from "@/data/blog/posts";
 import type { Locale } from "@/lib/i18n";
 
+const blogContentDirectory = join(process.cwd(), "src/data/blog");
+const localeSectionPattern = /^\[(en|de|fr|es)\]\s*$/gm;
+
+function parseMarkdownBody(content: string): BlogBody {
+  const intro: string[] = [];
+  const sections: BlogBody["sections"] = [];
+  const bullets: string[] = [];
+  let recommendedProductSlug: string | undefined;
+  let activeSection: BlogBody["sections"][number] | null = null;
+
+  const blocks = content
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  for (const block of blocks) {
+    const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+    if (lines.length === 0) {
+      continue;
+    }
+
+    if (lines.length === 1 && /^\[product:[a-z0-9-]+\]$/i.test(lines[0])) {
+      recommendedProductSlug = lines[0].slice(9, -1);
+      continue;
+    }
+
+    if (lines.every((line) => line.startsWith("- "))) {
+      bullets.push(...lines.map((line) => line.slice(2).trim()));
+      continue;
+    }
+
+    if (lines[0].startsWith("## ")) {
+      activeSection = {
+        heading: lines[0].slice(3).trim(),
+        paragraphs: lines.slice(1).join(" ").trim() ? [lines.slice(1).join(" ").trim()] : [],
+      };
+      sections.push(activeSection);
+      continue;
+    }
+
+    const paragraph = lines.join(" ").trim();
+    if (!paragraph) {
+      continue;
+    }
+
+    if (activeSection) {
+      activeSection.paragraphs.push(paragraph);
+    } else {
+      intro.push(paragraph);
+    }
+  }
+
+  return {
+    intro,
+    bullets: bullets.length > 0 ? bullets : undefined,
+    sections,
+    recommendedProductSlug,
+  };
+}
+
+function parseLocalizedMarkdown(slug: string): Record<Locale, BlogBody> {
+  const fileContent = readFileSync(join(blogContentDirectory, `${slug}.md`), "utf8");
+  const sections = Array.from(fileContent.matchAll(localeSectionPattern));
+  const bodies = {} as Record<Locale, BlogBody>;
+
+  sections.forEach((match, index) => {
+    const locale = match[1] as Locale;
+    const start = match.index ?? 0;
+    const contentStart = start + match[0].length;
+    const contentEnd = index + 1 < sections.length ? sections[index + 1].index ?? fileContent.length : fileContent.length;
+    const bodyContent = fileContent.slice(contentStart, contentEnd).trim();
+    bodies[locale] = parseMarkdownBody(bodyContent);
+  });
+
+  return bodies;
+}
+
 export function getAllBlogPosts() {
-  return [...blogPosts].sort(
+  return blogPosts
+    .map((post) => ({
+      ...post,
+      body: parseLocalizedMarkdown(post.slug),
+    }))
+    .sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
 }

@@ -44,6 +44,25 @@ async function getAccessToken() {
   return data.access_token;
 }
 
+export function getPayPalCountryCode(country: string) {
+  const normalized = country.trim().toLowerCase();
+
+  switch (normalized) {
+    case "france":
+      return "FR";
+    case "germany":
+      return "DE";
+    case "italy":
+      return "IT";
+    case "spain":
+      return "ES";
+    case "netherlands":
+      return "NL";
+    default:
+      throw new Error(`Unsupported shipping country: ${country}.`);
+  }
+}
+
 export async function createPayPalOrder(order: CheckoutOrderPayload) {
   const accessToken = await getAccessToken();
 
@@ -87,7 +106,7 @@ export async function createPayPalOrder(order: CheckoutOrderPayload) {
               address_line_1: order.shippingAddress.address,
               admin_area_2: order.shippingAddress.city,
               postal_code: order.shippingAddress.postalCode,
-              country_code: "FR",
+              country_code: getPayPalCountryCode(order.shippingAddress.country),
             },
           },
         },

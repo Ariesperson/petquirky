@@ -22,13 +22,19 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
           email: dict.auth.email,
           password: dict.auth.password,
           confirmPassword: dict.auth.confirm_password,
+          passwordHint: dict.auth.password_min_length,
           submit: dict.auth.register_submit,
           alreadyHaveAccount: dict.auth.already_have_account,
           login: dict.auth.login_submit,
           privacyPrefix: dict.auth.agree_prefix,
           privacy: dict.footer.privacy,
           terms: dict.footer.terms,
-          invalidForm: dict.auth.invalid_registration,
+          missingFields: dict.auth.invalid_registration,
+          passwordTooShort: dict.auth.password_too_short,
+          passwordsDoNotMatch: dict.auth.passwords_do_not_match,
+          acceptTermsRequired: dict.auth.accept_terms_required,
+          authUnavailable: dict.auth.auth_unavailable,
+          confirmationSent: dict.auth.confirmation_sent,
         }}
       />
     </main>

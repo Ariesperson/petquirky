@@ -67,12 +67,12 @@ export function CartSummary({
         </div>
 
         <div className="mt-8 space-y-4">
-          <button
-            type="button"
+          <Link
+            href={`/${locale}/checkout`}
             className="inline-flex w-full items-center justify-center rounded-[18px] bg-[linear-gradient(135deg,#d85a30,#ff8a65)] px-6 py-5 text-base font-semibold text-white shadow-[0_18px_34px_rgba(216,90,48,0.24)] transition hover:scale-[1.02]"
           >
             {labels.proceedToCheckout}
-          </button>
+          </Link>
           <Link
             href={`/${locale}/products`}
             className="inline-flex w-full items-center justify-center rounded-[18px] border-2 border-primary px-6 py-4 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"

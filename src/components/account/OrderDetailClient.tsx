@@ -1,17 +1,12 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 
-import { useAuth } from "@/hooks/useAuth";
 import type { Locale } from "@/lib/i18n";
 import { formatPrice } from "@/lib/products";
-import { listOrdersFromSupabase, readStoredOrders } from "@/lib/orders";
 import type { CompletedCheckoutOrder } from "@/types/checkout";
 
 type OrderDetailClientProps = {
   locale: Locale;
-  orderId: string;
+  order: CompletedCheckoutOrder | null;
   labels: {
     orderNumber: string;
     emptyTitle: string;
@@ -22,50 +17,12 @@ type OrderDetailClientProps = {
     email: string;
     placedOn: string;
     shippingAddress: string;
+    orderItems: string;
+    quantity: string;
   };
 };
 
-export function OrderDetailClient({ locale, orderId, labels }: OrderDetailClientProps) {
-  const { configured, hydrated: authHydrated, user } = useAuth();
-  const [orders, setOrders] = useState<CompletedCheckoutOrder[]>(() => readStoredOrders());
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  );
-
-  const order = useMemo(() => orders.find((entry) => entry.id === orderId), [orderId, orders]);
-
-  useEffect(() => {
-    if (!hydrated || !authHydrated || !configured || !user?.id) {
-      return;
-    }
-
-    let active = true;
-
-    void listOrdersFromSupabase(user.id).then((remoteOrders) => {
-      if (!active) {
-        return;
-      }
-
-      if (remoteOrders.length > 0) {
-        setOrders(remoteOrders);
-      }
-    });
-
-    return () => {
-      active = false;
-    };
-  }, [authHydrated, configured, hydrated, user?.id]);
-
-  if (!hydrated || !authHydrated) {
-    return (
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="h-64 animate-pulse rounded-[28px] bg-[#f6f3f2]" />
-      </main>
-    );
-  }
-
+export function OrderDetailClient({ locale, order, labels }: OrderDetailClientProps) {
   if (!order) {
     return (
       <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-12 sm:px-6 lg:px-8">
@@ -115,6 +72,30 @@ export function OrderDetailClient({ locale, orderId, labels }: OrderDetailClient
             <p className="mt-3 text-base font-semibold text-dark">
               {order.payerEmail ?? order.shippingAddress.email}
             </p>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-[24px] bg-[#f6f3f2] p-6">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">{labels.orderItems}</p>
+          <div className="mt-4 space-y-4">
+            {order.items && order.items.length > 0 ? (
+              order.items.map((item) => (
+                <div
+                  key={`${order.id}-${item.productId}`}
+                  className="flex items-start justify-between gap-4 border-b border-[#e7d8d2] pb-4 last:border-b-0 last:pb-0"
+                >
+                  <div>
+                    <p className="font-semibold text-dark">{item.name}</p>
+                    <p className="mt-1 text-sm text-muted">
+                      {labels.quantity}: {item.quantity}
+                    </p>
+                  </div>
+                  <p className="text-sm font-semibold text-dark">{formatPrice(item.lineTotal, locale)}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted">{labels.emptyDescription}</p>
+            )}
           </div>
         </div>
 

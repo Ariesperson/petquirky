@@ -60,9 +60,14 @@
   "contact": {
     "title": "Contact PetQuirky",
     "subtitle": "Questions about orders, shipping, returns, or a product you saw in the journal? Write to us directly.",
+    "form_title": "Send us a message",
     "email_label": "Email",
+    "message_label": "Message",
     "reply_label": "Typical reply time",
-    "reply_value": "Within 1 to 2 business days"
+    "reply_value": "Within 1 to 2 business days",
+    "submit": "Send Message",
+    "success": "Thanks! Your message is on its way to PetQuirky.",
+    "error": "We could not send your message. Please try again."
   },
   "cookie": {
     "title": "We use cookies to keep PetQuirky running smoothly.",
@@ -137,7 +142,12 @@
     "newsletter_title": "Stay in the loop",
     "newsletter_description": "Get early access to new arrivals, care guides, and pet-friendly tech insights.",
     "newsletter_placeholder": "Enter your email",
-    "newsletter_cta": "Subscribe"
+    "newsletter_cta": "Subscribe",
+    "newsletter_success": "Thanks for subscribing. We'll keep you posted.",
+    "newsletter_error": "We could not save your subscription right now. Please try again.",
+    "newsletter_invalid": "Please enter a valid email address.",
+    "newsletter_already": "You're already subscribed with this email.",
+    "newsletter_processing": "Saving your subscription..."
   },
   "product": {
     "add_to_cart": "Add to Cart",
@@ -223,9 +233,14 @@
     "agree_prefix": "I agree to the",
     "invalid_credentials": "Please enter a valid email and password.",
     "invalid_registration": "Please complete all fields and confirm the terms.",
+    "password_min_length": "Use at least 8 characters.",
+    "password_too_short": "Password must be at least 8 characters long.",
+    "passwords_do_not_match": "Passwords do not match.",
+    "accept_terms_required": "Please accept the Privacy Policy and Terms of Service.",
+    "confirmation_sent": "Your account was created. Please check your email to confirm it before signing in.",
     "reset_sent": "If this email exists, a reset link has been sent.",
     "password_updated": "Password updated. Redirecting to login...",
-    "auth_unavailable": "Supabase auth is not configured yet."
+    "auth_unavailable": "Authentication is temporarily unavailable."
   },
   "account": {
     "orders": "Orders",
@@ -237,17 +252,25 @@
     "view_details": "View Details",
     "track_order": "Track Order",
     "order_number": "Order",
-    "order_detail_help": "Order detail and delivery history will appear here once real order persistence is connected.",
+    "order_detail_help": "Review your shipping details and purchased items here.",
     "empty_title": "No orders yet",
     "empty_description": "Your completed checkout history will appear here as soon as you place your first order.",
     "guest_name": "Guest Shopper",
     "guest_email": "Sign in to sync your orders across devices.",
     "order_missing_title": "Order not found",
-    "order_missing_description": "We could not find this order in local history yet.",
+    "order_missing_description": "We could not find this order in your account.",
     "back_to_orders": "Back to Orders",
     "placed_on": "Placed on",
     "profile_help": "This profile is synced from your current Supabase session.",
-    "sign_out": "Sign Out"
+    "account_id": "Account ID",
+    "sign_out": "Sign Out",
+    "signing_out": "Signing out...",
+    "no_saved_address": "No saved shipping address yet. Complete checkout once and we'll keep it here for you.",
+    "save_changes": "Save Changes",
+    "saving_changes": "Saving...",
+    "profile_saved": "Your profile changes have been saved.",
+    "incomplete_address": "Please complete the full shipping address or leave it empty.",
+    "email_locked": "Email updates are managed through Supabase authentication and are currently read-only here."
   },
   "checkout": {
     "back_to_cart": "Back to Cart",
@@ -275,14 +298,17 @@
     "paypal_unavailable": "PayPal is currently unavailable",
     "paypal_error": "We could not start your PayPal payment. Please try again.",
     "processing": "Complete shipping details before continuing to payment.",
+    "login_required": "Please sign in before starting payment.",
     "summary_title": "Order Summary",
     "success_title": "Thank you for your order!",
     "success_subtitle": "We've received your request and our quirky team is on it.",
     "order_number": "Order Number",
     "success_email_notice": "We've sent a confirmation to your email.",
+    "success_email_pending": "Your order is confirmed, but the confirmation email is still pending. You can review the order from your account.",
     "success_delivery_notice": "Estimated delivery: 5-10 business days.",
     "success_contact_notice": "Questions? Contact us at",
-    "success_account_prompt": "Create an account to track your order in real time.",
+    "success_internal_notice": "The order was saved successfully, but one internal notification still needs attention.",
+    "success_account_prompt": "You can review your order details and saved shipping address from your account anytime.",
     "continue_shopping": "Continue Shopping"
   },
   "cart": {

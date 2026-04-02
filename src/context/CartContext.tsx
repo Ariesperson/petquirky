@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useCallback,
   createContext,
   useContext,
   useEffect,
@@ -60,13 +61,13 @@ function readCartEntries(): CartEntry[] {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartEntry[]>(() => readCartEntries());
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const hydrated = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false
   );
+  const [items, setItems] = useState<CartEntry[]>(() => readCartEntries());
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     if (!hydrated) {
@@ -75,6 +76,50 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [hydrated, items]);
+
+  const openCart = useCallback(() => {
+    setIsDrawerOpen(true);
+  }, []);
+
+  const closeCart = useCallback(() => {
+    setIsDrawerOpen(false);
+  }, []);
+
+  const addItem = useCallback((productId: string, quantity = 1) => {
+    setItems((current) => {
+      const existing = current.find((item) => item.productId === productId);
+      if (existing) {
+        return current.map((item) =>
+          item.productId === productId
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+
+      return [...current, { productId, quantity }];
+    });
+    setIsDrawerOpen(true);
+  }, []);
+
+  const updateQuantity = useCallback((productId: string, quantity: number) => {
+    setItems((current) =>
+      current
+        .map((item) =>
+          item.productId === productId
+            ? { ...item, quantity: Math.max(1, quantity) }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  }, []);
+
+  const removeItem = useCallback((productId: string) => {
+    setItems((current) => current.filter((item) => item.productId !== productId));
+  }, []);
+
+  const clearCart = useCallback(() => {
+    setItems([]);
+  }, []);
 
   const allProducts = useMemo(() => getAllProducts(), []);
 
@@ -116,42 +161,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
       shipping,
       total,
       isDrawerOpen,
-      openCart: () => setIsDrawerOpen(true),
-      closeCart: () => setIsDrawerOpen(false),
-      addItem: (productId, quantity = 1) => {
-        setItems((current) => {
-          const existing = current.find((item) => item.productId === productId);
-          if (existing) {
-            return current.map((item) =>
-              item.productId === productId
-                ? { ...item, quantity: item.quantity + quantity }
-                : item
-            );
-          }
-
-          return [...current, { productId, quantity }];
-        });
-        setIsDrawerOpen(true);
-      },
-      updateQuantity: (productId, quantity) => {
-        setItems((current) =>
-          current
-            .map((item) =>
-              item.productId === productId
-                ? { ...item, quantity: Math.max(1, quantity) }
-                : item
-            )
-            .filter((item) => item.quantity > 0)
-        );
-      },
-      removeItem: (productId) => {
-        setItems((current) => current.filter((item) => item.productId !== productId));
-      },
-      clearCart: () => {
-        setItems([]);
-      },
+      openCart,
+      closeCart,
+      addItem,
+      updateQuantity,
+      removeItem,
+      clearCart,
     }),
-    [hydrated, items, itemCount, lineItems, shipping, subtotal, total, isDrawerOpen]
+    [
+      addItem,
+      clearCart,
+      closeCart,
+      hydrated,
+      isDrawerOpen,
+      itemCount,
+      items,
+      lineItems,
+      openCart,
+      removeItem,
+      shipping,
+      subtotal,
+      total,
+      updateQuantity,
+    ]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -83,3 +83,51 @@ export async function sendNewOrderNotificationEmail(input: {
 
   return result.error ? { ok: false as const, reason: result.error.message } : { ok: true as const };
 }
+
+export async function sendContactMessageEmail(input: {
+  name: string;
+  email: string;
+  message: string;
+  locale?: string;
+}) {
+  const resend = getResendClient();
+  if (!resend) {
+    return { ok: false as const, reason: "resend-not-configured" };
+  }
+
+  const result = await resend.emails.send({
+    from: getFromEmail(),
+    to: getSellerEmail(),
+    replyTo: input.email,
+    subject: `Contact request from ${input.name} <${input.email}>`,
+    text: [
+      `Locale: ${input.locale ?? "unknown"}`,
+      `Name: ${input.name}`,
+      `Email: ${input.email}`,
+      "",
+      input.message,
+    ].join("\n"),
+  });
+
+  return result.error ? { ok: false as const, reason: result.error.message } : { ok: true as const };
+}
+
+export async function sendNewsletterSignupEmail(input: { email: string; locale?: string; source?: string }) {
+  const resend = getResendClient();
+  if (!resend) {
+    return { ok: false as const, reason: "resend-not-configured" };
+  }
+
+  const result = await resend.emails.send({
+    from: getFromEmail(),
+    to: getSellerEmail(),
+    subject: `Newsletter signup: ${input.email}`,
+    text: [
+      `Email: ${input.email}`,
+      `Locale: ${input.locale ?? "unknown"}`,
+      `Source: ${input.source ?? "homepage"}`,
+    ].join("\n"),
+  });
+
+  return result.error ? { ok: false as const, reason: result.error.message } : { ok: true as const };
+}

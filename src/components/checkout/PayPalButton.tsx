@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import type { Locale } from "@/lib/i18n";
@@ -10,6 +11,7 @@ type PayPalButtonProps = {
   locale: Locale;
   orderPayload: CheckoutOrderPayload;
   disabled?: boolean;
+  loginHref?: string;
   labels: {
     paypal: string;
     card: string;
@@ -17,12 +19,20 @@ type PayPalButtonProps = {
     unavailable: string;
     error: string;
     processing: string;
+    loginRequired: string;
+    login: string;
   };
 };
 
 const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
-export function PayPalButton({ locale, orderPayload, disabled = false, labels }: PayPalButtonProps) {
+export function PayPalButton({
+  locale,
+  orderPayload,
+  disabled = false,
+  loginHref,
+  labels,
+}: PayPalButtonProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const isUnavailable = !paypalClientId;
@@ -82,6 +92,7 @@ export function PayPalButton({ locale, orderPayload, disabled = false, labels }:
                 id?: string;
                 status?: string;
                 payerEmail?: string;
+                warnings?: string[];
                 error?: string;
               };
 
@@ -97,6 +108,9 @@ export function PayPalButton({ locale, orderPayload, disabled = false, labels }:
                 email: result.payerEmail ?? orderPayload.shippingAddress.email,
                 shipping: JSON.stringify(orderPayload.shippingAddress),
               });
+              if (result.warnings && result.warnings.length > 0) {
+                successParams.set("warnings", JSON.stringify(result.warnings));
+              }
 
               router.push(`/${locale}/checkout/success?${successParams.toString()}`);
             }}
@@ -115,6 +129,11 @@ export function PayPalButton({ locale, orderPayload, disabled = false, labels }:
       </button>
       <p className="text-center text-xs text-muted">{labels.secure}</p>
       {disabled ? <p className="text-center text-xs text-muted">{labels.processing}</p> : null}
+      {disabled && loginHref ? (
+        <Link href={loginHref} className="block text-center text-xs font-semibold text-primary">
+          {labels.loginRequired} {labels.login}
+        </Link>
+      ) : null}
       {error ? <p className="text-center text-xs font-medium text-primary">{error}</p> : null}
     </div>
   );
