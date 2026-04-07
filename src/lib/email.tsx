@@ -21,7 +21,7 @@ function getFromEmail() {
   return process.env.RESEND_FROM_EMAIL ?? "PetQuirky <onboarding@resend.dev>";
 }
 
-function getSellerEmail() {
+export function getSellerEmail() {
   return process.env.SELLER_EMAIL ?? "hello@petquirky.com";
 }
 

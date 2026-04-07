@@ -66,8 +66,13 @@
     "reply_label": "Délai de réponse habituel",
     "reply_value": "Sous 1 à 2 jours ouvrés",
     "submit": "Envoyer le message",
+    "sending": "Envoi...",
     "success": "Merci ! Votre message a bien été envoyé à PetQuirky.",
-    "error": "Nous n'avons pas pu envoyer votre message. Veuillez réessayer."
+    "error": "Nous n'avons pas pu envoyer votre message. Veuillez réessayer.",
+    "invalid_email": "Veuillez saisir une adresse e-mail valide.",
+    "name_placeholder": "Ada Lovelace",
+    "email_placeholder": "ada@example.com",
+    "message_placeholder": "Expliquez-nous comment nous pouvons vous aider pour une commande, la livraison, un retour ou une question produit."
   },
   "cookie": {
     "title": "Nous utilisons des cookies pour assurer le bon fonctionnement de PetQuirky.",

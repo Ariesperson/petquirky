@@ -66,8 +66,13 @@
     "reply_label": "Typical reply time",
     "reply_value": "Within 1 to 2 business days",
     "submit": "Send Message",
+    "sending": "Sending...",
     "success": "Thanks! Your message is on its way to PetQuirky.",
-    "error": "We could not send your message. Please try again."
+    "error": "We could not send your message. Please try again.",
+    "invalid_email": "Please enter a valid email address.",
+    "name_placeholder": "Ada Lovelace",
+    "email_placeholder": "ada@example.com",
+    "message_placeholder": "Tell us how we can help with your order, shipping, returns, or product question."
   },
   "cookie": {
     "title": "We use cookies to keep PetQuirky running smoothly.",
