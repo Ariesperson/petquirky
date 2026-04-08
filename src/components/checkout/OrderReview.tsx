@@ -26,9 +26,16 @@ type OrderReviewProps = {
     privacy: string;
   };
   onEdit: () => void;
+  editDisabled?: boolean;
 };
 
-export function OrderReview({ items, shippingAddress, labels, onEdit }: OrderReviewProps) {
+export function OrderReview({
+  items,
+  shippingAddress,
+  labels,
+  onEdit,
+  editDisabled = false,
+}: OrderReviewProps) {
   return (
     <section className="lg:col-span-7 space-y-10">
       <h1 className="font-heading text-4xl font-extrabold text-dark">{labels.title}</h1>
@@ -49,7 +56,8 @@ export function OrderReview({ items, shippingAddress, labels, onEdit }: OrderRev
           <button
             type="button"
             onClick={onEdit}
-            className="text-sm font-semibold text-primary underline underline-offset-4"
+            disabled={editDisabled}
+            className="text-sm font-semibold text-primary underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {labels.edit}
           </button>

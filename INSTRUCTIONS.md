@@ -106,11 +106,11 @@ SUPABASE_SERVICE_ROLE_KEY=
 # Site
 NEXT_PUBLIC_SITE_URL=https://petquirky.com
 # 当前代码未读取，保留给后续联系方式配置扩展
-NEXT_PUBLIC_CONTACT_EMAIL=hello@petquirky.com
+NEXT_PUBLIC_CONTACT_EMAIL=969939390@qq.com
 
 # Email (Resend)
 RESEND_API_KEY=
-SELLER_EMAIL=hello@petquirky.com
+SELLER_EMAIL=969939390@qq.com
 ```
 
 ------
@@ -419,7 +419,7 @@ npm install resend
 
 ```env
 RESEND_API_KEY=
-SELLER_EMAIL=hello@petquirky.com
+SELLER_EMAIL=969939390@qq.com
 创建文件：
 ├── src/lib/email.ts                              # Resend 客户端 + 邮件工具函数
 ├── src/emails/OrderConfirmation.tsx                # 订单确认邮件模板（发给客户）
@@ -439,7 +439,7 @@ SELLER_EMAIL=hello@petquirky.com
 
 **邮件2 — 新订单通知（发给你）：**
 
-- 收件人：SELLER_EMAIL（hello@petquirky.com）
+- 收件人：SELLER_EMAIL（969939390@qq.com）
 - 主题："🎉 New Order #PQ-XXXXXXXX — €XX.XX"
 - 内容：订单号、客户姓名+邮箱、商品清单、收货地址、总金额、PayPal交易ID
 - 固定英文即可

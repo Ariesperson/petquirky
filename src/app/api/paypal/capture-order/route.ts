@@ -111,6 +111,10 @@ export async function POST(request: Request) {
       order: payload.order,
     });
     if (!confirmationResult.ok) {
+      console.error("Order confirmation email failed", {
+        orderId: capture.id,
+        reason: confirmationResult.reason,
+      });
       warnings.push(`confirmation-email-failed:${confirmationResult.reason}`);
     }
 
@@ -121,6 +125,11 @@ export async function POST(request: Request) {
       order: payload.order,
     });
     if (!notificationResult.ok) {
+      console.error("Seller notification email failed", {
+        orderId: capture.id,
+        sellerEmail: process.env.SELLER_EMAIL,
+        reason: notificationResult.reason,
+      });
       warnings.push(`seller-notification-failed:${notificationResult.reason}`);
     }
 

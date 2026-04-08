@@ -122,6 +122,7 @@ export function serializeOrderHistoryEntry(input: {
   total: number;
   payerEmail?: string;
   shippingAddress: CheckoutAddress;
+  createdAt?: string;
   items?: CheckoutItemPayload[];
 }): CompletedCheckoutOrder {
   return {
@@ -129,7 +130,7 @@ export function serializeOrderHistoryEntry(input: {
     status: input.status,
     total: input.total,
     currency: "EUR",
-    createdAt: new Date().toISOString(),
+    createdAt: input.createdAt ?? new Date().toISOString(),
     payerEmail: input.payerEmail,
     shippingAddress: input.shippingAddress,
     items: input.items ?? [],

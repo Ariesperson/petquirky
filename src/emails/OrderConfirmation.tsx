@@ -23,7 +23,7 @@ const copy = {
     shipping: "Shipping address",
     total: "Total",
     eta: "Estimated dispatch and delivery: 5-10 business days.",
-    support: "Questions? Reach us at hello@petquirky.com.",
+    support: "Questions? Reach us at 969939390@qq.com.",
   },
   de: {
     greeting: "Vielen Dank für Ihre Bestellung",
@@ -32,7 +32,7 @@ const copy = {
     shipping: "Lieferadresse",
     total: "Gesamt",
     eta: "Voraussichtlicher Versand und Lieferung: 5-10 Werktage.",
-    support: "Fragen? Schreiben Sie uns an hello@petquirky.com.",
+    support: "Fragen? Schreiben Sie uns an 969939390@qq.com.",
   },
   fr: {
     greeting: "Merci pour votre commande",
@@ -41,7 +41,7 @@ const copy = {
     shipping: "Adresse de livraison",
     total: "Total",
     eta: "Expédition et livraison estimées : 5 à 10 jours ouvrés.",
-    support: "Une question ? Écrivez-nous à hello@petquirky.com.",
+    support: "Une question ? Écrivez-nous à 969939390@qq.com.",
   },
   es: {
     greeting: "Gracias por tu pedido",
@@ -50,7 +50,7 @@ const copy = {
     shipping: "Dirección de envío",
     total: "Total",
     eta: "Envío y entrega estimados: 5-10 días laborables.",
-    support: "¿Preguntas? Escríbenos a hello@petquirky.com.",
+    support: "¿Preguntas? Escríbenos a 969939390@qq.com.",
   },
 } as const;
 

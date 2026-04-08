@@ -12,7 +12,7 @@ describe("auth helpers", () => {
   });
 
   it("validates email format", () => {
-    expect(isValidEmail("hello@petquirky.com")).toBe(true);
+    expect(isValidEmail("969939390@qq.com")).toBe(true);
     expect(isValidEmail("invalid-email")).toBe(false);
   });
 

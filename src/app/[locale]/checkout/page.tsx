@@ -54,6 +54,12 @@ export default async function CheckoutPage({ params }: CheckoutPageProps) {
         processing: dict.checkout.processing,
         loginRequired: dict.checkout.login_required,
         loginRequiredCta: dict.auth.login_submit,
+        orderNumber: dict.checkout.order_number,
+        paymentPendingTitle: dict.checkout.payment_pending_title,
+        paymentPendingDescription: dict.checkout.payment_pending_description,
+        paymentSuccessTitle: dict.checkout.payment_success_title,
+        paymentSuccessDescription: dict.checkout.payment_success_description,
+        paymentRedirecting: dict.checkout.payment_redirecting,
       }}
     />
   );

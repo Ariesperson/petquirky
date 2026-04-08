@@ -114,7 +114,7 @@ describe("email helpers", () => {
         from: "PetQuirky <onboarding@resend.dev>",
         to: "seller@petquirky.com",
         subject: "New Order #ORDER-123 — 40.90 €",
-        react: expect.any(Object),
+        text: expect.stringContaining("New Order #ORDER-123"),
       })
     );
   });

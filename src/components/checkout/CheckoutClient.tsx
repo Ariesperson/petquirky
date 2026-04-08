@@ -3,6 +3,7 @@
 import { startTransition, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { CheckCircle2, LoaderCircle } from "lucide-react";
 
 import { OrderReview } from "@/components/checkout/OrderReview";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
@@ -63,7 +64,19 @@ type CheckoutClientProps = {
     processing: string;
     loginRequired: string;
     loginRequiredCta: string;
+    orderNumber: string;
+    paymentPendingTitle: string;
+    paymentPendingDescription: string;
+    paymentSuccessTitle: string;
+    paymentSuccessDescription: string;
+    paymentRedirecting: string;
   };
+};
+
+type CapturedOrderState = {
+  href: string;
+  orderId: string;
+  status: string;
 };
 
 function StepNav({
@@ -106,6 +119,71 @@ function StepNav({
   );
 }
 
+function PaymentStatusCard({
+  phase,
+  capturedOrder,
+  labels,
+}: {
+  phase: "processing" | "success";
+  capturedOrder: CapturedOrderState | null;
+  labels: Pick<
+    CheckoutClientProps["labels"],
+    | "secure"
+    | "stepPayment"
+    | "orderNumber"
+    | "paymentPendingTitle"
+    | "paymentPendingDescription"
+    | "paymentSuccessTitle"
+    | "paymentSuccessDescription"
+    | "paymentRedirecting"
+  >;
+}) {
+  const isSuccess = phase === "success" && capturedOrder;
+
+  return (
+    <div className="flex min-h-[288px] flex-col items-center justify-center rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.92),_rgba(252,249,248,0.98)_52%,_rgba(246,243,242,1)_100%)] px-6 text-center shadow-[0_24px_60px_rgba(165,54,13,0.12)]">
+      <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-white/90 shadow-[0_18px_34px_rgba(165,54,13,0.12)]">
+        {isSuccess ? (
+          <>
+            <span className="absolute inset-0 rounded-full bg-success/10 animate-ping" />
+            <CheckCircle2 className="relative size-12 text-success" />
+          </>
+        ) : (
+          <>
+            <span className="absolute inset-0 rounded-full border border-primary/10" />
+            <LoaderCircle className="relative size-11 animate-spin text-primary" />
+          </>
+        )}
+      </div>
+
+      <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.24em] text-primary/60">
+        {labels.stepPayment}
+      </p>
+      <h2 className="mt-3 font-heading text-3xl font-extrabold text-dark">
+        {isSuccess ? labels.paymentSuccessTitle : labels.paymentPendingTitle}
+      </h2>
+      <p className="mt-3 max-w-md text-sm leading-7 text-muted">
+        {isSuccess ? labels.paymentSuccessDescription : labels.paymentPendingDescription}
+      </p>
+
+      {isSuccess && capturedOrder ? (
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-dark shadow-[0_12px_24px_rgba(165,54,13,0.08)]">
+            {labels.orderNumber}: {capturedOrder.orderId}
+          </span>
+          <span className="rounded-full bg-success/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-success">
+            {capturedOrder.status}
+          </span>
+        </div>
+      ) : null}
+
+      <p className="mt-6 text-xs font-semibold text-primary/80">
+        {isSuccess ? labels.paymentRedirecting : labels.secure}
+      </p>
+    </div>
+  );
+}
+
 export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -115,6 +193,8 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
   const [shippingAddress, setShippingAddress] = useState<CheckoutAddress>(() =>
     emptyCheckoutAddress()
   );
+  const [paymentPhase, setPaymentPhase] = useState<"idle" | "processing" | "success">("idle");
+  const [capturedOrder, setCapturedOrder] = useState<CapturedOrderState | null>(null);
 
   useEffect(() => {
     if (!hydrated || !authHydrated) {
@@ -143,7 +223,29 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
     });
   }, [authHydrated, hydrated, shippingAddress, user]);
 
-  const currentStep = searchParams.get("step") === "review" ? 2 : 1;
+  useEffect(() => {
+    if (paymentPhase !== "success" || !capturedOrder) {
+      return;
+    }
+
+    router.prefetch(capturedOrder.href);
+    const timeoutId = window.setTimeout(() => {
+      startTransition(() => {
+        router.push(capturedOrder.href);
+      });
+    }, 1200);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [capturedOrder, paymentPhase, router]);
+
+  const isPaymentBusy = paymentPhase !== "idle";
+  const currentStep: 1 | 2 | 3 = isPaymentBusy
+    ? 3
+    : searchParams.get("step") === "review"
+      ? 2
+      : 1;
   const items = useMemo(
     () =>
       lineItems.map((item) => ({
@@ -182,6 +284,10 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
   );
 
   const updateSearchStep = (step: "shipping" | "review") => {
+    if (isPaymentBusy) {
+      return;
+    }
+
     const nextParams = new URLSearchParams(searchParams.toString());
     if (step === "shipping") {
       nextParams.delete("step");
@@ -197,12 +303,50 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
 
   const handleShippingSubmit = (value: CheckoutAddress) => {
     setShippingAddress(value);
+    setPaymentPhase("idle");
+    setCapturedOrder(null);
     window.localStorage.setItem(CHECKOUT_ADDRESS_STORAGE_KEY, JSON.stringify(value));
     updateSearchStep("review");
   };
 
   const handleShippingChange = (value: CheckoutAddress) => {
     setShippingAddress(value);
+  };
+
+  const handlePaymentStart = () => {
+    setPaymentPhase("processing");
+    setCapturedOrder(null);
+  };
+
+  const handlePaymentError = () => {
+    setPaymentPhase("idle");
+    setCapturedOrder(null);
+  };
+
+  const handlePaymentSuccess = (result: {
+    id: string;
+    status: string;
+    payerEmail?: string;
+    warnings: string[];
+  }) => {
+    const successParams = new URLSearchParams({
+      orderId: result.id,
+      status: result.status,
+      total: orderPayload.total.toFixed(2),
+      email: result.payerEmail ?? orderPayload.shippingAddress.email,
+      shipping: JSON.stringify(orderPayload.shippingAddress),
+    });
+
+    if (result.warnings.length > 0) {
+      successParams.set("warnings", JSON.stringify(result.warnings));
+    }
+
+    setCapturedOrder({
+      href: `/${locale}/checkout/success?${successParams.toString()}`,
+      orderId: result.id,
+      status: result.status,
+    });
+    setPaymentPhase("success");
   };
 
   if (!hydrated || !authHydrated) {
@@ -232,9 +376,16 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
     <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-8">
       <header className="flex items-center justify-between py-4">
         <div className="font-heading text-3xl font-extrabold text-primary">{labels.brand}</div>
-        <Link href={`/${locale}/cart`} className="text-sm font-semibold text-muted hover:text-primary">
-          {labels.backToCart}
-        </Link>
+        {isPaymentBusy ? (
+          <span className="text-sm font-semibold text-muted/60">{labels.backToCart}</span>
+        ) : (
+          <Link
+            href={`/${locale}/cart`}
+            className="text-sm font-semibold text-muted hover:text-primary"
+          >
+            {labels.backToCart}
+          </Link>
+        )}
       </header>
 
       <StepNav
@@ -247,7 +398,7 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
       />
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-        {currentStep === 2 ? (
+        {currentStep === 2 || currentStep === 3 ? (
           <section className="space-y-10 lg:col-span-7">
             <OrderReview
               items={items}
@@ -266,23 +417,48 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
                 privacy: labels.privacy,
               }}
               onEdit={() => updateSearchStep("shipping")}
+              editDisabled={isPaymentBusy}
             />
-            <div className="rounded-[28px] bg-[#f6f3f2] p-8">
-              <PayPalButton
-                locale={locale}
-                orderPayload={orderPayload}
-                disabled={!isCheckoutAddressComplete(shippingAddress)}
-                labels={{
-                  paypal: labels.paypal,
-                  card: labels.card,
-                  secure: labels.secure,
-                  unavailable: labels.paypalUnavailable,
-                  error: labels.paypalError,
-                  processing: labels.processing,
-                  loginRequired: labels.loginRequired,
-                  login: labels.loginRequiredCta,
-                }}
-              />
+            <div className="relative overflow-hidden rounded-[28px] bg-[#f6f3f2] p-8">
+              <div className={isPaymentBusy ? "pointer-events-none opacity-0" : "transition-opacity duration-300"}>
+                <PayPalButton
+                  orderPayload={orderPayload}
+                  disabled={!isCheckoutAddressComplete(shippingAddress)}
+                  labels={{
+                    paypal: labels.paypal,
+                    card: labels.card,
+                    secure: labels.secure,
+                    unavailable: labels.paypalUnavailable,
+                    error: labels.paypalError,
+                    processing: labels.processing,
+                    loginRequired: labels.loginRequired,
+                    login: labels.loginRequiredCta,
+                  }}
+                  onPaymentStart={handlePaymentStart}
+                  onPaymentSuccess={handlePaymentSuccess}
+                  onPaymentError={handlePaymentError}
+                  onPaymentCancel={handlePaymentError}
+                />
+              </div>
+
+              {isPaymentBusy ? (
+                <div className="absolute inset-0 p-8">
+                  <PaymentStatusCard
+                    phase={paymentPhase === "success" ? "success" : "processing"}
+                    capturedOrder={capturedOrder}
+                    labels={{
+                      secure: labels.secure,
+                      stepPayment: labels.stepPayment,
+                      orderNumber: labels.orderNumber,
+                      paymentPendingTitle: labels.paymentPendingTitle,
+                      paymentPendingDescription: labels.paymentPendingDescription,
+                      paymentSuccessTitle: labels.paymentSuccessTitle,
+                      paymentSuccessDescription: labels.paymentSuccessDescription,
+                      paymentRedirecting: labels.paymentRedirecting,
+                    }}
+                  />
+                </div>
+              ) : null}
             </div>
           </section>
         ) : (
