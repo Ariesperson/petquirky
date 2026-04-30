@@ -37,7 +37,9 @@ test.describe("localized storefront smoke", () => {
     await page.getByPlaceholder("Search products...").fill("fountain");
     await page.waitForTimeout(400);
 
-    await expect(page.getByText("FlowSmart Zen Fountain")).toBeVisible();
+    await expect(
+      page.locator('a[href="/en/products/flowsmart-zen-fountain"]').first()
+    ).toBeVisible();
   });
 
   test("opens cookie settings and persists preferences", async ({ page }) => {
@@ -169,25 +171,23 @@ test.describe("localized storefront smoke", () => {
     await page.getByRole("button", { name: "Create Account" }).click();
 
     await expect(
-      page.getByText("Please complete all fields and confirm the terms.")
+      page.getByText("Please accept the Privacy Policy and Terms of Service.")
     ).toBeVisible();
     await expect(page).toHaveURL(/\/en\/auth\/register$/);
   });
 
-  test("shows auth unavailable on forgot-password when Supabase is not configured", async ({
-    page,
-  }) => {
+  test("loads the forgot-password email flow", async ({ page }) => {
     await page.goto("/en/auth/forgot-password");
 
     await expect(
       page.getByRole("heading", { name: "Forgot password?" })
     ).toBeVisible();
-    await page.getByLabel("Email").fill("ada@example.com");
-    await page.getByRole("button", { name: "Send Reset Link" }).click();
-
-    await expect(
-      page.getByText("Supabase auth is not configured yet.")
-    ).toBeVisible();
+    await expect(page.getByLabel("Email")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Send Reset Link" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Back to Login" })).toHaveAttribute(
+      "href",
+      "/en/auth/login"
+    );
   });
 
   test("validates mismatched passwords on the reset-password page", async ({ page }) => {
@@ -222,14 +222,13 @@ test.describe("localized storefront smoke", () => {
   });
 
   test("moves checkout from shipping to review with a completed address", async ({ page }) => {
-    await page.goto("/en/checkout");
-    await page.evaluate(() => {
+    await page.addInitScript(() => {
       window.localStorage.setItem(
         "petquirky-cart",
         JSON.stringify([{ productId: "prod_ceramic_slow_feeder", quantity: 1 }])
       );
     });
-    await page.reload();
+    await page.goto("/en/checkout");
 
     await page.locator("label", { hasText: "Full Name" }).locator("input").fill("Ada Lovelace");
     await page
@@ -249,19 +248,26 @@ test.describe("localized storefront smoke", () => {
     await expect(page.getByText("Ada Lovelace")).toBeVisible();
     await expect(page.getByText("1 Rue de Test")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Order Summary" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Log in to continue checkout" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Log In" })).toHaveAttribute(
+      "href",
+      /\/en\/auth\/login\?returnTo=/
+    );
+    await expect(page.getByRole("link", { name: "Create Account" })).toHaveAttribute(
+      "href",
+      /\/en\/auth\/register\?returnTo=/
+    );
+    await expect(page.getByRole("button", { name: /Pay with PayPal/i })).toHaveCount(0);
   });
 
-  test("shows the PayPal unavailable state on checkout review when no client id is configured", async ({
-    page,
-  }) => {
-    await page.goto("/en/checkout");
-    await page.evaluate(() => {
+  test("blocks anonymous checkout review before rendering PayPal", async ({ page }) => {
+    await page.addInitScript(() => {
       window.localStorage.setItem(
         "petquirky-cart",
         JSON.stringify([{ productId: "prod_ceramic_slow_feeder", quantity: 1 }])
       );
     });
-    await page.reload();
+    await page.goto("/en/checkout");
 
     await page.locator("label", { hasText: "Full Name" }).locator("input").fill("Ada Lovelace");
     await page
@@ -277,14 +283,22 @@ test.describe("localized storefront smoke", () => {
     await page.getByRole("button", { name: "Continue to Review" }).click();
 
     await expect(
-      page.getByRole("button", { name: "PayPal is currently unavailable" })
-    ).toBeDisabled();
-    await expect(
-      page.getByText("Your payment is processed securely through PayPal")
+      page.getByText("PetQuirky checkout is account-based.")
     ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Log In" })).toHaveAttribute(
+      "href",
+      /returnTo=%2Fen%2Fcheckout%3Fstep%3Dreview/
+    );
+    await expect(page.getByRole("link", { name: "Create Account" })).toHaveAttribute(
+      "href",
+      /returnTo=%2Fen%2Fcheckout%3Fstep%3Dreview/
+    );
+    await expect(
+      page.getByRole("button", { name: "PayPal is currently unavailable" })
+    ).toHaveCount(0);
   });
 
-  test("writes order history on success and shows it on the account page", async ({ page }) => {
+  test("checkout success clears the cart without writing guest order history", async ({ page }) => {
     const shipping = JSON.stringify({
       fullName: "Ada Lovelace",
       email: "ada@example.com",
@@ -303,10 +317,12 @@ test.describe("localized storefront smoke", () => {
     await expect(page.getByRole("heading", { name: "Thank you for your order!" })).toBeVisible();
     await expect(page.getByText("ORDER-123")).toBeVisible();
     await expect(page.getByText("We've sent a confirmation to your email.")).toBeVisible();
-    await expect(page.getByText("Create an account to track your order in real time.")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Create Account" })).toHaveAttribute(
+    await expect(
+      page.getByText("You can review your order details and saved shipping address from your account anytime.")
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "View Details" })).toHaveAttribute(
       "href",
-      "/en/auth/register"
+      "/en/account/orders/ORDER-123"
     );
     await expect(page.getByRole("link", { name: "Continue Shopping" })).toHaveAttribute(
       "href",
@@ -314,57 +330,22 @@ test.describe("localized storefront smoke", () => {
     );
 
     const storedOrders = await page.evaluate(() => window.localStorage.getItem("petquirky-orders"));
-    expect(storedOrders).toContain("ORDER-123");
+    expect(storedOrders).toBeNull();
     const storedCart = await page.evaluate(() => window.localStorage.getItem("petquirky-cart"));
     expect(storedCart).toBe("[]");
-
-    await page.goto("/en/account");
-    await expect(page.getByRole("heading", { name: "Your Orders" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "View Details" })).toHaveAttribute(
-      "href",
-      "/en/account/orders/ORDER-123"
-    );
-    await expect(page.getByText("68.00 €")).toBeVisible();
   });
 
-  test("shows stored order details on the account order page", async ({ page }) => {
+  test("redirects anonymous account order lookup to login", async ({ page }) => {
     await page.goto("/en/account/orders/ORDER-123");
-    await page.evaluate(() => {
-      window.localStorage.setItem(
-        "petquirky-orders",
-        JSON.stringify([
-          {
-            id: "ORDER-123",
-            status: "COMPLETED",
-            total: 68,
-            currency: "EUR",
-            createdAt: "2026-03-27T00:00:00.000Z",
-            payerEmail: "ada@example.com",
-            shippingAddress: {
-              fullName: "Ada Lovelace",
-              email: "ada@example.com",
-              address: "1 Rue de Test",
-              city: "Paris",
-              postalCode: "75001",
-              country: "France",
-            },
-          },
-        ])
-      );
-    });
-    await page.reload();
 
-    await expect(page.getByRole("heading", { name: /Order ORDER-123/ })).toBeVisible();
-    await expect(page.getByText("68.00 €")).toBeVisible();
-    await expect(page.getByText("ada@example.com")).toBeVisible();
-    await expect(page.getByText("Ada Lovelace")).toBeVisible();
-    await expect(page.getByText("1 Rue de Test")).toBeVisible();
+    await expect(page).toHaveURL(/\/en\/auth\/login$/);
+    await expect(page.getByRole("heading", { name: "Welcome Back" })).toBeVisible();
   });
 
-  test("shows an empty state for a missing account order", async ({ page }) => {
-    await page.goto("/en/account/orders/MISSING-ORDER");
+  test("redirects anonymous account order list to login", async ({ page }) => {
+    await page.goto("/en/account");
 
-    await expect(page.getByRole("heading", { name: "Order not found" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Back to Orders" })).toBeVisible();
+    await expect(page).toHaveURL(/\/en\/auth\/login$/);
+    await expect(page.getByRole("heading", { name: "Welcome Back" })).toBeVisible();
   });
 });

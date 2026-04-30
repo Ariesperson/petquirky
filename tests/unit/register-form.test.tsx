@@ -33,6 +33,7 @@ describe("RegisterForm", () => {
     render(
       <RegisterForm
         locale="en"
+        returnTo="/en/account"
         labels={{
           title: "Create account",
           subtitle: "Join PetQuirky",
@@ -52,6 +53,7 @@ describe("RegisterForm", () => {
           passwordsDoNotMatch: "Passwords do not match.",
           acceptTermsRequired: "Please accept the Privacy Policy and Terms of Service.",
           authUnavailable: "Supabase auth is not configured yet.",
+          confirmationSent: "Please confirm your email.",
         }}
       />
     );
@@ -75,6 +77,7 @@ describe("RegisterForm", () => {
     render(
       <RegisterForm
         locale="en"
+        returnTo="/en/account"
         labels={{
           title: "Create account",
           subtitle: "Join PetQuirky",
@@ -94,6 +97,7 @@ describe("RegisterForm", () => {
           passwordsDoNotMatch: "Passwords do not match.",
           acceptTermsRequired: "Please accept the Privacy Policy and Terms of Service.",
           authUnavailable: "Supabase auth is not configured yet.",
+          confirmationSent: "Please confirm your email.",
         }}
       />
     );
@@ -121,6 +125,7 @@ describe("RegisterForm", () => {
     render(
       <RegisterForm
         locale="en"
+        returnTo="/en/checkout?step=review"
         labels={{
           title: "Create account",
           subtitle: "Join PetQuirky",
@@ -140,6 +145,7 @@ describe("RegisterForm", () => {
           passwordsDoNotMatch: "Passwords do not match.",
           acceptTermsRequired: "Please accept the Privacy Policy and Terms of Service.",
           authUnavailable: "Supabase auth is not configured yet.",
+          confirmationSent: "Please confirm your email.",
         }}
       />
     );
@@ -155,8 +161,9 @@ describe("RegisterForm", () => {
       email: "ada@example.com",
       password: "12345678",
       fullName: "Ada Lovelace",
-      emailRedirectTo: "http://localhost:3000/en/auth/confirm?next=/en/account",
+      emailRedirectTo:
+        "http://localhost:3000/en/auth/confirm?next=%2Fen%2Fcheckout%3Fstep%3Dreview",
     });
-    expect(pushMock).toHaveBeenCalledWith("/en/account");
+    expect(pushMock).toHaveBeenCalledWith("/en/checkout?step=review");
   });
 });

@@ -1,6 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
 import type { CheckoutAddress } from "@/types/checkout";
+import type { Locale } from "@/lib/i18n";
 
 type OrderReviewProps = {
   items: Array<{
@@ -11,6 +14,7 @@ type OrderReviewProps = {
     lineLabel: string;
     lineTotal: string;
   }>;
+  locale: Locale;
   shippingAddress: CheckoutAddress;
   labels: {
     title: string;
@@ -24,6 +28,7 @@ type OrderReviewProps = {
     secure: string;
     terms: string;
     privacy: string;
+    returns: string;
   };
   onEdit: () => void;
   editDisabled?: boolean;
@@ -31,6 +36,7 @@ type OrderReviewProps = {
 
 export function OrderReview({
   items,
+  locale,
   shippingAddress,
   labels,
   onEdit,
@@ -79,6 +85,25 @@ export function OrderReview({
             <div className="font-semibold text-dark">{item.lineTotal}</div>
           </div>
         ))}
+      </div>
+
+      <div className="rounded-[24px] bg-[#fff7f3] p-5 text-sm leading-7 text-muted">
+        <p>
+          {labels.legal}{" "}
+          <Link href={`/${locale}/policies/terms`} className="font-semibold text-primary underline underline-offset-4">
+            {labels.terms}
+          </Link>
+          {", "}
+          <Link href={`/${locale}/policies/privacy`} className="font-semibold text-primary underline underline-offset-4">
+            {labels.privacy}
+          </Link>
+          {", "}
+          <Link href={`/${locale}/policies/returns`} className="font-semibold text-primary underline underline-offset-4">
+            {labels.returns}
+          </Link>
+          .
+        </p>
+        <p className="mt-2">{labels.secure}</p>
       </div>
     </section>
   );

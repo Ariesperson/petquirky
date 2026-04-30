@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 
 import { localeLabels, locales, type Locale } from "@/lib/i18n";
+import { isNavItemActive } from "@/lib/utils";
 
 type MobileMenuProps = {
   locale: Locale;
@@ -84,8 +85,7 @@ export function MobileMenu({
 
             <div className="mt-6 space-y-2">
               {navItems.map((item) => {
-                const active =
-                  pathname === item.href || pathname.startsWith(`${item.href}/`);
+                const active = isNavItemActive(pathname, item.href);
 
                 return (
                   <Link

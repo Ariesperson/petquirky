@@ -64,6 +64,10 @@ export function getProductBySlug(slug: string) {
   return getAllProducts().find((product) => product.slug === slug);
 }
 
+export function getProductById(id: string) {
+  return getAllProducts().find((product) => product.id === id);
+}
+
 export function getReviewsByProductId(productId: string) {
   return reviews.filter((review) => review.productId === productId);
 }

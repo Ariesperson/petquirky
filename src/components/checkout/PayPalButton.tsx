@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { defaultLocale, isLocale } from "@/lib/i18n";
 import type { CheckoutOrderPayload } from "@/types/checkout";
 
 type PayPalButtonProps = {
@@ -51,6 +53,7 @@ export function PayPalButton({
   onPaymentCancel,
   labels,
 }: PayPalButtonProps) {
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const pendingOrderIdRef = useRef<string | null>(null);
@@ -72,6 +75,26 @@ export function PayPalButton({
     /ORDER_NOT_APPROVED|PAYER_ACTION_REQUIRED|INSTRUMENT_DECLINED|payer/i.test(message);
 
   const hasResolvedSuccessfully = () => resolutionRef.current === "success";
+
+  const buildSuccessHref = useCallback(
+    (result: { id: string; status: string; payerEmail?: string; warnings: string[] }) => {
+      const locale = isLocale(orderPayload.locale) ? orderPayload.locale : defaultLocale;
+      const successParams = new URLSearchParams({
+        orderId: result.id,
+        status: result.status,
+        total: orderPayload.total.toFixed(2),
+        email: result.payerEmail ?? orderPayload.shippingAddress.email,
+        shipping: JSON.stringify(orderPayload.shippingAddress),
+      });
+
+      if (result.warnings.length > 0) {
+        successParams.set("warnings", JSON.stringify(result.warnings));
+      }
+
+      return `/${locale}/checkout/success?${successParams.toString()}`;
+    },
+    [orderPayload.locale, orderPayload.shippingAddress, orderPayload.total]
+  );
 
   const captureOrder = useCallback(async (orderId: string, source: "approve" | "fallback") => {
     if (hasResolvedSuccessfully() || resolutionRef.current === "cancelled") {
@@ -124,12 +147,18 @@ export function PayPalButton({
 
       resetPendingOrder();
       resolutionRef.current = "success";
-      onPaymentSuccess?.({
+      const successResult = {
         id: result.id,
         status: result.status,
         payerEmail: result.payerEmail ?? orderPayload.shippingAddress.email,
         warnings: result.warnings ?? [],
-      });
+      };
+
+      if (onPaymentSuccess) {
+        onPaymentSuccess(successResult);
+      } else {
+        router.push(buildSuccessHref(successResult));
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : labels.error;
       resetPendingOrder();
@@ -150,7 +179,16 @@ export function PayPalButton({
       setError(message);
       onPaymentError?.(message);
     }
-  }, [labels.error, onPaymentCancel, onPaymentError, onPaymentStart, onPaymentSuccess, orderPayload]);
+  }, [
+    buildSuccessHref,
+    labels.error,
+    onPaymentCancel,
+    onPaymentError,
+    onPaymentStart,
+    onPaymentSuccess,
+    orderPayload,
+    router,
+  ]);
 
   useEffect(() => {
     const handleWindowFocus = () => {

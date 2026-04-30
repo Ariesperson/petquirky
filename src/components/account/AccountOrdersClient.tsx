@@ -1,23 +1,32 @@
 import Link from "next/link";
+import { Clock3, CreditCard, Package, Sparkles } from "lucide-react";
 
 import { AccountSignOutButton } from "@/components/account/AccountSignOutButton";
 import { OrderCard } from "@/components/account/OrderCard";
 import type { Locale } from "@/lib/i18n";
 import { formatPrice } from "@/lib/products";
-import type { CompletedCheckoutOrder } from "@/types/checkout";
+import type { OrderDetailView } from "@/types/checkout";
 
 type AccountOrdersClientProps = {
   locale: Locale;
   customerName: string;
   customerEmail: string;
-  orders: CompletedCheckoutOrder[];
+  orders: OrderDetailView[];
   labels: {
     orders: string;
     profile: string;
     ordersTitle: string;
     ordersSubtitle: string;
+    reviewTitle: string;
+    orderJourney: string;
     statusProcessing: string;
+    statusCompleted: string;
+    statusShipped: string;
     viewDetails: string;
+    paymentSummary: string;
+    itemCountLabel: string;
+    quantity: string;
+    subtotal: string;
     total: string;
     emptyTitle: string;
     emptyDescription: string;
@@ -41,7 +50,7 @@ export function AccountOrdersClient({
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
 
-  const describeOrderItems = (order: CompletedCheckoutOrder) => {
+  const describeOrderItems = (order: OrderDetailView) => {
     if (!order.items || order.items.length === 0) {
       return order.shippingAddress.address;
     }
@@ -55,11 +64,24 @@ export function AccountOrdersClient({
     return remaining > 0 ? `${preview} +${remaining}` : preview;
   };
 
+  const totalSpend = orders.reduce((sum, order) => sum + order.total, 0);
+
+  const getStatusLabel = (status: string) => {
+    switch (status.trim().toUpperCase()) {
+      case "SHIPPED":
+        return labels.statusShipped;
+      case "COMPLETED":
+        return labels.statusCompleted;
+      default:
+        return labels.statusProcessing;
+    }
+  };
+
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 gap-8 px-4 pb-12 pt-10 md:flex md:px-8">
-      <aside className="mb-8 h-fit w-full rounded-[28px] bg-[#f6f3f2] p-6 md:sticky md:top-24 md:mb-0 md:w-72">
+      <aside className="mb-8 h-fit w-full rounded-[34px] bg-[linear-gradient(180deg,rgba(246,243,242,0.98),rgba(255,255,255,0.92))] p-6 shadow-[0_22px_52px_rgba(165,54,13,0.08)] md:sticky md:top-24 md:mb-0 md:w-80">
         <div className="mb-8 flex flex-col items-center gap-3 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-2xl font-heading font-extrabold text-white">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[linear-gradient(135deg,#d85a30,#ff8a65)] text-2xl font-heading font-extrabold text-white shadow-[0_18px_38px_rgba(165,54,13,0.18)]">
             {initials}
           </div>
           <div>
@@ -67,13 +89,29 @@ export function AccountOrdersClient({
             <p className="text-sm text-muted">{customerEmail}</p>
           </div>
         </div>
+        <div className="mb-6 grid gap-3">
+          <div className="rounded-[24px] bg-white/80 p-4">
+            <div className="flex items-center gap-2 text-primary">
+              <Package className="size-4" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em]">{labels.orders}</p>
+            </div>
+            <p className="mt-3 text-3xl font-extrabold text-dark">{orders.length}</p>
+          </div>
+          <div className="rounded-[24px] bg-white/80 p-4">
+            <div className="flex items-center gap-2 text-primary">
+              <CreditCard className="size-4" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em]">{labels.total}</p>
+            </div>
+            <p className="mt-3 text-3xl font-extrabold text-primary">{formatPrice(totalSpend, locale)}</p>
+          </div>
+        </div>
         <nav className="space-y-2">
-          <div className="rounded-[16px] bg-primary-tint px-4 py-3 text-sm font-semibold text-primary">
+          <div className="rounded-[18px] bg-primary-tint px-4 py-3 text-sm font-semibold text-primary">
             {labels.orders}
           </div>
           <Link
             href={`/${locale}/account/profile`}
-            className="block rounded-[16px] px-4 py-3 text-sm font-medium text-muted"
+            className="block rounded-[18px] px-4 py-3 text-sm font-medium text-muted transition hover:bg-white/70"
           >
             {labels.profile}
           </Link>
@@ -88,9 +126,44 @@ export function AccountOrdersClient({
       </aside>
 
       <section className="flex-1 space-y-6">
-        <header>
-          <h1 className="font-heading text-4xl font-extrabold text-dark">{labels.ordersTitle}</h1>
-          <p className="mt-2 text-sm text-muted">{labels.ordersSubtitle}</p>
+        <header className="rounded-[34px] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(246,243,242,0.96))] p-8 shadow-[0_24px_60px_rgba(165,54,13,0.08)]">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary/70">
+                {labels.reviewTitle}
+              </p>
+              <h1 className="mt-3 font-heading text-4xl font-extrabold text-dark sm:text-5xl">
+                {labels.ordersTitle}
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">{labels.ordersSubtitle}</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-[24px] bg-white/80 p-4 shadow-[0_14px_30px_rgba(165,54,13,0.08)]">
+                <div className="flex items-center gap-2 text-primary">
+                  <Sparkles className="size-4" />
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em]">
+                    {labels.orderJourney}
+                  </p>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-dark">
+                  {orders.length > 0 ? labels.viewDetails : labels.emptyDescription}
+                </p>
+              </div>
+              <div className="rounded-[24px] bg-white/80 p-4 shadow-[0_14px_30px_rgba(165,54,13,0.08)]">
+                <div className="flex items-center gap-2 text-primary">
+                  <Clock3 className="size-4" />
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em]">
+                    {labels.paymentSummary}
+                  </p>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-dark">
+                  {orders.length > 0
+                    ? `${orders[0]?.itemCount ?? 0} ${labels.itemCountLabel}`
+                    : labels.ordersSubtitle}
+                </p>
+              </div>
+            </div>
+          </div>
         </header>
 
         {orders.length > 0 ? (
@@ -100,15 +173,25 @@ export function AccountOrdersClient({
               locale={locale}
               order={{
                 id: order.id,
-                status: labels.statusProcessing,
+                status: getStatusLabel(order.status),
                 date: new Intl.DateTimeFormat(locale, {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 }).format(new Date(order.createdAt)),
                 items: describeOrderItems(order),
+                itemCount: order.itemCount,
+                itemCountLabel: labels.itemCountLabel,
+                itemPreview: order.items.slice(0, 3).map((item) => ({
+                  name: item.name,
+                  image: item.image,
+                  quantity: item.quantity,
+                })),
+                subtotal: formatPrice(order.subtotal, locale),
                 total: formatPrice(order.total, locale),
                 cta: labels.viewDetails,
+                quantityLabel: labels.quantity,
+                subtotalLabel: labels.subtotal,
                 totalLabel: labels.total,
               }}
             />

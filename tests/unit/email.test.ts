@@ -88,7 +88,8 @@ describe("email helpers", () => {
         from: "PetQuirky <orders@petquirky.com>",
         to: "ada@example.com",
         subject: "Your PetQuirky Order #ORDER-123 is Confirmed!",
-        react: expect.any(Object),
+        html: expect.stringContaining("Thank you for your order!"),
+        text: expect.stringContaining("Thank you for your order! #ORDER-123"),
       })
     );
   });

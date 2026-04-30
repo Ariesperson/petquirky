@@ -10,6 +10,7 @@ import type { Locale } from "@/lib/i18n";
 
 type RegisterFormProps = {
   locale: Locale;
+  returnTo: string;
   labels: {
     title: string;
     subtitle: string;
@@ -33,7 +34,7 @@ type RegisterFormProps = {
   };
 };
 
-export function RegisterForm({ locale, labels }: RegisterFormProps) {
+export function RegisterForm({ locale, returnTo, labels }: RegisterFormProps) {
   const router = useRouter();
   const { configured, register } = useAuth();
   const [fullName, setFullName] = useState("");
@@ -92,7 +93,9 @@ export function RegisterForm({ locale, labels }: RegisterFormProps) {
       email: submittedEmail,
       password: submittedPassword,
       fullName: submittedFullName,
-      emailRedirectTo: `${window.location.origin}/${locale}/auth/confirm?next=/${locale}/account`,
+      emailRedirectTo: `${window.location.origin}/${locale}/auth/confirm?next=${encodeURIComponent(
+        returnTo
+      )}`,
     });
     setSubmitting(false);
 
@@ -106,7 +109,7 @@ export function RegisterForm({ locale, labels }: RegisterFormProps) {
       return;
     }
 
-    router.push(`/${locale}/account`);
+    router.push(returnTo);
   };
 
   return (
@@ -188,7 +191,10 @@ export function RegisterForm({ locale, labels }: RegisterFormProps) {
 
       <p className="mt-8 text-center text-sm text-muted">
         {labels.alreadyHaveAccount}{" "}
-        <Link href={`/${locale}/auth/login`} className="font-semibold text-primary">
+        <Link
+          href={`/${locale}/auth/login?returnTo=${encodeURIComponent(returnTo)}`}
+          className="font-semibold text-primary"
+        >
           {labels.login}
         </Link>
       </p>

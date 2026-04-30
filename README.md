@@ -29,7 +29,7 @@ npm run build
 - `src/app/api/email/*` email handlers
 - `src/lib/supabase/*` Supabase helpers
 - `supabase/migrations/*` database schema
-- `docs/launch-checklist.md` launch prep
+- `docs/01-launch/launch-checklist.md` launch prep
 
 ## Required External Services
 

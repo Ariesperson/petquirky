@@ -9,6 +9,7 @@ import { MobileMenu } from "@/components/layout/MobileMenu";
 import { SearchOverlay } from "@/components/layout/SearchOverlay";
 import { useCart } from "@/hooks/useCart";
 import { localeLabels, locales, type Locale } from "@/lib/i18n";
+import { isNavItemActive } from "@/lib/utils";
 
 type HeaderProps = {
   locale: Locale;
@@ -102,8 +103,7 @@ export function Header({ locale, cartCount = 0, dictionary }: HeaderProps) {
 
         <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const active = isNavItemActive(pathname, item.href);
 
             return (
               <Link

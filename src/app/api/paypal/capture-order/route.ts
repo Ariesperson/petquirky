@@ -109,6 +109,7 @@ export async function POST(request: Request) {
       orderId: capture.id,
       payerEmail: capture.payer?.email_address ?? payload.order.shippingAddress.email,
       order: payload.order,
+      createdAt: completedOrder.createdAt,
     });
     if (!confirmationResult.ok) {
       console.error("Order confirmation email failed", {
@@ -123,6 +124,7 @@ export async function POST(request: Request) {
       payerEmail: capture.payer?.email_address ?? payload.order.shippingAddress.email,
       paypalOrderId: payload.orderId,
       order: payload.order,
+      createdAt: completedOrder.createdAt,
     });
     if (!notificationResult.ok) {
       console.error("Seller notification email failed", {

@@ -10,6 +10,7 @@ import type { Locale } from "@/lib/i18n";
 
 type LoginFormProps = {
   locale: Locale;
+  returnTo: string;
   labels: {
     title: string;
     subtitle: string;
@@ -24,7 +25,7 @@ type LoginFormProps = {
   };
 };
 
-export function LoginForm({ locale, labels }: LoginFormProps) {
+export function LoginForm({ locale, returnTo, labels }: LoginFormProps) {
   const router = useRouter();
   const { configured, login } = useAuth();
   const [email, setEmail] = useState("");
@@ -55,7 +56,7 @@ export function LoginForm({ locale, labels }: LoginFormProps) {
       return;
     }
 
-    router.push(`/${locale}/account`);
+    router.push(returnTo);
   };
 
   return (
@@ -113,7 +114,10 @@ export function LoginForm({ locale, labels }: LoginFormProps) {
 
       <p className="mt-8 text-center text-sm text-muted">
         {labels.noAccount}{" "}
-        <Link href={`/${locale}/auth/register`} className="font-semibold text-primary">
+        <Link
+          href={`/${locale}/auth/register?returnTo=${encodeURIComponent(returnTo)}`}
+          className="font-semibold text-primary"
+        >
           {labels.createAccount}
         </Link>
       </p>

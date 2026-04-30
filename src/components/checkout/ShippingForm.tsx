@@ -7,6 +7,7 @@ import type { CheckoutAddress } from "@/types/checkout";
 type ShippingFormProps = {
   locale: Locale;
   value: CheckoutAddress;
+  loginHref: string;
   onChange: (value: CheckoutAddress) => void;
   onSubmit: (value: CheckoutAddress) => void;
   labels: {
@@ -23,14 +24,14 @@ type ShippingFormProps = {
   };
 };
 
-export function ShippingForm({ locale, value, onChange, onSubmit, labels }: ShippingFormProps) {
+export function ShippingForm({ value, loginHref, onChange, onSubmit, labels }: ShippingFormProps) {
   return (
     <section className="space-y-10 lg:col-span-7">
       <div>
         <h1 className="font-heading text-4xl font-extrabold text-dark">{labels.title}</h1>
         <p className="mt-2 text-sm text-muted">
           {labels.subtitle}{" "}
-          <Link href={`/${locale}/auth/login`} className="font-semibold text-primary">
+          <Link href={loginHref} className="font-semibold text-primary">
             {labels.login}
           </Link>
         </p>

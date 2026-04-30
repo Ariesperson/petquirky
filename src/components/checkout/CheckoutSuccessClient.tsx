@@ -6,9 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useCart } from "@/hooks/useCart";
 import {
   CHECKOUT_ADDRESS_STORAGE_KEY,
-  serializeOrderHistoryEntry,
 } from "@/lib/checkout";
-import { readStoredOrders, writeStoredOrders } from "@/lib/orders";
 import type { CheckoutAddress, CheckoutItemPayload } from "@/types/checkout";
 
 type CheckoutSuccessClientProps = {
@@ -22,30 +20,12 @@ type CheckoutSuccessClientProps = {
 };
 
 export function CheckoutSuccessClient({
-  orderId,
-  status,
-  total,
-  payerEmail,
   shippingAddress,
-  createdAt,
-  items,
 }: CheckoutSuccessClientProps) {
   const { clearCart } = useCart();
   const { user, saveShippingAddress } = useAuth();
 
   useEffect(() => {
-    const nextOrder = serializeOrderHistoryEntry({
-      id: orderId,
-      status,
-      total,
-      payerEmail,
-      shippingAddress,
-      createdAt,
-      items,
-    });
-    const nextOrders = readStoredOrders().filter((order) => order.id !== orderId);
-
-    writeStoredOrders([nextOrder, ...nextOrders]);
     window.localStorage.setItem(
       CHECKOUT_ADDRESS_STORAGE_KEY,
       JSON.stringify(shippingAddress)
@@ -58,14 +38,8 @@ export function CheckoutSuccessClient({
     clearCart();
   }, [
     clearCart,
-    createdAt,
-    items,
-    orderId,
-    payerEmail,
     saveShippingAddress,
     shippingAddress,
-    status,
-    total,
     user,
   ]);
 

@@ -3,7 +3,7 @@
 import { startTransition, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { CheckCircle2, LoaderCircle } from "lucide-react";
+import { CheckCircle2, LoaderCircle, LockKeyhole } from "lucide-react";
 
 import { OrderReview } from "@/components/checkout/OrderReview";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
@@ -54,6 +54,7 @@ type CheckoutClientProps = {
     secure: string;
     terms: string;
     privacy: string;
+    returns: string;
     summaryTitle: string;
     subtotal: string;
     shipping: string;
@@ -64,6 +65,10 @@ type CheckoutClientProps = {
     processing: string;
     loginRequired: string;
     loginRequiredCta: string;
+    checkoutAuthTitle: string;
+    checkoutAuthBody: string;
+    checkoutAuthLogin: string;
+    checkoutAuthRegister: string;
     orderNumber: string;
     paymentPendingTitle: string;
     paymentPendingDescription: string;
@@ -93,12 +98,16 @@ function StepNav({
   ];
 
   return (
-    <nav className="mb-12 flex items-center justify-center gap-4 md:gap-8">
+    <nav className="mb-10 grid w-full grid-cols-3 items-start gap-2 sm:mb-12 sm:flex sm:items-center sm:justify-center sm:gap-4 md:gap-8">
       {steps.map((step, index) => (
-        <div key={step.number} className="flex items-center gap-4">
-          <div className={`flex items-center gap-3 ${step.number > currentStep ? "opacity-40" : ""}`}>
+        <div key={step.number} className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
+          <div
+            className={`flex min-w-0 flex-col items-center gap-2 text-center sm:flex-row sm:gap-3 ${
+              step.number > currentStep ? "opacity-40" : ""
+            }`}
+          >
             <span
-              className={`flex h-10 w-10 items-center justify-center rounded-full font-bold ${
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold sm:h-10 sm:w-10 ${
                 step.number < currentStep
                   ? "bg-success text-white"
                   : step.number === currentStep
@@ -108,14 +117,61 @@ function StepNav({
             >
               {step.number}
             </span>
-            <span className={`font-semibold ${step.number === currentStep ? "text-primary" : "text-muted"}`}>
+            <span
+              className={`min-w-0 max-w-full text-xs font-semibold leading-tight sm:text-base ${
+                step.number === currentStep ? "text-primary" : "text-muted"
+              }`}
+            >
               {step.label}
             </span>
           </div>
-          {index < steps.length - 1 ? <span className="h-px w-8 bg-[#e4d2cb] md:w-16" /> : null}
+          {index < steps.length - 1 ? (
+            <span className="hidden h-px w-8 bg-[#e4d2cb] sm:block md:w-16" />
+          ) : null}
         </div>
       ))}
     </nav>
+  );
+}
+
+function CheckoutAuthCard({
+  loginHref,
+  registerHref,
+  labels,
+}: {
+  loginHref: string;
+  registerHref: string;
+  labels: Pick<
+    CheckoutClientProps["labels"],
+    "checkoutAuthTitle" | "checkoutAuthBody" | "checkoutAuthLogin" | "checkoutAuthRegister"
+  >;
+}) {
+  return (
+    <div className="rounded-[28px] bg-[#fff0eb] p-7 text-center shadow-[0_20px_44px_rgba(165,54,13,0.10)] sm:p-8">
+      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-primary shadow-[0_14px_30px_rgba(165,54,13,0.12)]">
+        <LockKeyhole className="size-7" />
+      </span>
+      <h2 className="mt-5 font-heading text-3xl font-extrabold text-dark">
+        {labels.checkoutAuthTitle}
+      </h2>
+      <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-muted">
+        {labels.checkoutAuthBody}
+      </p>
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <Link
+          href={loginHref}
+          className="inline-flex items-center justify-center rounded-[18px] bg-[linear-gradient(135deg,#d85a30,#ff8a65)] px-6 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(165,54,13,0.18)]"
+        >
+          {labels.checkoutAuthLogin}
+        </Link>
+        <Link
+          href={registerHref}
+          className="inline-flex items-center justify-center rounded-[18px] bg-white px-6 py-3 text-sm font-semibold text-primary shadow-[0_12px_24px_rgba(165,54,13,0.08)]"
+        >
+          {labels.checkoutAuthRegister}
+        </Link>
+      </div>
+    </div>
   );
 }
 
@@ -246,6 +302,11 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
     : searchParams.get("step") === "review"
       ? 2
       : 1;
+  const query = searchParams.toString();
+  const returnTo = query ? `${pathname}?${query}` : pathname;
+  const encodedReturnTo = encodeURIComponent(returnTo);
+  const loginHref = `/${locale}/auth/login?returnTo=${encodedReturnTo}`;
+  const registerHref = `/${locale}/auth/register?returnTo=${encodedReturnTo}`;
   const items = useMemo(
     () =>
       lineItems.map((item) => ({
@@ -402,6 +463,7 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
           <section className="space-y-10 lg:col-span-7">
             <OrderReview
               items={items}
+              locale={locale}
               shippingAddress={shippingAddress}
               labels={{
                 title: labels.stepReview,
@@ -415,31 +477,45 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
                 secure: labels.secure,
                 terms: labels.terms,
                 privacy: labels.privacy,
+                returns: labels.returns,
               }}
               onEdit={() => updateSearchStep("shipping")}
               editDisabled={isPaymentBusy}
             />
-            <div className="relative overflow-hidden rounded-[28px] bg-[#f6f3f2] p-8">
-              <div className={isPaymentBusy ? "pointer-events-none opacity-0" : "transition-opacity duration-300"}>
-                <PayPalButton
-                  orderPayload={orderPayload}
-                  disabled={!isCheckoutAddressComplete(shippingAddress)}
+            <div className="relative overflow-hidden rounded-[28px] bg-[#f6f3f2] p-6 sm:p-8">
+              {!user ? (
+                <CheckoutAuthCard
+                  loginHref={loginHref}
+                  registerHref={registerHref}
                   labels={{
-                    paypal: labels.paypal,
-                    card: labels.card,
-                    secure: labels.secure,
-                    unavailable: labels.paypalUnavailable,
-                    error: labels.paypalError,
-                    processing: labels.processing,
-                    loginRequired: labels.loginRequired,
-                    login: labels.loginRequiredCta,
+                    checkoutAuthTitle: labels.checkoutAuthTitle,
+                    checkoutAuthBody: labels.checkoutAuthBody,
+                    checkoutAuthLogin: labels.checkoutAuthLogin,
+                    checkoutAuthRegister: labels.checkoutAuthRegister,
                   }}
-                  onPaymentStart={handlePaymentStart}
-                  onPaymentSuccess={handlePaymentSuccess}
-                  onPaymentError={handlePaymentError}
-                  onPaymentCancel={handlePaymentError}
                 />
-              </div>
+              ) : (
+                <div className={isPaymentBusy ? "pointer-events-none opacity-0" : "transition-opacity duration-300"}>
+                  <PayPalButton
+                    orderPayload={orderPayload}
+                    disabled={!isCheckoutAddressComplete(shippingAddress)}
+                    labels={{
+                      paypal: labels.paypal,
+                      card: labels.card,
+                      secure: labels.secure,
+                      unavailable: labels.paypalUnavailable,
+                      error: labels.paypalError,
+                      processing: labels.processing,
+                      loginRequired: labels.loginRequired,
+                      login: labels.loginRequiredCta,
+                    }}
+                    onPaymentStart={handlePaymentStart}
+                    onPaymentSuccess={handlePaymentSuccess}
+                    onPaymentError={handlePaymentError}
+                    onPaymentCancel={handlePaymentError}
+                  />
+                </div>
+              )}
 
               {isPaymentBusy ? (
                 <div className="absolute inset-0 p-8">
@@ -465,6 +541,7 @@ export function CheckoutClient({ locale, labels }: CheckoutClientProps) {
           <ShippingForm
             locale={locale}
             value={shippingAddress}
+            loginHref={loginHref}
             onChange={handleShippingChange}
             onSubmit={handleShippingSubmit}
             labels={{

@@ -40,3 +40,29 @@ export type CompletedCheckoutOrder = {
 export type CompletedCheckoutOrderWithItems = CompletedCheckoutOrder & {
   items: CheckoutItemPayload[];
 };
+
+export type OrderDetailTimelineStepKey = "placed" | "paid" | "preparing" | "shipped";
+
+export type OrderDetailTimelineStep = {
+  key: OrderDetailTimelineStepKey;
+  completed: boolean;
+  current: boolean;
+  date: string | null;
+};
+
+export type OrderDetailItemView = CheckoutItemPayload & {
+  href: string | null;
+};
+
+export type OrderDetailView = Omit<CompletedCheckoutOrderWithItems, "items"> & {
+  subtotal: number;
+  shippingAmount: number;
+  itemCount: number;
+  email: string;
+  paymentMethod: "paypal";
+  paymentState: "paid" | "pending";
+  estimatedDeliveryStart: string;
+  estimatedDeliveryEnd: string;
+  timeline: OrderDetailTimelineStep[];
+  items: OrderDetailItemView[];
+};

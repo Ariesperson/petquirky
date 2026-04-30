@@ -1,9 +1,11 @@
 import "server-only";
 
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { withServerTimeout } from "@/lib/server-timeout";
 import type { CompletedCheckoutOrder, CompletedCheckoutOrderWithItems } from "@/types/checkout";
 
 const ORDERS_TABLE = "orders";
+const ORDERS_QUERY_TIMEOUT_MS = 2500;
 
 type PersistServerOrderInput = CompletedCheckoutOrderWithItems;
 type SupabaseOrderRow = {
@@ -69,11 +71,16 @@ export async function listOrdersForUserFromServer(userId: string) {
     return [] as CompletedCheckoutOrderWithItems[];
   }
 
-  const { data, error } = await supabase
-    .from(ORDERS_TABLE)
-    .select("id,user_id,status,total,currency,created_at,payer_email,shipping_address,items")
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false });
+  const result = await withServerTimeout(
+    supabase
+      .from(ORDERS_TABLE)
+      .select("id,user_id,status,total,currency,created_at,payer_email,shipping_address,items")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false }),
+    ORDERS_QUERY_TIMEOUT_MS,
+    "Orders query timed out"
+  ).catch(() => ({ data: null, error: new Error("Orders query failed") }));
+  const { data, error } = result;
 
   if (error || !data) {
     return [] as CompletedCheckoutOrderWithItems[];

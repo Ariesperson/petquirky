@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { CheckoutSuccessClient } from "@/components/checkout/CheckoutSuccessClient";
 import { emptyCheckoutAddress } from "@/lib/checkout";
+import { getSellerEmail } from "@/lib/email";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { getOrderForUserFromServer } from "@/lib/orders-server";
 import { formatPrice } from "@/lib/products";
@@ -45,11 +46,6 @@ function parseWarnings(rawValue?: string) {
   } catch {
     return [] as string[];
   }
-}
-
-function getWarningReason(warnings: string[], prefix: string) {
-  const match = warnings.find((entry) => entry.startsWith(prefix));
-  return match ? match.slice(prefix.length) : null;
 }
 
 function formatOrderDate(locale: Locale, value: string) {
@@ -103,15 +99,8 @@ export default async function CheckoutSuccessPage({
   const hasSellerNotificationWarning = warnings.some((entry) =>
     entry.startsWith("seller-notification-failed:")
   );
-  const confirmationEmailWarningReason = getWarningReason(
-    warnings,
-    "confirmation-email-failed:"
-  );
-  const sellerNotificationWarningReason = getWarningReason(
-    warnings,
-    "seller-notification-failed:"
-  );
   const itemCount = displayOrder.items.reduce((sum, item) => sum + item.quantity, 0);
+  const supportEmail = getSellerEmail();
 
   return (
     <main className="mx-auto flex w-full max-w-[760px] flex-1 flex-col px-6 pb-20 pt-20">
@@ -252,24 +241,14 @@ export default async function CheckoutSuccessPage({
             <p>{dict.checkout.success_delivery_notice}</p>
             <p>
               {dict.checkout.success_contact_notice}{" "}
-              <a href="mailto:969939390@qq.com" className="font-semibold text-primary">
-                969939390@qq.com
+              <a href={`mailto:${supportEmail}`} className="font-semibold text-primary">
+                {supportEmail}
               </a>
             </p>
             {hasSellerNotificationWarning ? (
               <div className="space-y-2">
                 <p className="font-medium text-warning">{dict.checkout.success_internal_notice}</p>
-                {sellerNotificationWarningReason ? (
-                  <p className="break-words text-xs text-warning/90">
-                    Seller notification detail: {sellerNotificationWarningReason}
-                  </p>
-                ) : null}
               </div>
-            ) : null}
-            {hasConfirmationEmailWarning && confirmationEmailWarningReason ? (
-              <p className="break-words text-xs text-warning/90">
-                Confirmation email detail: {confirmationEmailWarningReason}
-              </p>
             ) : null}
           </div>
         </div>

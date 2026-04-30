@@ -1,6 +1,6 @@
 ---
 name: petquirky-project
-description: Use when starting any PetQuirky development task, scoping a feature, or checking project guardrails. This skill loads the project's real source of truth, confirms the current Next.js 16 / React 19 / Tailwind 4 setup, flags missing docs referenced by INSTRUCTIONS.md, and establishes non-negotiable product rules before implementation.
+description: Use when starting any PetQuirky development task, scoping a feature, or checking project guardrails. This skill loads the project's in-repo source of truth from docs/00-project-context, confirms the current Next.js 16 / React 19 / Tailwind 4 setup, and establishes non-negotiable product rules before implementation.
 ---
 
 # PetQuirky Project
@@ -11,15 +11,17 @@ Use this skill first for any PetQuirky feature or bugfix unless the task is alre
 
 1. Read `AGENTS.md`.
 2. Read `INSTRUCTIONS.md`.
-3. Read `package.json`, `src/lib/i18n.ts`, `src/proxy.ts`, and the route files related to the task.
-4. Read the relevant Next.js 16 docs from `node_modules/next/dist/docs/` before writing code that depends on routing, proxy, layout, data fetching, or styling conventions.
-5. Read [current-baseline.md](./references/current-baseline.md).
+3. Read `docs/00-project-context/PetQuirky-项目阶段性总结.md` for business context when the task touches planning, product, operations, or priorities.
+4. Read `docs/00-project-context/PetQuirky-Architecture.md` when the task touches data models, routing, payment, shipping, SEO, or page architecture.
+5. Read `package.json`, `src/lib/i18n.ts`, `src/proxy.ts`, and the route files related to the task.
+6. Read the relevant Next.js 16 docs from `node_modules/next/dist/docs/` before writing code that depends on routing, proxy, layout, data fetching, or styling conventions.
+7. Read [current-baseline.md](./references/current-baseline.md).
 
 ## Source-of-truth rules
 
 - In this repository, `INSTRUCTIONS.md` is the highest available product document.
-- `PetQuirky-PRD-v1.md` and `PetQuirky-Architecture.md` are referenced by `INSTRUCTIONS.md` but are not present in the current workspace.
-- Treat any requirement derived from those missing docs as provisional unless it is restated in `INSTRUCTIONS.md`, existing code, or design references.
+- `docs/00-project-context/PetQuirky-项目阶段性总结.md` and `docs/00-project-context/PetQuirky-Architecture.md` are the in-repo context documents for business and architecture decisions.
+- `PetQuirky-PRD-v1.md` is referenced by historical docs but is not present in this repository; treat PRD-only requirements as provisional unless restated in `INSTRUCTIONS.md`, existing code, architecture docs, or design references.
 - `README.md` is scaffold-level context only and should not override project-specific instructions.
 
 ## Current technical baseline
