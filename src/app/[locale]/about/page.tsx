@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: AboutPageProps) {
     locale,
     path: "/about",
     title: "About PetQuirky",
-    description: "Meet the editorial commerce studio building warm, curious tools for unique pets.",
+    description: "Meet the independent PetQuirky shop for curious pet people in Europe.",
   });
 }
 
